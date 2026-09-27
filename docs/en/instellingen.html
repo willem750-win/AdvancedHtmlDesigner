@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings tab - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/instellingen.html">NL</a><a href="../en/instellingen.html" class="cur">EN</a><a href="../fr/instellingen.html">FR</a><a href="../de/instellingen.html">DE</a></div>
+  <a href="index.html">Home</a>
+  <a href="werkwijze.html">Getting started</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Table tab (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell tab (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Text block tab (B)</a>
+  <a href="instellingen.html" class="active"><img src="../img/tool-settings.png" class="ico" alt="">Settings tab (S)</a>
+  <div class="group">More</div>
+  <a href="muis-toetsen.html">Mouse &amp; keys</a>
+  <a href="bestanden.html">Files &amp; export</a>
+</nav>
+<main>
+  <h1>Settings tab (S)</h1>
+  <p class="lead">Default values for new documents, the page size and the language of the toolbox.</p>
+
+  <h2>Managing default settings</h2>
+  <table>
+    <tr><th>Button</th><th>Name</th><th>What does it do?</th></tr>
+    <tr><td class="btn"><img src="../img/set-load.png" alt=""></td><td class="name">Load default settings</td><td>Reads the saved default settings again.</td></tr>
+    <tr><td class="btn"><img src="../img/set-save.png" alt=""></td><td class="name">Save default settings</td><td>Saves the current values on this tab as the default.</td></tr>
+    <tr><td class="btn"><img src="../img/set-reset.png" alt=""></td><td class="name">Factory defaults</td><td>Restores all values to the original factory settings.</td></tr>
+    <tr><td class="btn"><img src="../img/set-apply.png" alt=""></td><td class="name">Apply to document</td><td>Applies the default values to the document that is currently open.</td></tr>
+  </table>
+  <div class="tip"><strong>Note:</strong> changing a value on this tab does not yet change your current table.
+  Click <b>Apply</b> to use them on the current document, or <b>Save</b> to remember them for later.</div>
+
+  <h2>Default values</h2>
+  <table>
+    <tr><th>Setting</th><th>Meaning</th></tr>
+    <tr><td class="name">Default column width</td><td>Width of new columns.</td></tr>
+    <tr><td class="name">Default row height</td><td>Height of new rows.</td></tr>
+    <tr><td class="name">Default grid line width</td><td>Thickness of the lines between the cells.</td></tr>
+    <tr><td class="name">Default grid colour</td><td>Colour of those lines.</td></tr>
+    <tr><td class="name">HTML background colour</td><td>Background colour of the page (the <code>body</code> of the HTML document).</td></tr>
+    <tr><td class="name">Show layout grid</td><td>Shows a dotted grid on the page to help with positioning.</td></tr>
+    <tr><td class="name">Show page rulers</td><td>Shows the rulers in mm above and to the left of the page.</td></tr>
+    <tr><td class="name">Show headers</td><td>Shows the row and column headers (1, 2, 3&hellip; and A, B, C&hellip;) around the table.</td></tr>
+  </table>
+
+  <h2>Page size</h2>
+  <p>The page size button opens a menu: A3, A4, A5 or Letter, each in portrait or landscape.
+  The button shows the chosen size; the width and height in pixels are shown next to it.</p>
+
+  <h2>Language</h2>
+  <table>
+    <tr><th>Button</th><th>Name</th><th>What does it do?</th></tr>
+    <tr><td class="btn">&#9662;</td><td class="name">Display language</td><td>Choose Dutch, English, French or German. The toolbox hints and the window texts switch immediately.</td></tr>
+    <tr><td class="btn">Language...</td><td class="name">Edit translations</td><td>Opens the language editor. There you adjust the translations and save them in <code>talen.lng</code>.</td></tr>
+  </table>
+  <div class="tip"><strong>Language editor:</strong> the first column (<i>Key</i>) is the lookup key from the source code and cannot be changed.
+  Only edit the NL, EN, FR and DU columns.</div>
+
+  <div class="pager"><a href="tekstblok.html">&larr; <img src="../img/tool-textblock.png" class="ico" alt="">Text block tab</a><a href="muis-toetsen.html">Mouse &amp; keys &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

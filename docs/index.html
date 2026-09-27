@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advanced Html Designer - Help</title>
+<link rel="stylesheet" href="help.css">
+<style>
+  .choose { max-width: 640px; margin: 60px auto; padding: 0 16px; text-align: center; }
+  .choose img.shot { max-width: 100%; border: 1px solid var(--border); border-radius: 8px; margin: 24px 0; }
+  .choose .cards { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); text-align: left; }
+</style>
+<script>
+  // Meteen naar de taal van de browser, tenzij ?choose in de link staat
+  (function () {
+    if (location.search.indexOf('choose') >= 0) return;
+    var map = { nl: 'nl', en: 'en', fr: 'fr', de: 'de' };
+    var langs = navigator.languages || [navigator.language || 'en'];
+    for (var i = 0; i < langs.length; i++) {
+      var code = String(langs[i]).slice(0, 2).toLowerCase();
+      if (map[code]) { location.replace(map[code] + '/index.html'); return; }
+    }
+  })();
+</script>
+</head>
+<body>
+<div class="choose">
+  <h1>Advanced Html Designer</h1>
+  <p class="lead">Help &middot; Aide &middot; Hilfe</p>
+  <div class="cards">
+    <a class="card" href="nl/index.html"><b>Nederlands</b><span>Help</span></a>
+    <a class="card" href="en/index.html"><b>English</b><span>Help</span></a>
+    <a class="card" href="fr/index.html"><b>Français</b><span>Aide</span></a>
+    <a class="card" href="de/index.html"><b>Deutsch</b><span>Hilfe</span></a>
+  </div>
+  <img class="shot" src="screenshot.png" alt="Advanced Html Designer">
+  <p><a href="https://github.com/willem750-win/AdvancedHtmlDesigner">github.com/willem750-win/AdvancedHtmlDesigner</a></p>
+</div>
+</body>
+</html>

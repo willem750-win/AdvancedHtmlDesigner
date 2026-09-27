@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registerkarte Tabelle - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/tabel.html">NL</a><a href="../en/tabel.html">EN</a><a href="../fr/tabel.html">FR</a><a href="../de/tabel.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html" class="active"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <h1>Registerkarte Tabelle (T)</h1>
+  <p class="lead">Einstellungen für die ganze Tabelle: Struktur, Abmessungen, Position, Rahmen und Farben.</p>
+
+  <h2>Struktur</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/table-new.png" alt=""></td><td class="name">Tabelle leeren</td><td>Löscht den Inhalt aller Zellen. Die Struktur (Zeilen und Spalten) bleibt erhalten.</td></tr>
+    <tr><td class="btn"><img src="../img/table-addrow.png" alt=""></td><td class="name">Zeile hinzufügen</td><td>Fügt eine Zeile hinzu.</td></tr>
+    <tr><td class="btn"><img src="../img/table-addcol.png" alt=""></td><td class="name">Spalte hinzufügen</td><td>Fügt eine Spalte hinzu.</td></tr>
+    <tr><td class="btn"><img src="../img/table-delrow.png" alt=""></td><td class="name">Zeile löschen</td><td>Löscht die ausgewählte Zeile. Klicken Sie zuerst auf einen Zeilenkopf.</td></tr>
+    <tr><td class="btn"><img src="../img/table-delcol.png" alt=""></td><td class="name">Spalte löschen</td><td>Löscht die ausgewählte Spalte. Klicken Sie zuerst auf einen Spaltenkopf.</td></tr>
+    <tr><td class="btn"><img src="../img/table-merge.png" alt=""></td><td class="name">Zellen verbinden</td><td>Verbindet die ausgewählten Zellen zu einer Zelle. Wählen Sie zuerst mehrere Zellen durch Ziehen aus.</td></tr>
+    <tr><td class="btn"><img src="../img/table-unmerge.png" alt=""></td><td class="name">Zellen trennen</td><td>Trennt eine verbundene Zelle wieder.</td></tr>
+  </table>
+
+  <h2>Abmessungen</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Gitterlinienbreite</td><td>Dicke der Linien zwischen den Zellen.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Zeilenhöhe</td><td>Standardhöhe der Zeilen.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Spaltenbreite</td><td>Standardbreite der Spalten.</td></tr>
+  </table>
+  <div class="tip"><strong>Tipp:</strong> eine einzelne Zeile oder Spalte ändern Sie, indem Sie die Trennlinie in den Köpfen ziehen.</div>
+
+  <h2>Position</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn">X</td><td class="name">Move X</td><td>Horizontale Position der Tabelle in mm, gemessen vom Nullpunkt der Lineale.</td></tr>
+    <tr><td class="btn">Y</td><td class="name">Move Y</td><td>Vertikale Position der Tabelle in mm.</td></tr>
+  </table>
+  <p>Sie können die Tabelle auch mit der Maus verschieben: halten Sie <kbd>Strg</kbd> gedrückt und ziehen Sie. Move X und Move Y laufen dabei mit.</p>
+
+  <h2>Rahmen und Farben</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Rahmenfarbe</td><td>Farbe des äußeren Rahmens der Tabelle.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Rahmenbreite</td><td>Dicke des äußeren Rahmens.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Rahmenradius</td><td>Abgerundete Ecken der Tabelle (0 = eckig).</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Eckenradius der Zellen</td><td>Abgerundete Ecken der einzelnen Zellen.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Hintergrundfarbe</td><td>Hintergrundfarbe der ganzen Tabelle.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Kopfzeilenfarbe</td><td>Farbe der Zeilen- und Spaltenköpfe im Designer.</td></tr>
+    <tr><td class="btn">&#9472;</td><td class="name">Rahmenstil</td><td>Stil des Rahmens: keiner, durchgezogen, gestrichelt, gepunktet oder doppelt.</td></tr>
+  </table>
+
+  <div class="pager"><a href="werkwijze.html">&larr; Erste Schritte</a><a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

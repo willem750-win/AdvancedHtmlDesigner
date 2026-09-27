@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onglet Paramètres - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/instellingen.html">NL</a><a href="../en/instellingen.html">EN</a><a href="../fr/instellingen.html" class="cur">FR</a><a href="../de/instellingen.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html" class="active"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <h1>Onglet Paramètres (S)</h1>
+  <p class="lead">Valeurs par défaut pour les nouveaux documents, le format de page et la langue de la boîte à outils.</p>
+
+  <h2>Gérer les paramètres par défaut</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/set-load.png" alt=""></td><td class="name">Charger les paramètres par défaut</td><td>Relit les paramètres par défaut enregistrés.</td></tr>
+    <tr><td class="btn"><img src="../img/set-save.png" alt=""></td><td class="name">Enregistrer les paramètres par défaut</td><td>Enregistre les valeurs actuelles de cet onglet comme valeurs par défaut.</td></tr>
+    <tr><td class="btn"><img src="../img/set-reset.png" alt=""></td><td class="name">Paramètres d'usine</td><td>Remet toutes les valeurs aux paramètres d'usine d'origine.</td></tr>
+    <tr><td class="btn"><img src="../img/set-apply.png" alt=""></td><td class="name">Appliquer au document</td><td>Applique les valeurs par défaut au document actuellement ouvert.</td></tr>
+  </table>
+  <div class="tip"><strong>Attention :</strong> modifier une valeur dans cet onglet ne change pas encore votre tableau actuel.
+  Cliquez sur <b>Appliquer</b> pour l'utiliser sur le document actuel, ou sur <b>Enregistrer</b> pour la garder pour plus tard.</div>
+
+  <h2>Valeurs par défaut</h2>
+  <table>
+    <tr><th>Paramètre</th><th>Signification</th></tr>
+    <tr><td class="name">Largeur de colonne par défaut</td><td>Largeur des nouvelles colonnes.</td></tr>
+    <tr><td class="name">Hauteur de ligne par défaut</td><td>Hauteur des nouvelles lignes.</td></tr>
+    <tr><td class="name">Épaisseur des lignes de grille</td><td>Épaisseur des lignes entre les cellules.</td></tr>
+    <tr><td class="name">Couleur de grille par défaut</td><td>Couleur de ces lignes.</td></tr>
+    <tr><td class="name">Couleur de fond HTML</td><td>Couleur de fond de la page (le <code>body</code> du document HTML).</td></tr>
+    <tr><td class="name">Afficher la grille de mise en page</td><td>Affiche une grille de points sur la page pour aider au placement.</td></tr>
+    <tr><td class="name">Afficher les règles de page</td><td>Affiche les règles en mm au-dessus et à gauche de la page.</td></tr>
+    <tr><td class="name">Afficher les en-têtes</td><td>Affiche les en-têtes de lignes et de colonnes (1, 2, 3&hellip; et A, B, C&hellip;) autour du tableau.</td></tr>
+  </table>
+
+  <h2>Format de page</h2>
+  <p>Le bouton du format de page ouvre un menu : A3, A4, A5 ou Letter, chaque fois en portrait ou en paysage.
+  Le bouton affiche le format choisi ; la largeur et la hauteur en pixels sont indiquées à côté.</p>
+
+  <h2>Langue</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn">&#9662;</td><td class="name">Langue d'affichage</td><td>Choisissez néerlandais, anglais, français ou allemand. Les info-bulles et les textes de la fenêtre changent immédiatement.</td></tr>
+    <tr><td class="btn">Langue...</td><td class="name">Modifier les traductions</td><td>Ouvre l'éditeur de langues. Vous y adaptez les traductions et les enregistrez dans <code>talen.lng</code>.</td></tr>
+  </table>
+  <div class="tip"><strong>Éditeur de langues :</strong> la première colonne (<i>Key</i>) est la clé de recherche du code source et ne peut pas être modifiée.
+  Modifiez uniquement les colonnes NL, EN, FR et DU.</div>
+
+  <div class="pager"><a href="tekstblok.html">&larr; <img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte</a><a href="muis-toetsen.html">Souris &amp; clavier &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

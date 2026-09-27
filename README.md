@@ -17,7 +17,7 @@ Windows program and as reusable Lazarus components.
 - Export as a complete HTML document or as table-only HTML, preview in your browser
 - Save and load designs (`.htd`)
 - User interface in **Dutch, English, French and German**, with a built-in translation editor
-- Built-in help in all four languages
+- Built-in help in all four languages — also [online](https://willem750-win.github.io/AdvancedHtmlDesigner/)
 
 ## Download (Windows)
 
@@ -70,4 +70,5 @@ en herbruikbare Lazarus-componenten.
   heb je ook het pakket **ExpandPanels** nodig. Open dan
   `advanced/project/project1.lpi`.
 - De help (in het programma via de Help-knop) is beschikbaar in het Nederlands,
-  Engels, Frans en Duits.
+  Engels, Frans en Duits, en ook
+  [online](https://willem750-win.github.io/AdvancedHtmlDesigner/nl/index.html).

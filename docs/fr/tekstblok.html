@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onglet Bloc de texte - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/tekstblok.html">NL</a><a href="../en/tekstblok.html">EN</a><a href="../fr/tekstblok.html" class="cur">FR</a><a href="../de/tekstblok.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html" class="active"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <h1>Onglet Bloc de texte (B)</h1>
+  <p class="lead">Les blocs de texte sont des zones de texte libres que vous placez n'importe où sur la page,
+  indépendamment du tableau &ndash; par exemple pour un titre, une remarque ou un pied de page.</p>
+
+  <h2>Placer et modifier un bloc de texte</h2>
+  <ol class="steps">
+    <li>Cliquez dans le concepteur à l'endroit où le bloc doit apparaître.</li>
+    <li>Cliquez sur <b>TBA</b>.</li>
+    <li>Double-cliquez sur le bloc (ou appuyez sur <kbd>Entrée</kbd> / <kbd>F2</kbd>) pour saisir le texte.</li>
+    <li>Faites glisser le bloc pour le déplacer. Faites glisser le coin inférieur droit pour le redimensionner.</li>
+    <li>Le petit bouton en haut à gauche d'un bloc sélectionné ouvre directement cet onglet.</li>
+  </ol>
+  <div class="tip"><strong>Attention :</strong> la plupart des boutons de cet onglet ne sont actifs que si un bloc de texte est sélectionné.</div>
+
+  <h2>Ajouter, supprimer et positionner</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-add.png" alt=""></td><td class="name">Ajouter un bloc</td><td>Crée un nouveau bloc de texte à l'endroit où vous avez cliqué en dernier dans le concepteur.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-del.png" alt=""></td><td class="name">Supprimer le bloc</td><td>Supprime le bloc sélectionné. Fonctionne aussi avec <kbd>Suppr</kbd>.</td></tr>
+    <tr><td class="btn">X</td><td class="name">Move X</td><td>Position horizontale du bloc en mm, mesurée depuis le zéro des règles.</td></tr>
+    <tr><td class="btn">Y</td><td class="name">Move Y</td><td>Position verticale du bloc en mm.</td></tr>
+  </table>
+  <p>Move X et Move Y suivent le mouvement quand vous faites glisser le bloc avec la souris. Vous pouvez donc placer un bloc grossièrement, puis l'ajuster au millimètre près.</p>
+
+  <h2>Mise en forme du texte</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-bold.png" alt=""></td><td class="name">Gras</td><td>Gras activé ou désactivé.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-italic.png" alt=""></td><td class="name">Italique</td><td>Italique activé ou désactivé.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-underline.png" alt=""></td><td class="name">Souligné</td><td>Soulignement activé ou désactivé.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-left.png" alt=""></td><td class="name">Aligner à gauche</td><td>Texte à gauche dans le bloc.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-center.png" alt=""></td><td class="name">Centrer</td><td>Texte au milieu.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-right.png" alt=""></td><td class="name">Aligner à droite</td><td>Texte à droite dans le bloc.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Couleur du texte</td><td>Couleur du texte.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Taille de police</td><td>Taille du texte (8 à 20).</td></tr>
+  </table>
+  <p>Si vous êtes en train de modifier le texte et qu'une partie est sélectionnée, le gras, l'italique et le souligné ne s'appliquent qu'à cette partie. Sans sélection, ils s'appliquent à tout le bloc.</p>
+
+  <h2>Hyperliens</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-link-add.png" alt=""></td><td class="name">Créer un hyperlien</td><td>Transforme le texte sélectionné en hyperlien. Sélectionnez d'abord le morceau de texte qui doit devenir un lien.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-link-del.png" alt=""></td><td class="name">Supprimer l'hyperlien</td><td>Supprime l'hyperlien ; le texte reste.</td></tr>
+  </table>
+
+  <h2>Fond et bordure</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-transparent.png" alt=""></td><td class="name">Transparent</td><td>Active ou désactive un fond transparent pour le bloc.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Couleur du bloc</td><td>Couleur de fond du bloc (s'il n'est pas transparent).</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Épaisseur de bordure</td><td>Épaisseur de la bordure, de 1 à 5.</td></tr>
+    <tr><td class="btn">&#9472;</td><td class="name">Style de bordure</td><td>Aucune, pleine, tirets, pointillés ou double.</td></tr>
+  </table>
+
+  <div class="pager"><a href="cel.html">&larr; <img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule</a><a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>
