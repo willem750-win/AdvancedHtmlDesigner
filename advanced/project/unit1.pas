@@ -90,6 +90,10 @@ implementation
 
 {$R *.lfm}
 
+const
+  // Online help (GitHub Pages), gebruikt als de map help naast de .exe ontbreekt
+  HelpOnlineURL = 'https://willem750-win.github.io/AdvancedHtmlDesigner/';
+
 { TForm1 }
 
 {-------------------------------------------------------------------------------
@@ -300,13 +304,17 @@ begin
   if not FileExists(FileName) then
     FileName := HelpDir + 'nl' + PathDelim + 'index.html';
 
-  if not FileExists(FileName) then
+  if FileExists(FileName) then
   begin
-    ShowMessage(TR('Help-bestanden niet gevonden:') + LineEnding + FileName);
+    OpenDocument(FileName);
     Exit;
   end;
 
-  OpenDocument(FileName);
+  // Geen map help naast de .exe (bv. enkel de .exe gekopieerd):
+  // de online help in dezelfde taal openen
+  if not OpenURL(HelpOnlineURL + LangDir + '/index.html') then
+    ShowMessage(TR('Help-bestanden niet gevonden:') + LineEnding + FileName +
+      LineEnding + LineEnding + HelpOnlineURL);
 end;
 
 procedure TForm1.HtmlTableDesignerAdvanced1CellClick(Sender: TObject; ACol,
