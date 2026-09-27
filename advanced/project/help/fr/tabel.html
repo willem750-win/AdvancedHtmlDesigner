@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onglet Tableau - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/tabel.html">NL</a><a href="../en/tabel.html">EN</a><a href="../fr/tabel.html" class="cur">FR</a><a href="../de/tabel.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html" class="active"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <h1>Onglet Tableau (T)</h1>
+  <p class="lead">Réglages valables pour tout le tableau : structure, dimensions, position, bordures et couleurs.</p>
+
+  <h2>Structure</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/table-new.png" alt=""></td><td class="name">Vider le tableau</td><td>Efface le contenu de toutes les cellules. La structure (lignes et colonnes) est conservée.</td></tr>
+    <tr><td class="btn"><img src="../img/table-addrow.png" alt=""></td><td class="name">Ajouter une ligne</td><td>Ajoute une ligne.</td></tr>
+    <tr><td class="btn"><img src="../img/table-addcol.png" alt=""></td><td class="name">Ajouter une colonne</td><td>Ajoute une colonne.</td></tr>
+    <tr><td class="btn"><img src="../img/table-delrow.png" alt=""></td><td class="name">Supprimer la ligne</td><td>Supprime la ligne sélectionnée. Cliquez d'abord sur un en-tête de ligne.</td></tr>
+    <tr><td class="btn"><img src="../img/table-delcol.png" alt=""></td><td class="name">Supprimer la colonne</td><td>Supprime la colonne sélectionnée. Cliquez d'abord sur un en-tête de colonne.</td></tr>
+    <tr><td class="btn"><img src="../img/table-merge.png" alt=""></td><td class="name">Fusionner les cellules</td><td>Fusionne les cellules sélectionnées en une seule. Sélectionnez d'abord plusieurs cellules en faisant glisser.</td></tr>
+    <tr><td class="btn"><img src="../img/table-unmerge.png" alt=""></td><td class="name">Dissocier les cellules</td><td>Sépare à nouveau une cellule fusionnée.</td></tr>
+  </table>
+
+  <h2>Dimensions</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Épaisseur des lignes</td><td>Épaisseur des lignes entre les cellules.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Hauteur de ligne</td><td>Hauteur par défaut des lignes.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Largeur de colonne</td><td>Largeur par défaut des colonnes.</td></tr>
+  </table>
+  <div class="tip"><strong>Astuce :</strong> pour modifier une seule ligne ou colonne, faites glisser la ligne de séparation dans les en-têtes.</div>
+
+  <h2>Position</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn">X</td><td class="name">Move X</td><td>Position horizontale du tableau en mm, mesurée depuis le zéro des règles.</td></tr>
+    <tr><td class="btn">Y</td><td class="name">Move Y</td><td>Position verticale du tableau en mm.</td></tr>
+  </table>
+  <p>Vous pouvez aussi déplacer le tableau avec la souris : maintenez <kbd>Ctrl</kbd> enfoncé et faites glisser. Move X et Move Y suivent le mouvement.</p>
+
+  <h2>Bordures et couleurs</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Couleur de bordure</td><td>Couleur de la bordure extérieure du tableau.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Épaisseur de bordure</td><td>Épaisseur de la bordure extérieure.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Rayon de bordure</td><td>Coins arrondis du tableau (0 = coins droits).</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Rayon des cellules</td><td>Coins arrondis des cellules individuelles.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Couleur de fond</td><td>Couleur de fond de tout le tableau.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Couleur d'en-tête</td><td>Couleur des en-têtes de lignes et de colonnes dans le concepteur.</td></tr>
+    <tr><td class="btn">&#9472;</td><td class="name">Style de bordure</td><td>Style de la bordure : aucune, pleine, tirets, pointillés ou double.</td></tr>
+  </table>
+
+  <div class="pager"><a href="werkwijze.html">&larr; Premiers pas</a><a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

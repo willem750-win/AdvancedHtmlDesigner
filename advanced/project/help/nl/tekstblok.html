@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabblad Tekstblok - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/tekstblok.html" class="cur">NL</a><a href="../en/tekstblok.html">EN</a><a href="../fr/tekstblok.html">FR</a><a href="../de/tekstblok.html">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Aan de slag</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabblad Tabel (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Tabblad Cel (C)</a>
+  <a href="tekstblok.html" class="active"><img src="../img/tool-textblock.png" class="ico" alt="">Tabblad Tekstblok (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Tabblad Instellingen (S)</a>
+  <div class="group">Overige</div>
+  <a href="muis-toetsen.html">Muis &amp; toetsen</a>
+  <a href="bestanden.html">Bestanden &amp; export</a>
+</nav>
+<main>
+  <h1>Tabblad Tekstblok (B)</h1>
+  <p class="lead">Tekstblokken zijn vrije tekstvakken die je overal op de pagina kunt zetten,
+  los van de tabel &ndash; bijvoorbeeld voor een titel, een opmerking of een voettekst.</p>
+
+  <h2>Tekstblok plaatsen en bewerken</h2>
+  <ol class="steps">
+    <li>Klik in de designer op de plaats waar het blok moet komen.</li>
+    <li>Klik op <b>TBA</b>.</li>
+    <li>Dubbelklik op het blok (of druk <kbd>Enter</kbd> / <kbd>F2</kbd>) om de tekst te typen.</li>
+    <li>Sleep het blok om het te verplaatsen. Sleep de hoek rechtsonder om de grootte te wijzigen.</li>
+    <li>Het knopje linksboven in een geselecteerd blok opent meteen dit tabblad.</li>
+  </ol>
+  <div class="tip"><strong>Let op:</strong> de meeste knoppen op dit tabblad zijn pas actief als er een tekstblok geselecteerd is.</div>
+
+  <h2>Toevoegen, verwijderen en positie</h2>
+  <table>
+    <tr><th>Knop</th><th>Naam</th><th>Wat doet het?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-add.png" alt=""></td><td class="name">Tekstblok toevoegen</td><td>Maakt een nieuw tekstblok op de plaats waar je laatst in de designer klikte.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-del.png" alt=""></td><td class="name">Tekstblok verwijderen</td><td>Verwijdert het geselecteerde blok. Kan ook met <kbd>Delete</kbd>.</td></tr>
+    <tr><td class="btn">X</td><td class="name">Move X</td><td>Horizontale positie van het blok in mm, gemeten vanaf het nulpunt van de linialen.</td></tr>
+    <tr><td class="btn">Y</td><td class="name">Move Y</td><td>Verticale positie van het blok in mm.</td></tr>
+  </table>
+  <p>Move X en Move Y lopen mee als je het blok met de muis versleept. Zo kun je een blok grof slepen en daarna op de millimeter juist zetten.</p>
+
+  <h2>Tekstopmaak</h2>
+  <table>
+    <tr><th>Knop</th><th>Naam</th><th>Wat doet het?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-bold.png" alt=""></td><td class="name">Vet</td><td>Vet aan of uit.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-italic.png" alt=""></td><td class="name">Cursief</td><td>Cursief aan of uit.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-underline.png" alt=""></td><td class="name">Onderstrepen</td><td>Onderstrepen aan of uit.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-left.png" alt=""></td><td class="name">Links uitlijnen</td><td>Tekst links in het blok.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-center.png" alt=""></td><td class="name">Centreren</td><td>Tekst in het midden.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-right.png" alt=""></td><td class="name">Rechts uitlijnen</td><td>Tekst rechts in het blok.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Tekstkleur</td><td>Kleur van de tekst.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Lettergrootte</td><td>Grootte van de tekst (8 tot 20).</td></tr>
+  </table>
+  <p>Staat de tekst in bewerking en heb je een stuk geselecteerd, dan gelden vet, cursief en onderstrepen alleen voor dat stuk. Zonder selectie gelden ze voor het hele blok.</p>
+
+  <h2>Hyperlinks</h2>
+  <table>
+    <tr><th>Knop</th><th>Naam</th><th>Wat doet het?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-link-add.png" alt=""></td><td class="name">Hyperlink maken</td><td>Maakt van de geselecteerde tekst een hyperlink. Selecteer eerst het stuk tekst dat een link moet worden.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-link-del.png" alt=""></td><td class="name">Hyperlink verwijderen</td><td>Verwijdert de hyperlink; de tekst blijft staan.</td></tr>
+  </table>
+
+  <h2>Achtergrond en rand</h2>
+  <table>
+    <tr><th>Knop</th><th>Naam</th><th>Wat doet het?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-transparent.png" alt=""></td><td class="name">Transparant</td><td>Zet de achtergrond van het blok doorzichtig aan of uit.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Kleur tekstblok</td><td>Achtergrondkleur van het blok (als het niet transparant is).</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Randdikte</td><td>Dikte van de rand, 1 tot 5.</td></tr>
+    <tr><td class="btn">&#9472;</td><td class="name">Randstijl</td><td>Geen, doorgetrokken, streepjes, puntjes of dubbel.</td></tr>
+  </table>
+
+  <div class="pager"><a href="cel.html">&larr; <img src="../img/tool-cell.png" class="ico" alt="">Tabblad Cel</a><a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Tabblad Instellingen &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registerkarte Einstellungen - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/instellingen.html">NL</a><a href="../en/instellingen.html">EN</a><a href="../fr/instellingen.html">FR</a><a href="../de/instellingen.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html" class="active"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <h1>Registerkarte Einstellungen (S)</h1>
+  <p class="lead">Standardwerte für neue Dokumente, das Seitenformat und die Sprache des Werkzeugkastens.</p>
+
+  <h2>Standardeinstellungen verwalten</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/set-load.png" alt=""></td><td class="name">Standardeinstellungen laden</td><td>Liest die gespeicherten Standardeinstellungen erneut ein.</td></tr>
+    <tr><td class="btn"><img src="../img/set-save.png" alt=""></td><td class="name">Standardeinstellungen speichern</td><td>Speichert die aktuellen Werte dieser Registerkarte als Standard.</td></tr>
+    <tr><td class="btn"><img src="../img/set-reset.png" alt=""></td><td class="name">Werkseinstellungen</td><td>Setzt alle Werte auf die ursprünglichen Werkseinstellungen zurück.</td></tr>
+    <tr><td class="btn"><img src="../img/set-apply.png" alt=""></td><td class="name">Auf Dokument anwenden</td><td>Wendet die Standardwerte auf das gerade geöffnete Dokument an.</td></tr>
+  </table>
+  <div class="tip"><strong>Hinweis:</strong> das Ändern eines Wertes auf dieser Registerkarte ändert Ihre aktuelle Tabelle noch nicht.
+  Klicken Sie auf <b>Anwenden</b>, um die Werte im aktuellen Dokument zu verwenden, oder auf <b>Speichern</b>, um sie für später zu behalten.</div>
+
+  <h2>Standardwerte</h2>
+  <table>
+    <tr><th>Einstellung</th><th>Bedeutung</th></tr>
+    <tr><td class="name">Standard-Spaltenbreite</td><td>Breite neuer Spalten.</td></tr>
+    <tr><td class="name">Standard-Zeilenhöhe</td><td>Höhe neuer Zeilen.</td></tr>
+    <tr><td class="name">Standard-Gitterlinienbreite</td><td>Dicke der Linien zwischen den Zellen.</td></tr>
+    <tr><td class="name">Standard-Gitterfarbe</td><td>Farbe dieser Linien.</td></tr>
+    <tr><td class="name">HTML-Hintergrundfarbe</td><td>Hintergrundfarbe der Seite (der <code>body</code> des HTML-Dokuments).</td></tr>
+    <tr><td class="name">Layoutraster anzeigen</td><td>Zeigt ein Punktraster auf der Seite als Hilfe beim Platzieren.</td></tr>
+    <tr><td class="name">Seitenlineale anzeigen</td><td>Zeigt die Lineale in mm oberhalb und links der Seite.</td></tr>
+    <tr><td class="name">Kopfzeilen anzeigen</td><td>Zeigt die Zeilen- und Spaltenköpfe (1, 2, 3&hellip; und A, B, C&hellip;) um die Tabelle.</td></tr>
+  </table>
+
+  <h2>Seitenformat</h2>
+  <p>Die Schaltfläche für das Seitenformat öffnet ein Menü: A3, A4, A5 oder Letter, jeweils im Hoch- oder Querformat.
+  Die Schaltfläche zeigt das gewählte Format; Breite und Höhe in Pixeln stehen daneben.</p>
+
+  <h2>Sprache</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn">&#9662;</td><td class="name">Anzeigesprache</td><td>Wählen Sie Niederländisch, Englisch, Französisch oder Deutsch. Die Hinweise im Werkzeugkasten und die Fenstertexte wechseln sofort.</td></tr>
+    <tr><td class="btn">Sprache...</td><td class="name">Übersetzungen bearbeiten</td><td>Öffnet den Spracheditor. Dort passen Sie die Übersetzungen an und speichern sie in <code>talen.lng</code>.</td></tr>
+  </table>
+  <div class="tip"><strong>Spracheditor:</strong> die erste Spalte (<i>Key</i>) ist der Suchschlüssel aus dem Quellcode und kann nicht geändert werden.
+  Bearbeiten Sie nur die Spalten NL, EN, FR und DU.</div>
+
+  <div class="pager"><a href="tekstblok.html">&larr; <img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock</a><a href="muis-toetsen.html">Maus &amp; Tastatur &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

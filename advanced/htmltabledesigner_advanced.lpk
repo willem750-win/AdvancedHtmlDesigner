@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="HtmlTableDesigner_advanced"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files>
+      <Item>
+        <Filename Value="htmltabledesigneradvanced.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="HtmlTableDesignerAdvanced"/>
+      </Item>
+      <Item>
+        <Filename Value="htmltabledesigneradvancedreg.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="HtmlTableDesignerAdvancedReg"/>
+      </Item>
+      <Item>
+        <Filename Value="borderstylebutton.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="BorderStyleButton"/>
+      </Item>
+      <Item>
+        <Filename Value="htmltabledesignerlang.pas"/>
+        <UnitName Value="HtmlTableDesignerLang"/>
+      </Item>
+      <Item>
+        <Filename Value="langeditorform.pas"/>
+        <UnitName Value="LangEditorForm"/>
+      </Item>
+    </Files>
+    <RequiredPkgs>
+      <Item>
+        <PackageName Value="IDEIntf"/>
+      </Item>
+      <Item>
+        <PackageName Value="TableDesignerHtml"/>
+      </Item>
+      <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

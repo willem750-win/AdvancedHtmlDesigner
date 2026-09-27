@@ -1,0 +1,20 @@
+# Compileerresten en IDE-bestanden
+lib/
+backup/
+*.o
+*.ppu
+*.compiled
+*.lps
+*.res
+*.bak
+
+# Gebouwde programma's (die komen in de release-zip, niet in de broncode)
+*.exe
+*.dll
+
+# Bestanden die het programma zelf aanmaakt tijdens het gebruik
+DesignerDefaults.ini
+previewN.html
+advanced/project/htd/*.htd
+advanced/project/images/
+advanced/project/html/

@@ -1,0 +1,101 @@
+Table settings	Tabelinstellingen	Table settings	Paramètres du tableau	Tabelleneinstellungen
+Cell settings	Celinstellingen	Cell settings	Paramètres de la cellule	Zelleneinstellungen
+Text block settings	Tekstblokinstellingen	Text block settings	Paramètres du bloc de texte	Textblockeinstellungen
+Global settings	Algemene instellingen	Global settings	Paramètres généraux	Allgemeine Einstellungen
+Tool selector	Gereedschapskiezer	Tool selector	Sélecteur d'outil	Werkzeugauswahl
+Clear table-cells content	Inhoud van tabelcellen wissen	Clear table-cells content	Effacer le contenu des cellules du tableau	Inhalt der Tabellenzellen löschen
+Add row	Rij toevoegen	Add row	Ajouter une ligne	Zeile hinzufügen
+Add column	Kolom toevoegen	Add column	Ajouter une colonne	Spalte hinzufügen
+Delete row	Rij verwijderen	Delete row	Supprimer la ligne	Zeile löschen
+Delete column	Kolom verwijderen	Delete column	Supprimer la colonne	Spalte löschen
+Change Grid Line width	Lijndikte raster wijzigen	Change grid line width	Modifier l'épaisseur des lignes de la grille	Gitterlinienbreite ändern
+Grid Row height	Rijhoogte raster	Grid row height	Hauteur de ligne de la grille	Zeilenhöhe des Rasters
+Grid Column width	Kolombreedte raster	Grid column width	Largeur de colonne de la grille	Spaltenbreite des Rasters
+ Hold Ctrl and drag the table with the mouse\n OR\nchange only Horizontally( X )	Houd Ctrl ingedrukt en sleep de tabel met de muis\nOF\nenkel horizontaal verplaatsen ( X )	Hold Ctrl and drag the table with the mouse\nOR\nchange only Horizontally ( X )	Maintenez Ctrl enfoncé et faites glisser le tableau avec la souris\nOU\nne déplacer qu'horizontalement ( X )	Strg gedrückt halten und die Tabelle mit der Maus ziehen\nODER\nnur horizontal verschieben ( X )
+ Hold Ctrl and drag the table with the mouse\n OR\n change only Vertically( Y )	Houd Ctrl ingedrukt en sleep de tabel met de muis\nOF\nenkel verticaal verplaatsen ( Y )	Hold Ctrl and drag the table with the mouse\nOR\nchange only Vertically ( Y )	Maintenez Ctrl enfoncé et faites glisser le tableau avec la souris\nOU\nne déplacer que verticalement ( Y )	Strg gedrückt halten und die Tabelle mit der Maus ziehen\nODER\nnur vertikal verschieben ( Y )
+Table border color	Randkleur tabel	Table border color	Couleur de bordure du tableau	Rahmenfarbe der Tabelle
+Table border width	Randdikte tabel	Table border width	Épaisseur de bordure du tableau	Rahmenbreite der Tabelle
+Table border radius	Randafronding tabel	Table border radius	Rayon de bordure du tableau	Rahmenradius der Tabelle
+Table background color	Achtergrondkleur tabel	Table background color	Couleur de fond du tableau	Hintergrundfarbe der Tabelle
+Header color	Kleur koptekst	Header color	Couleur d'en-tête	Kopfzeilenfarbe
+Table Border Style	Randstijl tabel	Table border style	Style de bordure du tableau	Rahmenstil der Tabelle
+Bold	Vet	Bold	Gras	Fett
+Italic	Cursief	Italic	Italique	Kursiv
+Underline	Onderstrepen	Underline	Souligné	Unterstrichen
+Align left	Links uitlijnen	Align left	Aligner à gauche	Linksbündig ausrichten
+Align center	Centreren	Align center	Centrer	Zentrieren
+Align right	Rechts uitlijnen	Align right	Aligner à droite	Rechtsbündig ausrichten
+Create text hyperlink	Teksthyperlink maken	Create text hyperlink	Créer un hyperlien texte	Text-Hyperlink erstellen
+Delete text hyperlink	Teksthyperlink verwijderen	Delete text hyperlink	Supprimer l'hyperlien texte	Text-Hyperlink löschen
+Copy cell	Cel kopiëren	Copy cell	Copier la cellule	Zelle kopieren
+Paste cell	Cel plakken	Paste cell	Coller la cellule	Zelle einfügen
+Cell color	Celkleur	Cell color	Couleur de la cellule	Zellenfarbe
+Change fontSize	Lettergrootte wijzigen	Change font size	Modifier la taille de police	Schriftgröße ändern
+Text color	Tekstkleur	Text color	Couleur du texte	Textfarbe
+Add image	Afbeelding toevoegen	Add image	Ajouter une image	Bild hinzufügen
+Delete image	Afbeelding verwijderen	Delete image	Supprimer l'image	Bild löschen
+Image left	Afbeelding links	Image left	Image à gauche	Bild links
+Image center	Afbeelding centreren	Image center	Image centrée	Bild zentriert
+Image right	Afbeelding rechts	Image right	Image à droite	Bild rechts
+Create image hyperlink	Afbeeldingshyperlink maken	Create image hyperlink	Créer un hyperlien image	Bild-Hyperlink erstellen
+Delete image hyperlink	Afbeeldingshyperlink verwijderen	Delete image hyperlink	Supprimer l'hyperlien image	Bild-Hyperlink löschen
+Merge cells	Cellen samenvoegen	Merge cells	Fusionner les cellules	Zellen verbinden
+UnMerge cells	Cellen splitsen	Unmerge cells	Dissocier les cellules	Zellen trennen
+Corner radius " cells" 	Hoekafronding cellen	Corner radius (cells)	Rayon d'angle des cellules	Eckenradius der Zellen
+Klik eerst op de plaats in designer\nwaar je het tekstblok wil zetten.	Klik eerst op de plaats in designer\nwaar je het tekstblok wil zetten.	Click first on the location in the designer\nwhere you want to place the text block.	Cliquez d'abord à l'endroit dans le concepteur\noù vous voulez placer le bloc de texte.	Klicken Sie zuerst auf die Stelle im Designer\nan der Sie den Textblock platzieren möchten.
+Selecteer tekstblock  in designer\nom te verwijderen.	Selecteer tekstblok in designer\nom te verwijderen.	Select a text block in the designer\nto delete it.	Sélectionnez un bloc de texte dans le concepteur\npour le supprimer.	Wählen Sie einen Textblock im Designer\naus, um ihn zu löschen.
+ Drag the TextBlock with the mouse\n OR\n change only Horizontally( X )	Sleep het tekstblok met de muis\nOF\nenkel horizontaal verplaatsen ( X )	Drag the text block with the mouse\nOR\nchange only Horizontally ( X )	Faites glisser le bloc de texte avec la souris\nOU\nne déplacer qu'horizontalement ( X )	Den Textblock mit der Maus ziehen\nODER\nnur horizontal verschieben ( X )
+ Drag the TextBlock with the mouse\n OR\n change only Vertically( Y )	Sleep het tekstblok met de muis\nOF\nenkel verticaal verplaatsen ( Y )	Drag the text block with the mouse\nOR\nchange only Vertically ( Y )	Faites glisser le bloc de texte avec la souris\nOU\nne déplacer que verticalement ( Y )	Den Textblock mit der Maus ziehen\nODER\nnur vertikal verschieben ( Y )
+Align Left	Links uitlijnen	Align Left	Aligner à gauche	Linksbündig ausrichten
+Align Center	Centreren	Align Center	Centrer	Zentrieren
+Align Right	Rechts uitlijnen	Align Right	Aligner à droite	Rechtsbündig ausrichten
+Text Color	Tekstkleur	Text Color	Couleur du texte	Textfarbe
+Font Size	Lettergrootte	Font Size	Taille de police	Schriftgröße
+Create Hyperlink	Hyperlink maken	Create Hyperlink	Créer un hyperlien	Hyperlink erstellen
+Delete Hyperlink	Hyperlink verwijderen	Delete Hyperlink	Supprimer l'hyperlien	Hyperlink löschen
+Set TextBlock transparancy True/False 	Transparantie van tekstblok aan/uit	Set text block transparency on/off	Activer/désactiver la transparence du bloc de texte	Transparenz des Textblocks ein-/ausschalten
+TextBlock color	Kleur tekstblok	Text block color	Couleur du bloc de texte	Farbe des Textblocks
+Border width	Randdikte	Border width	Épaisseur de bordure	Rahmenbreite
+Border Style	Randstijl	Border style	Style de bordure	Rahmenstil
+Load	Laden	Load	Charger	Laden
+Load default settings	Standaardinstellingen laden	Load default settings	Charger les paramètres par défaut	Standardeinstellungen laden
+Save	Bewaren	Save	Enregistrer	Speichern
+Save default settings	Standaardinstellingen bewaren	Save default settings	Enregistrer les paramètres par défaut	Standardeinstellungen speichern
+Reset	Herstellen	Reset	Réinitialiser	Zurücksetzen
+Restore factory defaults	Fabrieksinstellingen herstellen	Restore factory defaults	Rétablir les paramètres d'usine	Werkseinstellungen wiederherstellen
+Apply	Toepassen	Apply	Appliquer	Anwenden
+Apply defaults to current document	Standaardinstellingen toepassen op huidig document	Apply defaults to current document	Appliquer les paramètres par défaut au document actuel	Standardeinstellungen auf aktuelles Dokument anwenden
+Taal...	Taal...	Language...	Langue...	Sprache...
+Vertalingen bewerken (NL/EN/FR/DU)	Vertalingen bewerken (NL/EN/FR/DU)	Edit translations (NL/EN/FR/DU)	Modifier les traductions (NL/EN/FR/DU)	Übersetzungen bearbeiten (NL/EN/FR/DU)
+Default column width	Standaard kolombreedte	Default column width	Largeur de colonne par défaut	Standard-Spaltenbreite
+Default row height	Standaard rijhoogte	Default row height	Hauteur de ligne par défaut	Standard-Zeilenhöhe
+Default grid line width	Standaard lijndikte raster	Default grid line width	Épaisseur de ligne de grille par défaut	Standard-Gitterlinienbreite
+Default grid color	Standaard rasterkleur	Default grid color	Couleur de grille par défaut	Standard-Gitterfarbe
+Default HTML-Body color	Standaard achtergrondkleur HTML	Default HTML body color	Couleur de fond HTML par défaut	Standard-HTML-Hintergrundfarbe
+Show layout grid	Opmaakraster tonen	Show layout grid	Afficher la grille de mise en page	Layoutraster anzeigen
+Default show layout grid	Standaard opmaakraster tonen	Show layout grid by default	Afficher la grille de mise en page par défaut	Layoutraster standardmäßig anzeigen
+Show page rulers	Papierlinialen tonen	Show page rulers	Afficher les règles de page	Seitenlineale anzeigen
+Default show page rulers	Standaard papierlinialen tonen	Show page rulers by default	Afficher les règles de page par défaut	Seitenlineale standardmäßig anzeigen
+Show headers	Koppen tonen	Show headers	Afficher les en-têtes	Kopfzeilen anzeigen
+Default show headers	Standaard koppen tonen	Show headers by default	Afficher les en-têtes par défaut	Kopfzeilen standardmäßig anzeigen
+A3 Portrait	A3 staand	A3 Portrait	A3 portrait	A3 Hochformat
+A3 Landscape	A3 liggend	A3 Landscape	A3 paysage	A3 Querformat
+A4 Portrait	A4 staand	A4 Portrait	A4 portrait	A4 Hochformat
+A4 Landscape	A4 liggend	A4 Landscape	A4 paysage	A4 Querformat
+A5 Portrait	A5 staand	A5 Portrait	A5 portrait	A5 Hochformat
+A5 Landscape	A5 liggend	A5 Landscape	A5 paysage	A5 Querformat
+Letter Portrait	Letter staand	Letter Portrait	Lettre portrait	Letter Hochformat
+Letter Landscape	Letter liggend	Letter Landscape	Lettre paysage	Letter Querformat
+Page width: %d px	Paginabreedte: %d px	Page width: %d px	Largeur de page : %d px	Seitenbreite: %d px
+Page height: %d px	Paginahoogte: %d px	Page height: %d px	Hauteur de page : %d px	Seitenhöhe: %d px
+Klik eerst op een rijheader.	Klik eerst op een rijheader.	Click a row header first.	Cliquez d'abord sur un en-tête de ligne.	Klicken Sie zuerst auf eine Zeilenüberschrift.
+Klik eerst op een kolomheader.	Klik eerst op een kolomheader.	Click a column header first.	Cliquez d'abord sur un en-tête de colonne.	Klicken Sie zuerst auf eine Spaltenüberschrift.
+Hyperlink	Hyperlink	Hyperlink	Hyperlien	Hyperlink
+URL:	URL:	URL:	URL :	URL:
+Tekst:	Tekst:	Text:	Texte :	Text:
+De afbeelding kon niet naar de images-map worden gekopieerd.	De afbeelding kon niet naar de images-map worden gekopieerd.	The image could not be copied to the images folder.	L'image n'a pas pu être copiée dans le dossier images.	Das Bild konnte nicht in den Bilderordner kopiert werden.
+Afbeeldingshyperlink	Afbeeldingshyperlink	Image hyperlink	Hyperlien image	Bild-Hyperlink
+De geselecteerde cel bevat geen afbeelding.	De geselecteerde cel bevat geen afbeelding.	The selected cell does not contain an image.	La cellule sélectionnée ne contient pas d'image.	Die ausgewählte Zelle enthält kein Bild.
+Geen tekstblok geselecteerd.	Geen tekstblok geselecteerd.	No text block selected.	Aucun bloc de texte sélectionné.	Kein Textblock ausgewählt.
+Selecteer eerst een tekstblok.	Selecteer eerst een tekstblok.	Select a text block first.	Sélectionnez d'abord un bloc de texte.	Wählen Sie zuerst einen Textblock aus.
+Selecteer eerst het tekstgedeelte dat een hyperlink moet worden.	Selecteer eerst het tekstgedeelte dat een hyperlink moet worden.	First select the text portion that should become a hyperlink.	Sélectionnez d'abord la partie de texte qui doit devenir un hyperlien.	Wählen Sie zuerst den Textabschnitt aus, der ein Hyperlink werden soll.

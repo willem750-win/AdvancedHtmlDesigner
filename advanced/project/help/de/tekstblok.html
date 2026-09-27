@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registerkarte Textblock - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/tekstblok.html">NL</a><a href="../en/tekstblok.html">EN</a><a href="../fr/tekstblok.html">FR</a><a href="../de/tekstblok.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html" class="active"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <h1>Registerkarte Textblock (B)</h1>
+  <p class="lead">Textblöcke sind freie Textfelder, die Sie überall auf der Seite platzieren können,
+  unabhängig von der Tabelle &ndash; zum Beispiel für einen Titel, eine Bemerkung oder eine Fußzeile.</p>
+
+  <h2>Textblock platzieren und bearbeiten</h2>
+  <ol class="steps">
+    <li>Klicken Sie im Designer an die Stelle, an der der Block stehen soll.</li>
+    <li>Klicken Sie auf <b>TBA</b>.</li>
+    <li>Doppelklicken Sie auf den Block (oder drücken Sie <kbd>Enter</kbd> / <kbd>F2</kbd>), um den Text einzugeben.</li>
+    <li>Ziehen Sie den Block, um ihn zu verschieben. Ziehen Sie die Ecke rechts unten, um die Größe zu ändern.</li>
+    <li>Die kleine Schaltfläche oben links in einem ausgewählten Block öffnet direkt diese Registerkarte.</li>
+  </ol>
+  <div class="tip"><strong>Hinweis:</strong> die meisten Schaltflächen dieser Registerkarte sind erst aktiv, wenn ein Textblock ausgewählt ist.</div>
+
+  <h2>Hinzufügen, löschen und positionieren</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-add.png" alt=""></td><td class="name">Textblock hinzufügen</td><td>Erstellt einen neuen Textblock an der Stelle, an der Sie zuletzt in den Designer geklickt haben.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-del.png" alt=""></td><td class="name">Textblock löschen</td><td>Löscht den ausgewählten Block. Geht auch mit <kbd>Entf</kbd>.</td></tr>
+    <tr><td class="btn">X</td><td class="name">Move X</td><td>Horizontale Position des Blocks in mm, gemessen vom Nullpunkt der Lineale.</td></tr>
+    <tr><td class="btn">Y</td><td class="name">Move Y</td><td>Vertikale Position des Blocks in mm.</td></tr>
+  </table>
+  <p>Move X und Move Y laufen mit, wenn Sie den Block mit der Maus ziehen. So können Sie einen Block grob hinziehen und danach millimetergenau setzen.</p>
+
+  <h2>Textformat</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-bold.png" alt=""></td><td class="name">Fett</td><td>Fett ein oder aus.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-italic.png" alt=""></td><td class="name">Kursiv</td><td>Kursiv ein oder aus.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-underline.png" alt=""></td><td class="name">Unterstrichen</td><td>Unterstreichen ein oder aus.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-left.png" alt=""></td><td class="name">Linksbündig</td><td>Text links im Block.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-center.png" alt=""></td><td class="name">Zentrieren</td><td>Text in der Mitte.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-right.png" alt=""></td><td class="name">Rechtsbündig</td><td>Text rechts im Block.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Textfarbe</td><td>Farbe des Textes.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Schriftgröße</td><td>Größe des Textes (8 bis 20).</td></tr>
+  </table>
+  <p>Bearbeiten Sie gerade den Text und haben Sie ein Stück markiert, dann gelten Fett, Kursiv und Unterstrichen nur für dieses Stück. Ohne Markierung gelten sie für den ganzen Block.</p>
+
+  <h2>Hyperlinks</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-link-add.png" alt=""></td><td class="name">Hyperlink erstellen</td><td>Macht aus dem markierten Text einen Hyperlink. Markieren Sie zuerst das Textstück, das ein Link werden soll.</td></tr>
+    <tr><td class="btn"><img src="../img/tb-link-del.png" alt=""></td><td class="name">Hyperlink löschen</td><td>Entfernt den Hyperlink; der Text bleibt stehen.</td></tr>
+  </table>
+
+  <h2>Hintergrund und Rahmen</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/tb-transparent.png" alt=""></td><td class="name">Transparent</td><td>Schaltet einen durchsichtigen Hintergrund des Blocks ein oder aus.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Farbe des Textblocks</td><td>Hintergrundfarbe des Blocks (wenn er nicht transparent ist).</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Rahmenbreite</td><td>Dicke des Rahmens, 1 bis 5.</td></tr>
+    <tr><td class="btn">&#9472;</td><td class="name">Rahmenstil</td><td>Keiner, durchgezogen, gestrichelt, gepunktet oder doppelt.</td></tr>
+  </table>
+
+  <div class="pager"><a href="cel.html">&larr; <img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle</a><a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

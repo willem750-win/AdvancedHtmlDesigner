@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tabblad Cel - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/cel.html" class="cur">NL</a><a href="../en/cel.html">EN</a><a href="../fr/cel.html">FR</a><a href="../de/cel.html">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Aan de slag</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabblad Tabel (T)</a>
+  <a href="cel.html" class="active"><img src="../img/tool-cell.png" class="ico" alt="">Tabblad Cel (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Tabblad Tekstblok (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Tabblad Instellingen (S)</a>
+  <div class="group">Overige</div>
+  <a href="muis-toetsen.html">Muis &amp; toetsen</a>
+  <a href="bestanden.html">Bestanden &amp; export</a>
+</nav>
+<main>
+  <h1>Tabblad Cel (C)</h1>
+  <p class="lead">Opmaak van de geselecteerde cel(len): tekst, kleuren, hyperlinks en afbeeldingen.</p>
+
+  <div class="tip"><strong>Selecteren:</strong> klik op een cel, sleep over meerdere cellen,
+  of klik op een rij- of kolomkop om een hele rij of kolom te kiezen. De opmaak geldt voor de hele selectie.</div>
+
+  <h2>Tekstopmaak</h2>
+  <table>
+    <tr><th>Knop</th><th>Naam</th><th>Wat doet het?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-bold.png" alt=""></td><td class="name">Vet</td><td>Zet de tekst vet aan of uit.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-italic.png" alt=""></td><td class="name">Cursief</td><td>Zet de tekst cursief aan of uit.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-underline.png" alt=""></td><td class="name">Onderstrepen</td><td>Zet onderstrepen aan of uit.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-left.png" alt=""></td><td class="name">Links uitlijnen</td><td>Lijnt de tekst links uit.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-center.png" alt=""></td><td class="name">Centreren</td><td>Centreert de tekst.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-right.png" alt=""></td><td class="name">Rechts uitlijnen</td><td>Lijnt de tekst rechts uit.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Lettergrootte</td><td>Grootte van de tekst in de cel.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Tekstkleur</td><td>Kleur van de tekst.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Celkleur</td><td>Achtergrondkleur van de cel.</td></tr>
+    <tr><td class="btn">&#9472;</td><td class="name">Celrandstijl</td><td>Stijl van de rand rond de cel.</td></tr>
+  </table>
+
+  <h2>Kopiëren en plakken</h2>
+  <table>
+    <tr><th>Knop</th><th>Naam</th><th>Wat doet het?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-copy.png" alt=""></td><td class="name">Cel kopiëren</td><td>Kopieert inhoud en opmaak van de geselecteerde cel(len). Sneltoets <kbd>Ctrl</kbd>+<kbd>C</kbd>.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-paste.png" alt=""></td><td class="name">Cel plakken</td><td>Plakt wat gekopieerd werd in de geselecteerde cel. Sneltoets <kbd>Ctrl</kbd>+<kbd>V</kbd>.</td></tr>
+  </table>
+
+  <h2>Teksthyperlinks</h2>
+  <table>
+    <tr><th>Knop</th><th>Naam</th><th>Wat doet het?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-textlink-add.png" alt=""></td><td class="name">Teksthyperlink maken</td><td>Maakt van de geselecteerde tekst een hyperlink. Je geeft een URL en eventueel een tekst op.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-textlink-del.png" alt=""></td><td class="name">Teksthyperlink verwijderen</td><td>Verwijdert de hyperlink; de tekst blijft staan.</td></tr>
+  </table>
+  <p>Werkwijze: dubbelklik op de cel, selecteer het stuk tekst dat een link moet worden en klik op <b>TH+</b>.</p>
+
+  <h2>Afbeeldingen</h2>
+  <table>
+    <tr><th>Knop</th><th>Naam</th><th>Wat doet het?</th></tr>
+    <tr><td class="btn"><img src="../img/img-add.png" alt=""></td><td class="name">Afbeelding toevoegen</td><td>Kiest een afbeelding voor de cel. Het bestand wordt naar de map <code>images</code> gekopieerd, zodat de HTML er later naar kan verwijzen.</td></tr>
+    <tr><td class="btn"><img src="../img/img-del.png" alt=""></td><td class="name">Afbeelding verwijderen</td><td>Haalt de afbeelding uit de cel.</td></tr>
+    <tr><td class="btn"><img src="../img/img-left.png" alt=""></td><td class="name">Afbeelding links</td><td>Plaatst de afbeelding links in de cel.</td></tr>
+    <tr><td class="btn"><img src="../img/img-center.png" alt=""></td><td class="name">Afbeelding centreren</td><td>Plaatst de afbeelding in het midden.</td></tr>
+    <tr><td class="btn"><img src="../img/img-right.png" alt=""></td><td class="name">Afbeelding rechts</td><td>Plaatst de afbeelding rechts.</td></tr>
+    <tr><td class="btn"><img src="../img/img-size.png" alt=""></td><td class="name">Afbeeldingsgrootte</td><td>Opent een menu om de grootte van de afbeelding te kiezen.</td></tr>
+    <tr><td class="btn"><img src="../img/img-link-add.png" alt=""></td><td class="name">Afbeeldingshyperlink maken</td><td>Maakt van de afbeelding een klikbare link.</td></tr>
+    <tr><td class="btn"><img src="../img/img-link-del.png" alt=""></td><td class="name">Afbeeldingshyperlink verwijderen</td><td>Verwijdert de link van de afbeelding.</td></tr>
+  </table>
+
+  <div class="pager"><a href="tabel.html">&larr; <img src="../img/tool-table.png" class="ico" alt="">Tabblad Tabel</a><a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Tabblad Tekstblok &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onglet Cellule - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/cel.html">NL</a><a href="../en/cel.html">EN</a><a href="../fr/cel.html" class="cur">FR</a><a href="../de/cel.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html" class="active"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <h1>Onglet Cellule (C)</h1>
+  <p class="lead">Mise en forme de la ou des cellules sélectionnées : texte, couleurs, hyperliens et images.</p>
+
+  <div class="tip"><strong>Sélection :</strong> cliquez sur une cellule, faites glisser sur plusieurs cellules,
+  ou cliquez sur un en-tête pour choisir toute une ligne ou colonne. La mise en forme s'applique à toute la sélection.</div>
+
+  <h2>Mise en forme du texte</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-bold.png" alt=""></td><td class="name">Gras</td><td>Active ou désactive le gras.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-italic.png" alt=""></td><td class="name">Italique</td><td>Active ou désactive l'italique.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-underline.png" alt=""></td><td class="name">Souligné</td><td>Active ou désactive le soulignement.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-left.png" alt=""></td><td class="name">Aligner à gauche</td><td>Aligne le texte à gauche.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-center.png" alt=""></td><td class="name">Centrer</td><td>Centre le texte.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-right.png" alt=""></td><td class="name">Aligner à droite</td><td>Aligne le texte à droite.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Taille de police</td><td>Taille du texte dans la cellule.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Couleur du texte</td><td>Couleur du texte.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Couleur de la cellule</td><td>Couleur de fond de la cellule.</td></tr>
+    <tr><td class="btn">&#9472;</td><td class="name">Style de bordure</td><td>Style de la bordure autour de la cellule.</td></tr>
+  </table>
+
+  <h2>Copier et coller</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-copy.png" alt=""></td><td class="name">Copier la cellule</td><td>Copie le contenu et la mise en forme de la ou des cellules sélectionnées. Raccourci <kbd>Ctrl</kbd>+<kbd>C</kbd>.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-paste.png" alt=""></td><td class="name">Coller la cellule</td><td>Colle ce qui a été copié dans la cellule sélectionnée. Raccourci <kbd>Ctrl</kbd>+<kbd>V</kbd>.</td></tr>
+  </table>
+
+  <h2>Hyperliens texte</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-textlink-add.png" alt=""></td><td class="name">Créer un hyperlien texte</td><td>Transforme le texte sélectionné en hyperlien. Vous indiquez une URL et éventuellement un texte.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-textlink-del.png" alt=""></td><td class="name">Supprimer l'hyperlien</td><td>Supprime l'hyperlien ; le texte reste.</td></tr>
+  </table>
+  <p>Méthode : double-cliquez sur la cellule, sélectionnez le morceau de texte qui doit devenir un lien et cliquez sur <b>TH+</b>.</p>
+
+  <h2>Images</h2>
+  <table>
+    <tr><th>Bouton</th><th>Nom</th><th>Que fait-il ?</th></tr>
+    <tr><td class="btn"><img src="../img/img-add.png" alt=""></td><td class="name">Ajouter une image</td><td>Choisit une image pour la cellule. Le fichier est copié dans le dossier <code>images</code>, pour que le HTML puisse y faire référence.</td></tr>
+    <tr><td class="btn"><img src="../img/img-del.png" alt=""></td><td class="name">Supprimer l'image</td><td>Retire l'image de la cellule.</td></tr>
+    <tr><td class="btn"><img src="../img/img-left.png" alt=""></td><td class="name">Image à gauche</td><td>Place l'image à gauche dans la cellule.</td></tr>
+    <tr><td class="btn"><img src="../img/img-center.png" alt=""></td><td class="name">Image centrée</td><td>Place l'image au milieu.</td></tr>
+    <tr><td class="btn"><img src="../img/img-right.png" alt=""></td><td class="name">Image à droite</td><td>Place l'image à droite.</td></tr>
+    <tr><td class="btn"><img src="../img/img-size.png" alt=""></td><td class="name">Taille de l'image</td><td>Ouvre un menu pour choisir la taille de l'image.</td></tr>
+    <tr><td class="btn"><img src="../img/img-link-add.png" alt=""></td><td class="name">Créer un hyperlien image</td><td>Rend l'image cliquable.</td></tr>
+    <tr><td class="btn"><img src="../img/img-link-del.png" alt=""></td><td class="name">Supprimer l'hyperlien image</td><td>Supprime le lien de l'image.</td></tr>
+  </table>
+
+  <div class="pager"><a href="tabel.html">&larr; <img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau</a><a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

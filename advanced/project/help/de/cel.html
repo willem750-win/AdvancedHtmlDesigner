@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registerkarte Zelle - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/cel.html">NL</a><a href="../en/cel.html">EN</a><a href="../fr/cel.html">FR</a><a href="../de/cel.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html" class="active"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <h1>Registerkarte Zelle (C)</h1>
+  <p class="lead">Formatierung der ausgewählten Zelle(n): Text, Farben, Hyperlinks und Bilder.</p>
+
+  <div class="tip"><strong>Auswählen:</strong> klicken Sie auf eine Zelle, ziehen Sie über mehrere Zellen,
+  oder klicken Sie auf einen Zeilen- oder Spaltenkopf, um eine ganze Zeile oder Spalte zu wählen. Die Formatierung gilt für die ganze Auswahl.</div>
+
+  <h2>Textformat</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-bold.png" alt=""></td><td class="name">Fett</td><td>Schaltet Fett ein oder aus.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-italic.png" alt=""></td><td class="name">Kursiv</td><td>Schaltet Kursiv ein oder aus.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-underline.png" alt=""></td><td class="name">Unterstrichen</td><td>Schaltet Unterstreichen ein oder aus.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-left.png" alt=""></td><td class="name">Linksbündig</td><td>Richtet den Text links aus.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-center.png" alt=""></td><td class="name">Zentrieren</td><td>Zentriert den Text.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-right.png" alt=""></td><td class="name">Rechtsbündig</td><td>Richtet den Text rechts aus.</td></tr>
+    <tr><td class="btn">&#8645;</td><td class="name">Schriftgröße</td><td>Größe des Textes in der Zelle.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Textfarbe</td><td>Farbe des Textes.</td></tr>
+    <tr><td class="btn">&#9632;</td><td class="name">Zellenfarbe</td><td>Hintergrundfarbe der Zelle.</td></tr>
+    <tr><td class="btn">&#9472;</td><td class="name">Zellenrahmenstil</td><td>Stil des Rahmens um die Zelle.</td></tr>
+  </table>
+
+  <h2>Kopieren und Einfügen</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-copy.png" alt=""></td><td class="name">Zelle kopieren</td><td>Kopiert Inhalt und Formatierung der ausgewählten Zelle(n). Tastenkürzel <kbd>Strg</kbd>+<kbd>C</kbd>.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-paste.png" alt=""></td><td class="name">Zelle einfügen</td><td>Fügt das Kopierte in die ausgewählte Zelle ein. Tastenkürzel <kbd>Strg</kbd>+<kbd>V</kbd>.</td></tr>
+  </table>
+
+  <h2>Text-Hyperlinks</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/cell-textlink-add.png" alt=""></td><td class="name">Text-Hyperlink erstellen</td><td>Macht aus dem markierten Text einen Hyperlink. Sie geben eine URL und optional einen Text ein.</td></tr>
+    <tr><td class="btn"><img src="../img/cell-textlink-del.png" alt=""></td><td class="name">Text-Hyperlink löschen</td><td>Entfernt den Hyperlink; der Text bleibt stehen.</td></tr>
+  </table>
+  <p>Vorgehen: doppelklicken Sie auf die Zelle, markieren Sie das Textstück, das ein Link werden soll, und klicken Sie auf <b>TH+</b>.</p>
+
+  <h2>Bilder</h2>
+  <table>
+    <tr><th>Schaltfläche</th><th>Name</th><th>Was macht sie?</th></tr>
+    <tr><td class="btn"><img src="../img/img-add.png" alt=""></td><td class="name">Bild hinzufügen</td><td>Wählt ein Bild für die Zelle. Die Datei wird in den Ordner <code>images</code> kopiert, damit das HTML später darauf verweisen kann.</td></tr>
+    <tr><td class="btn"><img src="../img/img-del.png" alt=""></td><td class="name">Bild löschen</td><td>Entfernt das Bild aus der Zelle.</td></tr>
+    <tr><td class="btn"><img src="../img/img-left.png" alt=""></td><td class="name">Bild links</td><td>Setzt das Bild links in die Zelle.</td></tr>
+    <tr><td class="btn"><img src="../img/img-center.png" alt=""></td><td class="name">Bild zentriert</td><td>Setzt das Bild in die Mitte.</td></tr>
+    <tr><td class="btn"><img src="../img/img-right.png" alt=""></td><td class="name">Bild rechts</td><td>Setzt das Bild rechts.</td></tr>
+    <tr><td class="btn"><img src="../img/img-size.png" alt=""></td><td class="name">Bildgröße</td><td>Öffnet ein Menü, um die Größe des Bildes zu wählen.</td></tr>
+    <tr><td class="btn"><img src="../img/img-link-add.png" alt=""></td><td class="name">Bild-Hyperlink erstellen</td><td>Macht das Bild zu einem anklickbaren Link.</td></tr>
+    <tr><td class="btn"><img src="../img/img-link-del.png" alt=""></td><td class="name">Bild-Hyperlink löschen</td><td>Entfernt den Link vom Bild.</td></tr>
+  </table>
+
+  <div class="pager"><a href="tabel.html">&larr; <img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle</a><a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>
