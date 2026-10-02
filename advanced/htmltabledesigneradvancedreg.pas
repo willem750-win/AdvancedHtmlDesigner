@@ -581,6 +581,13 @@ RegisterPropertyEditor(
   TAdvancedWideImageIndexPropertyEditor
 );
 
+RegisterPropertyEditor(
+  TypeInfo(Integer),
+  THtmlTableDesignerAdvanced,
+  'SettingsLanguageImageIndex',
+  TAdvancedWideImageIndexPropertyEditor
+);
+
 end;
 
 

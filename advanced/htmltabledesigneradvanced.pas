@@ -61,7 +61,7 @@ type
     PageWidth: Integer;
     PageHeight: Integer;
 
-    Language: TUILanguage; // met gebruik van FCbLanguage
+    Language: TUILanguage; // met gebruik van FBtLanguage / FSelectedLanguage
   end;
 
 type
@@ -210,13 +210,20 @@ type
     FBtSetReset: TSpeedButton;
     FBtSetApply: TSpeedButton;
     FBtSetLanguage: TSpeedButton;
-    FCbLanguage: TComboBox;
+    // Taalkeuze: vlag-knop + uitklapmenu (past in de smalle toolbox, i.t.t.
+    // een combobox waarvan de dropdown-pijl de vlag afsnijdt).
+    // FSelectedLanguage = wat de knop toont; wijkt tijdelijk af van de live
+    // taal na Load/Reset tot "Apply" (zie SettingsToControls).
+    FBtLanguage: TSpeedButton;
+    FLanguagePopup: TPopupMenu;
+    FSelectedLanguage: TUILanguage;
 
     // Image indexen buttons Settings toolbox
     FSettingsLoadImageIndex: Integer;
     FSettingsSaveImageIndex: Integer;
     FSettingsResetImageIndex: Integer;
     FSettingsApplyImageIndex: Integer;
+    FSettingsLanguageImageIndex: Integer;
 
     // Eerste globale default-instellingen
     FSetDefaultColWidth: TSpinEdit;
@@ -332,7 +339,13 @@ type
       Private methoden
       ------------------------------------------------------------------------ }
     FAdvancedImagesWide: TCustomImageList;
+    // Vlaggetjes in de taal-combobox (index = Ord(TUILanguage))
+    FLanguageFlagImages: TCustomImageList;
     procedure SetAdvancedImagesWide(AValue: TCustomImageList);
+    procedure SetLanguageFlagImages(AValue: TCustomImageList);
+    procedure UpdateLanguageButton;
+    procedure LanguageButtonClick(Sender: TObject);
+    procedure LanguageMenuClick(Sender: TObject);
 
     {---------------------------------------------------------------------------
      SETTINGS TOOLS
@@ -344,13 +357,13 @@ type
     procedure SettingsResetClick(Sender: TObject);
     procedure SettingsApplyClick(Sender: TObject);
     procedure SettingsLanguageClick(Sender: TObject);
-    procedure SettingsLanguageChanged(Sender: TObject);
     procedure PageSizeButtonClick(Sender:TObject);
     // setters  Settings-image indexen
     procedure SetSettingsLoadImageIndex(AValue: Integer);
     procedure SetSettingsSaveImageIndex(AValue: Integer);
     procedure SetSettingsResetImageIndex(AValue: Integer);
     procedure SetSettingsApplyImageIndex(AValue: Integer);
+    procedure SetSettingsLanguageImageIndex(AValue: Integer);
 
     procedure SetFactoryDefaultSettings;
     procedure SettingsToControls;
@@ -636,11 +649,11 @@ type
   property OnCellButtonClick: TNotifyEvent read FOnCellButtonClick write FOnCellButtonClick;
   property OnTextBlockButtonClick: TNotifyEvent read FOnTextBlockButtonClick write FOnTextBlockButtonClick;
 
-  property AantalSettingsButtons:integer read FAantalSettingsButtons write SetAantalSettingsButtons Default 16;
+  property AantalSettingsButtons:integer read FAantalSettingsButtons write SetAantalSettingsButtons Default 17;
 
-  property AantalCellButtons:integer read FAantalCellButtons write SetAantalCellButtons Default 6;
-  property AantalTableButtons:integer read FAantalTableButtons write SetAantalTableButtons Default 6;
-  property AantalTextBlockButtons:integer read FAantalTextBlockButtons write SetAantalTextBlockButtons Default 6;
+  property AantalCellButtons:integer read FAantalCellButtons write SetAantalCellButtons Default 24;
+  property AantalTableButtons:integer read FAantalTableButtons write SetAantalTableButtons Default 23;
+  property AantalTextBlockButtons:integer read FAantalTextBlockButtons write SetAantalTextBlockButtons Default 19;
   property CellBoldImageIndex: Integer read FCellBoldImageIndex write SetCellBoldImageIndex default -1;
   property CellItalicImageIndex: Integer read FCellItalicImageIndex write SetCellItalicImageIndex default -1;
   property CellUnderlineImageIndex: Integer read FCellUnderlineImageIndex write SetCellUnderlineImageIndex default -1;
@@ -673,6 +686,8 @@ type
   property SettingsSaveImageIndex: Integer read FSettingsSaveImageIndex write SetSettingsSaveImageIndex default -1;
   property SettingsResetImageIndex: Integer read FSettingsResetImageIndex write SetSettingsResetImageIndex default -1;
   property SettingsApplyImageIndex: Integer read FSettingsApplyImageIndex write SetSettingsApplyImageIndex default -1;
+  // Icoon (uit AdvancedImagesWide) voor de "Taal..."-knop die de vertaallijst opent
+  property SettingsLanguageImageIndex: Integer read FSettingsLanguageImageIndex write SetSettingsLanguageImageIndex default -1;
 
   //-----------------------------------------------------------------------------------
   property ActiveTool: TAdvancedTool read FActiveTool write SetActiveTool default atTable;
@@ -680,6 +695,8 @@ type
   property ToolButtonHeight: Integer read FToolButtonHeight write SetToolButtonHeight default 18;
 
   property AdvancedImagesWide: TCustomImageList read FAdvancedImagesWide write SetAdvancedImagesWide;
+  // Vlaggen voor de taal-combobox: 0 = NL, 1 = EN, 2 = FR, 3 = DE
+  property LanguageFlagImages: TCustomImageList read FLanguageFlagImages write SetLanguageFlagImages;
   property CellCreateTextHyperlinkImageIndex: Integer read FCellCreateTextHyperlinkImageIndex write SetCellCreateTextHyperlinkImageIndex default -1;
   property CellDelTextHyperlinkImageIndex: Integer read FCellDelTextHyperlinkImageIndex write SetCellDelTextHyperlinkImageIndex default -1;
 end;
@@ -730,10 +747,10 @@ begin
   FUpdatingSettingsToolStates := False;
 
 
-  FAantalCellButtons := 6;
-  FAantalTableButtons := 6;
-  FAantalTextBlockButtons := 6;
-  FAantalSettingsButtons := 16;
+  FAantalCellButtons := 24;
+  FAantalTableButtons := 23;
+  FAantalTextBlockButtons := 19;
+  FAantalSettingsButtons := 17;
 
   // Bewust GEEN Application.HintColor/HintPause/HintHidePause meer
   // hier instellen: dit zijn toepassingsbrede instellingen (TApplication),
@@ -762,6 +779,7 @@ begin
   FSettingsSaveImageIndex := -1;
   FSettingsResetImageIndex := -1;
   FSettingsApplyImageIndex := -1;
+  FSettingsLanguageImageIndex := -1;
 
   FCellBoldImageIndex := -1;
   FCellItalicImageIndex := -1;
@@ -933,9 +951,8 @@ begin
 
   // Combobox synchroon houden als de taal van buitenaf gewijzigd werd
   // (property, .lfm-streaming) i.p.v. via de combobox zelf.
-  if Assigned(FCbLanguage) and
-     (FCbLanguage.ItemIndex <> Ord(HtmlTableDesignerLang.CurrentLanguage)) then
-    FCbLanguage.ItemIndex := Ord(HtmlTableDesignerLang.CurrentLanguage);
+  FSelectedLanguage := HtmlTableDesignerLang.CurrentLanguage;
+  UpdateLanguageButton;
 
   Invalidate;
 
@@ -1486,7 +1503,93 @@ begin
   Invalidate;
 end;
 
+procedure THtmlTableDesignerAdvanced.SetLanguageFlagImages(
+  AValue: TCustomImageList);
+begin
+  if FLanguageFlagImages = AValue then
+    Exit;
 
+  if Assigned(FLanguageFlagImages) then
+    FLanguageFlagImages.RemoveFreeNotification(Self);
+
+  FLanguageFlagImages := AValue;
+
+  if Assigned(FLanguageFlagImages) then
+    FLanguageFlagImages.FreeNotification(Self);
+
+  UpdateLanguageButton;
+end;
+
+// Bouwt het uitklapmenu (vlag + taalnaam) en toont op de knop de vlag van
+// de gekozen taal. Zonder vlaggen-ImageList: knop met de taalcode als tekst.
+procedure THtmlTableDesignerAdvanced.UpdateLanguageButton;
+const
+  LangNames: array[TUILanguage] of string =
+    ('Nederlands', 'English', 'Français', 'Deutsch');
+  LangCodes: array[TUILanguage] of string =
+    ('NL', 'EN', 'FR', 'DU');
+var
+  L: TUILanguage;
+  MI: TMenuItem;
+  HasFlags: Boolean;
+begin
+  if not Assigned(FBtLanguage) then
+    Exit;
+
+  HasFlags := Assigned(FLanguageFlagImages) and
+    (FLanguageFlagImages.Count > Ord(High(TUILanguage)));
+
+  if not Assigned(FLanguagePopup) then
+    FLanguagePopup := TPopupMenu.Create(Self);
+
+  FLanguagePopup.Items.Clear;
+  FLanguagePopup.Images := FLanguageFlagImages;
+
+  for L := Low(TUILanguage) to High(TUILanguage) do
+  begin
+    MI := TMenuItem.Create(FLanguagePopup);
+    MI.Caption := LangNames[L];
+    MI.Tag := Ord(L);
+    MI.RadioItem := True;
+    MI.GroupIndex := 1;
+    MI.Checked := L = FSelectedLanguage;
+    if HasFlags then
+      MI.ImageIndex := Ord(L)
+    else
+      MI.ImageIndex := -1;
+    MI.OnClick := @LanguageMenuClick;
+    FLanguagePopup.Items.Add(MI);
+  end;
+
+  FBtLanguage.Images := FLanguageFlagImages;
+  if HasFlags then
+  begin
+    FBtLanguage.Caption := '';
+    FBtLanguage.ImageIndex := Ord(FSelectedLanguage);
+  end
+  else
+  begin
+    FBtLanguage.ImageIndex := -1;
+    FBtLanguage.Caption := LangCodes[FSelectedLanguage];
+  end;
+end;
+
+procedure THtmlTableDesignerAdvanced.LanguageButtonClick(Sender: TObject);
+var
+  P: TPoint;
+begin
+  P := FBtLanguage.ClientToScreen(Point(0, FBtLanguage.Height));
+  FLanguagePopup.PopUp(P.X, P.Y);
+end;
+
+procedure THtmlTableDesignerAdvanced.LanguageMenuClick(Sender: TObject);
+begin
+  FSelectedLanguage := TUILanguage((Sender as TMenuItem).Tag);
+  UpdateLanguageButton;
+
+  // Rechtstreeks kiezen schakelt meteen om (zoals Load/Reset niet doen).
+  Language := FSelectedLanguage;
+end;
 
 { -----------------------------------------------------------------------------
   Hoofdselector ImageIndex setters
@@ -1593,23 +1696,6 @@ begin
   ApplyLanguage;
 end;
 
-procedure THtmlTableDesignerAdvanced.SettingsLanguageChanged(Sender: TObject);
-begin
-  // Zelfde bescherming als de andere Settings-controls: voorkomt dat een
-  // bulk-refresh vanuit SettingsToControls (Load/Reset) hier al meteen de
-  // live taal omschakelt - dat gebeurt pas bij "Apply".
-  if FUpdatingSettingsToolStates then
-    Exit;
-
-  if FCbLanguage.ItemIndex < 0 then
-    Exit;
-
-  // FCbLanguage.Items staat in dezelfde volgorde als TUILanguage
-  // (langNL, langEN, langFR, langDU), dus ItemIndex kan rechtstreeks
-  // omgezet worden.
-  Language := TUILanguage(FCbLanguage.ItemIndex);
-end;
-
 procedure THtmlTableDesignerAdvanced.PageSizeButtonClick(
   Sender: TObject);
 var
@@ -1673,6 +1759,16 @@ begin
     Exit;
 
   FSettingsApplyImageIndex := AValue;
+  UpdateSettingsToolsIcons;
+end;
+
+procedure THtmlTableDesignerAdvanced.SetSettingsLanguageImageIndex(
+  AValue: Integer);
+begin
+  if FSettingsLanguageImageIndex = AValue then
+    Exit;
+
+  FSettingsLanguageImageIndex := AValue;
   UpdateSettingsToolsIcons;
 end;
 
@@ -1753,9 +1849,10 @@ begin
       FChkShowHeaders.Checked :=
         FDefaultSettings.ShowHeaders;
 
-    if Assigned(FCbLanguage) then
-      FCbLanguage.ItemIndex :=
-        Ord(FDefaultSettings.Language);
+    // Toont enkel de bewaarde taal op de vlag-knop; omschakelen gebeurt
+    // pas bij "Apply" (zoals bij de andere instellingen).
+    FSelectedLanguage := FDefaultSettings.Language;
+    UpdateLanguageButton;
 
     UpdatePageSizeButton;
 
@@ -1798,9 +1895,7 @@ begin
     FDefaultSettings.ShowHeaders :=
       FChkShowHeaders.Checked;
 
-  if Assigned(FCbLanguage) and (FCbLanguage.ItemIndex >= 0) then
-    FDefaultSettings.Language :=
-      TUILanguage(FCbLanguage.ItemIndex);
+  FDefaultSettings.Language := FSelectedLanguage;
 
 end;
 
@@ -6633,23 +6728,19 @@ begin
 
   Inc(Y, FToolButtonHeight + Gap);
 
-  FCbLanguage := TComboBox.Create(Self);
-  FCbLanguage.Parent := FTabSettings;
-  FCbLanguage.Style := csDropDownList;
-  FCbLanguage.Items.Add('Nederlands');  // volgorde moet TUILanguage volgen:
-  FCbLanguage.Items.Add('English');     // langNL, langEN, langFR, langDU
-  FCbLanguage.Items.Add('Français');
-  FCbLanguage.Items.Add('Deutsch');
-  FCbLanguage.ItemIndex := Ord(Language);
-  FCbLanguage.Hint := TRH(FCbLanguage, 'Weergavetaal van de toolbox');
-  FCbLanguage.ShowHint := True;
-  FCbLanguage.SetBounds(
+  FBtLanguage := TSpeedButton.Create(Self);
+  FBtLanguage.Parent := FTabSettings;
+  FSelectedLanguage := Language;
+  FBtLanguage.Hint := TRH(FBtLanguage, 'Weergavetaal van de toolbox');
+  FBtLanguage.ShowHint := True;
+  FBtLanguage.SetBounds(
     StartX,
     Y,
     FToolButtonWidth,
     FToolButtonHeight
   );
-  FCbLanguage.OnChange := @SettingsLanguageChanged;
+  FBtLanguage.OnClick := @LanguageButtonClick;
+  UpdateLanguageButton;
 
   Inc(Y, FToolButtonHeight + Gap);
   Inc(Y, 5);
@@ -6964,9 +7055,9 @@ begin
   PlaceControl(FBtSetLoad);
   PlaceControl(FBtSetSave);
   PlaceControl(FBtSetReset);
-  PlaceControl(FBtSetApply);
+  PlaceControl(FBtSetApply,True);
   PlaceControl(FBtSetLanguage);
-  PlaceControl(FCbLanguage, True);
+  PlaceControl(FBtLanguage, True);
 
   // ------------------------------------------------------------
   // Table / Grid defaults
@@ -6994,11 +7085,7 @@ begin
   // ------------------------------------------------------------
   // Page defaults
   // ------------------------------------------------------------
-  {// oud
-  PlaceControl(FSetPageWidth, True);
 
-  //new
-  PlaceControl(FBtSetPageSize, True);}
   PlaceControl(FBtSetPageSize);
   PlaceControl(FLblPageWidth);
   PlaceControl(FLblPageHeight, True);
@@ -7062,6 +7149,12 @@ begin
     FBtSetApply,
     FSettingsApplyImageIndex,
     'Apply'
+  );
+
+  LoadWideButtonIcon(
+    FBtSetLanguage,
+    FSettingsLanguageImageIndex,
+    'Taal...'
   );
 end;
 // Bestandsnaal
@@ -7413,6 +7506,14 @@ begin
     UpdateCellToolIcons;
 
     Invalidate;
+    Exit;
+  end;
+
+  // Vlaggen weg: taal-combobox toont weer alleen tekst
+  if AComponent = FLanguageFlagImages then
+  begin
+    FLanguageFlagImages := nil;
+    UpdateLanguageButton;
     Exit;
   end;
 end;

@@ -11,6 +11,8 @@ backup/
 # Gebouwde programma's (die komen in de release-zip, niet in de broncode)
 *.exe
 *.dll
+advanced/project/Advanced Html Designer
+advanced/project/tools/deb/
 
 # Bestanden die het programma zelf aanmaakt tijdens het gebruik
 DesignerDefaults.ini

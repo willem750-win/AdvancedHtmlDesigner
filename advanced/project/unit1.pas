@@ -7,14 +7,14 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Buttons, ExtCtrls,
   Spin, StdCtrls, HtmlTableDesignerAdvanced, HtmlTableDesigner, ExpandPanels,
-  ComCtrls, SynEdit, SynHighlighterHTML, LCLIntf, HtmlTableDesignerLang, Math,
-  uAbout;
+  ComCtrls, SynEdit, SynHighlighterHTML, LCLIntf, HtmlTableDesignerLang, Math, uAbout;
 
 type
 
   { TForm1 }
 
   TForm1 = class(TForm)
+    btextrafunc: TSpeedButton;
     btLoad: TSpeedButton;
     btnKopToKlembord: TSpeedButton;
     btnKopToKlembord1: TSpeedButton;
@@ -25,6 +25,7 @@ type
     HtmlTableDesignerAdvanced1: THtmlTableDesignerAdvanced;
     icons16x16: TImageList;
     icons16_34: TImageList;
+    flags: TImageList;
     MyRollOut1: TMyRollOut;
     OpenDialog1: TOpenDialog;
     PageControl1: TPageControl;
@@ -36,7 +37,7 @@ type
     SavHtml: TSpeedButton;
     SavHtml1: TSpeedButton;
     ScrollBox1: TScrollBox;
-    SpeedButton1: TSpeedButton;
+    btWclose: TSpeedButton;
     btClose: TSpeedButton;
     btInfo: TSpeedButton;
     bthelp: TSpeedButton;
@@ -45,19 +46,22 @@ type
     TabSheet3: TTabSheet;
     TimerFloatingTools: TTimer;
     procedure btCloseClick(Sender: TObject);
+    procedure btextrafuncClick(Sender: TObject);
     procedure bthelpClick(Sender: TObject);
     procedure btInfoClick(Sender: TObject);
     procedure btLoadClick(Sender: TObject);
     procedure btSaveClick(Sender: TObject);
     procedure BtTestBrowserClick(Sender: TObject);
+    procedure btWcloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure HtmlTableDesignerAdvanced1CellClick(Sender: TObject; ACol,
       ARow: Integer);
-
     procedure HtmlTableDesignerAdvanced1SettingsClick(Sender: TObject);
     procedure HtmlTableDesignerAdvanced1TextBlockSettingsClick(Sender: TObject);
+    procedure MyRollOut1Click(Sender: TObject);
     procedure MyRollOut1Collapse(Sender: TObject);
     procedure MyRollOut1Expand(Sender: TObject);
+    procedure PSystemClick(Sender: TObject);
     procedure SavHtmlClick(Sender: TObject);
     procedure TimerFloatingToolsTimer(Sender: TObject);
     // Drag Form
@@ -79,6 +83,8 @@ type
     // gebruikt; de signatuur komt overeen met TNotifyEvent zodat dit
     // rechtstreeks als OnLanguageChanged gekoppeld kan worden.
     procedure ApplyFormLanguage(Sender: TObject);
+
+
   public
 
   end;
@@ -153,6 +159,10 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   dir:String;
 begin
+   {$IFDEF LINUX}
+   MyRollOut1.Visible := not MyRollOut1.Collapsed;
+   {$ENDIF}
+
    FLastScrollX := -1;
    FLastScrollY := -1;
 
@@ -160,7 +170,14 @@ begin
   // bewust niet in HtmlTableDesignerAdvanced zelf gezet (zie comment
   // daar) omdat het anders voor elke instantie/toepassing zou gelden.
   Application.HintColor := clYellow;
-  Screen.HintFont.Style := [];// [fsBold];
+
+  // Tekstkleur expliciet zwart: zonder dit gebruikt GTK op Linux de
+  // tekstkleur van het systeemthema (bv. lichtgrijs/wit bij een donker
+  // thema), wat op de gele achtergrond onleesbaar/"leeg" oogt. Op
+  // Windows viel dit niet op omdat de systeem-tooltiptekst daar sowieso
+  // zwart is.
+  Screen.HintFont.Color := clBlack;
+
   Application.HintPause := 400;      // sneller tonen
   Application.HintHidePause := 8000; // langer zichtbaar blijven
 
@@ -175,7 +192,8 @@ begin
 
 
    dir:= IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName));
-   HtmlTableDesignerAdvanced1.LoadFromHTD(dir + '\htd\temp.htd');
+
+   HtmlTableDesignerAdvanced1.LoadFromHTD(dir + 'htd' + PathDelim + 'temp.htd');
 
    // Dialogs
   OpenDialog1.Filter := 'HTML Table Designer (*.htd)|*.htd|Alle bestanden (*.*)|*.*';
@@ -264,6 +282,11 @@ begin
   MyRollOut1.Collapsed := True;
 end;
 
+procedure TForm1.btWcloseClick(Sender: TObject);
+begin
+ MyRollOut1.Collapsed:=true;;
+end;
+
 procedure TForm1.btLoadClick(Sender: TObject);
 begin
   if OpenDialog1.Execute then
@@ -273,6 +296,19 @@ end;
 procedure TForm1.btCloseClick(Sender: TObject);
 begin
    close;
+end;
+
+procedure TForm1.btextrafuncClick(Sender: TObject);
+begin
+  // Onder Linux (GTK2) blijft de PageControl van een ingeklapt rolluik
+  // zichtbaar bovenop de balk; daar wordt het rolluik daarom verborgen
+  // zolang het dicht is (zie MyRollOut1Collapse).
+  {$IFDEF LINUX}
+  if MyRollOut1.Collapsed then
+    MyRollOut1.Visible := True;
+  {$ENDIF}
+
+  MyRollOut1.Collapsed := not MyRollOut1.Collapsed;
 end;
 
 procedure TForm1.btInfoClick(Sender: TObject);
@@ -325,6 +361,8 @@ end;
 
 
 
+
+
 procedure TForm1.HtmlTableDesignerAdvanced1SettingsClick(Sender: TObject);
 begin
    HtmlTableDesignerAdvanced1.ActiveTool := atTable;
@@ -336,8 +374,17 @@ begin
    HtmlTableDesignerAdvanced1.ActiveTool := atTextBlock;
 end;
 
+procedure TForm1.MyRollOut1Click(Sender: TObject);
+begin
+
+end;
+
 procedure TForm1.MyRollOut1Collapse(Sender: TObject);
 begin
+   {$IFDEF LINUX}
+   MyRollOut1.Visible := False;
+   {$ENDIF}
+
    BtTestBrowser.Enabled:=False;
    EHtml.ClearAll;
    EHtml1.ClearAll;
@@ -369,6 +416,11 @@ var
   TabSheet3.TabVisible := true;
   PageControl1.ActivePage:= PageControl1.Pages[0];
   BtTestBrowser.Enabled:=True;
+end;
+
+procedure TForm1.PSystemClick(Sender: TObject);
+begin
+
 end;
 
 procedure TForm1.SavHtmlClick(Sender: TObject);

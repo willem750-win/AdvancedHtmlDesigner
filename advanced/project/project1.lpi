@@ -16,8 +16,11 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
+      <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
-      <StringTable FileDescription="Advanced Html Designer" InternalName="AdvancedHtmlDesigner" OriginalFilename="Advanced Html Designer.exe" ProductName="Advanced Html Designer" ProductVersion="1.0"/>
+      <MinorVersionNr Value="1"/>
+      <BuildNr Value="4"/>
+      <StringTable FileDescription="Advanced Html Designer" InternalName="AdvancedHtmlDesigner" OriginalFilename="Advanced Html Designer.exe" ProductName="Advanced Html Designer" ProductVersion="1.1"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
@@ -30,6 +33,9 @@
       <FormatVersion Value="2"/>
     </RunParams>
     <RequiredPackages>
+      <Item>
+        <PackageName Value="ComboBox_image"/>
+      </Item>
       <Item>
         <PackageName Value="SynEditDsgn"/>
       </Item>

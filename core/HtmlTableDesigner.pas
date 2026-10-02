@@ -439,6 +439,8 @@ procedure DrawTextBlockSettingsButton(ABlock: TDesignerTextBlock);// voor knopje
 
 procedure SetWorkspaceOffsetX(AValue: Integer);
 procedure SetImages(AValue: TCustomImageList);
+procedure SetTableSettingsImageIndex(AValue: Integer);
+procedure ReadLegacySettingsImageIndex(Reader: TReader);
 procedure SetDefaultColWidth(AValue: Integer);
 procedure SetExportTableBgColor(AValue: TColor);
 procedure SetExportTableBorderColor(AValue: TColor);
@@ -539,6 +541,9 @@ procedure KeyDown(var Key: Word; Shift: TShiftState); override;
 // de gebruiker de gekoppelde ImageList van het formulier verwijdert,
 // met een crash bij de eerstvolgende Paint tot gevolg.
 procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+
+// Leest de oude eigenschapsnaam SettingsImageIndex uit bestaande .lfm's.
+procedure DefineProperties(Filer: TFiler); override;
 
 public
 constructor Create(AOwner: TComponent); override;
@@ -655,9 +660,14 @@ property Images: TCustomImageList
 read FImages
 write SetImages;
 
-property SettingsImageIndex: Integer
+// Index in Images voor het instellingen-knopje linksboven in de tabel
+// (en in een geselecteerd tekstblok). Heette vroeger SettingsImageIndex;
+// die naam botste met de gelijknamige eigenschap van
+// THtmlTableDesignerAdvanced. Oude .lfm-bestanden worden nog gelezen
+// via DefineProperties.
+property TableSettingsImageIndex: Integer
 read FSettingsImageIndex
-write FSettingsImageIndex default 0;
+write SetTableSettingsImageIndex default 0;
 
 property OnTextBlockSettingsClick: TTextBlockSettingsClickEvent // voor knopje in TextBlok
 read FOnTextBlockSettingsClick
@@ -5975,6 +5985,29 @@ if Assigned(FImages) then
 FImages.FreeNotification(Self);
 
 Invalidate;
+end;
+
+procedure THtmlTableDesigner.SetTableSettingsImageIndex(AValue: Integer);
+begin
+if FSettingsImageIndex = AValue then Exit;
+FSettingsImageIndex := AValue;
+Invalidate;
+end;
+
+procedure THtmlTableDesigner.ReadLegacySettingsImageIndex(Reader: TReader);
+begin
+FSettingsImageIndex := Reader.ReadInteger;
+end;
+
+procedure THtmlTableDesigner.DefineProperties(Filer: TFiler);
+begin
+inherited DefineProperties(Filer);
+
+// Enkel lezen, nooit meer wegschrijven. Bij THtmlTableDesignerAdvanced
+// komt dit niet in actie: daar is SettingsImageIndex een eigen
+// gepubliceerde eigenschap die de streaming eerst vindt.
+Filer.DefineProperty('SettingsImageIndex',
+@ReadLegacySettingsImageIndex, nil, False);
 end;
 
 procedure THtmlTableDesigner.Notification(
