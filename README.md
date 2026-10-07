@@ -25,8 +25,13 @@ All downloads are on the [Releases](../../releases) page.
 
 ### Windows
 
-Download the zip, unzip it anywhere and run `Advanced Html Designer.exe`.
-No installation needed. Keep `talen.lng` and the `help` folder next to the program.
+Recommended: download and run `AdvancedHtmlDesigner-<version>-setup.exe`.
+It installs the program for your user account (no administrator rights needed)
+in `%LOCALAPPDATA%\Programs\Advanced Html Designer` and adds it to the Start menu.
+Your designs, settings and translations are kept on updates and when you uninstall.
+
+Without installing: download the zip, unzip it anywhere and run
+`Advanced Html Designer.exe`. Keep `talen.lng` and the `help` folder next to the program.
 
 ### Linux (Debian, Ubuntu, Linux Mint …)
 
@@ -95,9 +100,12 @@ The package is written to `advanced/project/tools/deb/`.
 met Lazarus / Free Pascal. Het bestaat uit een kant-en-klaar programma voor
 Windows en Linux, en herbruikbare Lazarus-componenten.
 
-- **Windows:** download de zip bij [Releases](../../releases), pak hem
-  uit en start `Advanced Html Designer.exe`. Laat `talen.lng` en de map `help`
-  naast het programma staan.
+- **Windows:** start `AdvancedHtmlDesigner-<versie>-setup.exe` van
+  [Releases](../../releases). Het programma wordt voor jou geïnstalleerd (geen
+  beheerdersrechten nodig) en staat in het Startmenu; je ontwerpen, instellingen
+  en vertalingen blijven bij een update en bij verwijderen behouden.
+  Zonder installatie: pak de zip uit en start `Advanced Html Designer.exe`. Laat
+  `talen.lng` en de map `help` naast het programma staan.
 - **Linux (Debian, Ubuntu, Linux Mint …):** download het `.deb`-pakket bij
   [Releases](../../releases) en installeer het met
   `sudo apt install ./advanced-html-designer_<versie>_amd64.deb`. Het programma
