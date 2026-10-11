@@ -55,6 +55,10 @@ sudo apt remove advanced-html-designer
 The Windows version also runs under [Wine](https://www.winehq.org/):
 unzip the Windows download and start it with `wine "Advanced Html Designer.exe"`.
 
+Also available on [SourceForge](https://sourceforge.net/projects/advancedhtmldesigner/).
+Do you find Advanced Html Designer useful? Please leave a
+[review on SourceForge](https://sourceforge.net/projects/advancedhtmldesigner/reviews/).
+
 ## Building from source
 
 Requirements: [Lazarus](https://www.lazarus-ide.org/) 4.x with Free Pascal 3.2.2 or newer.
@@ -127,3 +131,6 @@ in het `.html`-bestand.
 - De help (in het programma via de Help-knop) is beschikbaar in het Nederlands,
   Engels, Frans en Duits, en ook
   [online](https://willem750-win.github.io/AdvancedHtmlDesigner/nl/index.html).
+- Ook te downloaden via [SourceForge](https://sourceforge.net/projects/advancedhtmldesigner/).
+  Vind je Advanced Html Designer handig? Laat dan een
+  [review achter op SourceForge](https://sourceforge.net/projects/advancedhtmldesigner/reviews/).
