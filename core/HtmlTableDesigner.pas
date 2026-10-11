@@ -581,6 +581,16 @@ procedure SaveToHTD(const AFileName: string);
 procedure LoadFromHTD(const AFileName: string);
 procedure SaveToHTDStream(AStream: TStream);
 procedure LoadFromHTDStream(AStream: TStream);
+// HTML met ingebed ontwerp: het volledige .htd-ontwerp (met de
+// afbeeldingen) gaat onzichtbaar mee in een <script>-blok, zodat een
+// opgeslagen .html later opnieuw geopend en bewerkt kan worden.
+function ToHTMLDocumentWithDesign: string;
+function EmbedDesignInHTML(const AHtml: string): string;
+procedure SaveToHTML(const AFileName: string);
+// False als het bestand geen ingebed ontwerp bevat (de huidige
+// tabel blijft dan ongewijzigd).
+function LoadFromHTML(const AFileName: string): Boolean;
+class function HTMLContainsDesign(const AFileName: string): Boolean;
 procedure GetSelectionBounds(out L, T, R, B: Integer);
 procedure ToggleStyleSelection(AStyle: TFontStyle);
 procedure ChangeFontSizeSelection(Delta: Integer);
@@ -8546,6 +8556,329 @@ end;
 // Gebruik de centrale HTD load-routine
 LoadFromHTD(TempFile);
 
+finally
+if FileExists(TempFile) then
+DeleteFile(TempFile);
+end;
+end;
+
+
+// ============================================================
+// Ontwerp ingebed in HTML
+// ============================================================
+// Het .htd-ontwerp wordt base64-gecodeerd in een <script>-blok met
+// een eigen type geplaatst. Browsers voeren zo'n blok niet uit en
+// tonen het niet. Afbeeldingen staan in een .htd enkel als pad; die
+// gaan daarom zelf mee in extra secties [HtdImage_<col>_<row>].
+
+const
+HTD_EmbedTag   = '<script type="application/x-htd"';
+HTD_EmbedOpen  = HTD_EmbedTag + ' data-generator="Advanced Html Designer" data-version="1">';
+HTD_EmbedClose = '</script>';
+HTD_PrefixEmbedImage = 'HtdImage_';
+
+function ReadFileAsString(const AFileName: string): string;
+var
+FS: TFileStream;
+begin
+Result := '';
+FS := TFileStream.Create(AFileName, fmOpenRead or fmShareDenyWrite);
+try
+SetLength(Result, FS.Size);
+if FS.Size > 0 then
+FS.ReadBuffer(Result[1], FS.Size);
+finally
+FS.Free;
+end;
+end;
+
+procedure WriteStringToFile(const AFileName, AData: string);
+var
+FS: TFileStream;
+begin
+FS := TFileStream.Create(AFileName, fmCreate);
+try
+if AData <> '' then
+FS.WriteBuffer(AData[1], Length(AData));
+finally
+FS.Free;
+end;
+end;
+
+function NewTempHTDFileName: string;
+begin
+Result :=
+IncludeTrailingPathDelimiter(GetTempDir(False)) +
+'temp_htd_' +
+IntToStr(Random(MaxInt)) +
+'.htd';
+end;
+
+// Zoekt het ingebedde blok. AStart = positie van '<script', AEnd =
+// positie net na '</script>', AData = de base64-inhoud ertussen.
+function FindEmbeddedDesign(const AHtml: string;
+out AStart, AEnd: Integer; out AData: string): Boolean;
+var
+P, Q, E: Integer;
+begin
+Result := False;
+AStart := 0;
+AEnd := 0;
+AData := '';
+
+P := Pos(HTD_EmbedTag, AHtml);
+if P = 0 then
+Exit;
+
+Q := Pos('>', AHtml, P);
+if Q = 0 then
+Exit;
+
+E := Pos(HTD_EmbedClose, AHtml, Q);
+if E = 0 then
+Exit;
+
+AStart := P;
+AEnd := E + Length(HTD_EmbedClose);
+AData := Copy(AHtml, Q + 1, E - Q - 1);
+Result := True;
+end;
+
+function DecodeEmbeddedBase64(const S: string): string;
+var
+I, N: Integer;
+Clean: string;
+begin
+// Regeleindes en spaties van het opsplitsen in regels weghalen
+SetLength(Clean, Length(S));
+N := 0;
+for I := 1 to Length(S) do
+if S[I] in ['A'..'Z', 'a'..'z', '0'..'9', '+', '/', '='] then
+begin
+Inc(N);
+Clean[N] := S[I];
+end;
+SetLength(Clean, N);
+
+Result := DecodeStringBase64(Clean);
+end;
+
+function WrapBase64(const S: string): string;
+const
+LineLen = 76;
+var
+I: Integer;
+SB: TStringBuilder;
+begin
+SB := TStringBuilder.Create;
+try
+I := 1;
+while I <= Length(S) do
+begin
+SB.Append(Copy(S, I, LineLen));
+SB.Append(LineEnding);
+Inc(I, LineLen);
+end;
+Result := SB.ToString;
+finally
+SB.Free;
+end;
+end;
+
+// Map voor afbeeldingen uit een ingebed ontwerp: naast het HTML-
+// bestand (<naam>_images), of in de tijdelijke map als dat niet mag.
+function EmbeddedImagesDir(const AHtmlFileName: string): string;
+begin
+Result := ChangeFileExt(AHtmlFileName, '') + '_images' + PathDelim;
+if ForceDirectories(Result) then
+Exit;
+
+Result :=
+IncludeTrailingPathDelimiter(GetTempDir(False)) +
+'htd_images_' + IntToStr(Random(MaxInt)) + PathDelim;
+ForceDirectories(Result);
+end;
+
+
+function THtmlTableDesigner.EmbedDesignInHTML(
+const AHtml: string): string;
+var
+TempFile, S, Html, LowerHtml, OldData: string;
+Ini: TIniFile;
+C, R, P, BodyPos, OldStart, OldEnd: Integer;
+Cell: THtmlCell;
+Block: string;
+begin
+// ------------------------------------------------------------
+// 1. Ontwerp + afbeeldingen als één .htd-tekst
+// ------------------------------------------------------------
+TempFile := NewTempHTDFileName;
+try
+SaveToHTD(TempFile);
+
+Ini := TIniFile.Create(TempFile);
+try
+Ini.CacheUpdates := True;
+
+for C := 0 to FColCount - 1 do
+for R := 0 to FRowCount - 1 do
+begin
+Cell := Cells[C, R];
+if (Cell = nil) or not Cell.ShowImage or
+(Cell.ImageFile = '') or not FileExists(Cell.ImageFile) then
+Continue;
+
+S := HTD_PrefixEmbedImage + IntToStr(C) + '_' + IntToStr(R);
+Ini.WriteInteger(S, 'Col', C);
+Ini.WriteInteger(S, 'Row', R);
+Ini.WriteString(S, 'Name', ExtractFileName(Cell.ImageFile));
+Ini.WriteString(S, 'Data',
+EncodeStringBase64(ReadFileAsString(Cell.ImageFile)));
+end;
+
+Ini.UpdateFile;
+finally
+Ini.Free;
+end;
+
+Block :=
+HTD_EmbedOpen + LineEnding +
+WrapBase64(EncodeStringBase64(ReadFileAsString(TempFile))) +
+HTD_EmbedClose + LineEnding;
+finally
+if FileExists(TempFile) then
+DeleteFile(TempFile);
+end;
+
+// ------------------------------------------------------------
+// 2. Een eventueel ouder ingebed ontwerp eerst verwijderen
+// ------------------------------------------------------------
+Html := AHtml;
+if FindEmbeddedDesign(Html, OldStart, OldEnd, OldData) then
+begin
+// ook het regeleinde na het oude blok meenemen
+while (OldEnd <= Length(Html)) and (Html[OldEnd] in [#13, #10]) do
+Inc(OldEnd);
+Delete(Html, OldStart, OldEnd - OldStart);
+end;
+
+// ------------------------------------------------------------
+// 3. Invoegen vóór de laatste </body>, anders achteraan
+// ------------------------------------------------------------
+LowerHtml := LowerCase(Html);
+BodyPos := 0;
+P := Pos('</body>', LowerHtml);
+while P > 0 do
+begin
+BodyPos := P;
+P := Pos('</body>', LowerHtml, P + 1);
+end;
+
+if BodyPos > 0 then
+begin
+Result := Html;
+Insert(Block, Result, BodyPos);
+end
+else
+Result := Html + LineEnding + Block;
+end;
+
+
+function THtmlTableDesigner.ToHTMLDocumentWithDesign: string;
+begin
+Result := EmbedDesignInHTML(ToHTMLDocument);
+end;
+
+
+procedure THtmlTableDesigner.SaveToHTML(
+const AFileName: string);
+begin
+WriteStringToFile(AFileName, ToHTMLDocumentWithDesign);
+end;
+
+
+class function THtmlTableDesigner.HTMLContainsDesign(
+const AFileName: string): Boolean;
+begin
+Result :=
+FileExists(AFileName) and
+(Pos(HTD_EmbedTag, ReadFileAsString(AFileName)) > 0);
+end;
+
+
+function THtmlTableDesigner.LoadFromHTML(
+const AFileName: string): Boolean;
+var
+Html, Data, TempFile, ImgDir: string;
+S, CellSec, OldFile, NewFile: string;
+DStart, DEnd, I, C, R: Integer;
+Ini: TIniFile;
+Sections: TStringList;
+begin
+Result := False;
+
+Html := ReadFileAsString(AFileName);
+if not FindEmbeddedDesign(Html, DStart, DEnd, Data) then
+Exit;
+
+Data := DecodeEmbeddedBase64(Data);
+if Data = '' then
+Exit;
+
+TempFile := NewTempHTDFileName;
+try
+WriteStringToFile(TempFile, Data);
+
+Ini := TIniFile.Create(TempFile);
+Sections := TStringList.Create;
+try
+if not Ini.SectionExists(HTD_SecTable) then
+Exit;
+
+// --------------------------------------------------------
+// Afbeeldingen terugzetten. Bestaat het oorspronkelijke
+// bestand nog (zelfde pc), dan blijft dat pad gewoon staan.
+// --------------------------------------------------------
+ImgDir := '';
+Ini.ReadSections(Sections);
+
+for I := 0 to Sections.Count - 1 do
+begin
+S := Sections[I];
+if Copy(S, 1, Length(HTD_PrefixEmbedImage)) <> HTD_PrefixEmbedImage then
+Continue;
+
+C := Ini.ReadInteger(S, 'Col', -1);
+R := Ini.ReadInteger(S, 'Row', -1);
+CellSec := HTD_PrefixCell + IntToStr(C) + '_' + IntToStr(R);
+OldFile := Ini.ReadString(CellSec, 'ImageFile', '');
+
+if (C >= 0) and (R >= 0) and
+((OldFile = '') or not FileExists(OldFile)) then
+begin
+if ImgDir = '' then
+ImgDir := EmbeddedImagesDir(AFileName);
+
+NewFile :=
+ImgDir + IntToStr(C) + '_' + IntToStr(R) + '_' +
+ExtractFileName(Ini.ReadString(S, 'Name', 'image'));
+
+WriteStringToFile(NewFile,
+DecodeStringBase64(Ini.ReadString(S, 'Data', '')));
+Ini.WriteString(CellSec, 'ImageFile', NewFile);
+end;
+
+Ini.EraseSection(S);
+end;
+
+Ini.UpdateFile;
+finally
+Sections.Free;
+Ini.Free;
+end;
+
+LoadFromHTD(TempFile);
+Result := True;
 finally
 if FileExists(TempFile) then
 DeleteFile(TempFile);

@@ -30,7 +30,7 @@
   <table>
     <tr><th>Button</th><th>What does it do?</th></tr>
     <tr><td class="name"><img src="../img/form-save.png" class="ico" alt="">Save table designer</td><td>Saves the complete design (table, formatting, images, text blocks and page) as an <code>.htd</code> file. By default in the <code>htd</code> folder next to the program.</td></tr>
-    <tr><td class="name"><img src="../img/form-open.png" class="ico" alt="">Open table designer</td><td>Opens a previously saved <code>.htd</code> file.</td></tr>
+    <tr><td class="name"><img src="../img/form-open.png" class="ico" alt="">Open table designer</td><td>Opens a previously saved <code>.htd</code> file, or an <code>.html</code> file you saved with <i>Save HTML document</i> (see <a href="#html-openen">Re-opening HTML</a>).</td></tr>
   </table>
   <p>At startup, the last working file <code>htd\temp.htd</code> is loaded automatically.</p>
 
@@ -49,6 +49,15 @@
   <p>The Html Document tab also has <img src="../img/form-testbrowser.png" class="ico" alt=""><b>Open test browser</b>: it shows the result
   in your normal web browser. The roll-out panel then closes again.</p>
 
+  <h2 id="html-openen">Re-opening HTML</h2>
+  <p>An HTML document saved with <i>Save HTML document</i> also contains your complete design, including the images, invisibly.
+  You can re-open such an <code>.html</code> file later with <img src="../img/form-open.png" class="ico" alt=""><b>Open table designer</b> and keep editing it, even if you no longer have the <code>.htd</code> file.</p>
+  <ul>
+    <li>You do not see any of this in the browser: the design is stored in a block that browsers do not display.</li>
+    <li>If you open the file on another computer, the images are extracted to a folder next to the HTML file (e.g. <code>page_images</code>).</li>
+    <li>Ordinary HTML files (from a website or another program) cannot be opened; you get a message instead.</li>
+    <li>Large images make the HTML file larger, because the images are stored in the design.</li>
+  </ul>
   <div class="tip"><strong>Images:</strong> the HTML refers to the <code>images</code> folder.
   If you move the page somewhere else, take that folder along.</div>
 

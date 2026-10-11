@@ -16,6 +16,7 @@ program for Windows and Linux, and as reusable Lazarus components.
 - Free-floating **text blocks** anywhere on the page, positioned with the mouse or to the millimetre
 - Export as a complete HTML document or as table-only HTML, preview in your browser
 - Save and load designs (`.htd`)
+- Re-open a saved HTML document and keep editing it: the design (including images) is embedded invisibly in the `.html`
 - User interface in **Dutch, English, French and German**, with a built-in translation editor
 - Built-in help in all four languages — also [online](https://willem750-win.github.io/AdvancedHtmlDesigner/)
 
@@ -83,7 +84,7 @@ The same steps work in Lazarus on Linux (GTK2 widgetset). To turn the Linux
 build into a `.deb` package, run on Linux:
 
 ```
-sh advanced/project/tools/make-deb.sh 1.1.0
+sh advanced/project/tools/make-deb.sh 1.2.0
 ```
 
 The package is written to `advanced/project/tools/deb/`.
@@ -99,6 +100,10 @@ The package is written to `advanced/project/tools/deb/`.
 **Advanced Html Designer** is een visuele ontwerper voor HTML-tabellen, gemaakt
 met Lazarus / Free Pascal. Het bestaat uit een kant-en-klaar programma voor
 Windows en Linux, en herbruikbare Lazarus-componenten.
+
+Een HTML-document dat je met het programma bewaart, kun je later opnieuw
+openen en verder bewerken: het ontwerp (met de afbeeldingen) zit onzichtbaar
+in het `.html`-bestand.
 
 - **Windows:** start `AdvancedHtmlDesigner-<versie>-setup.exe` van
   [Releases](../../releases). Het programma wordt voor jou geïnstalleerd (geen
@@ -118,7 +123,7 @@ Windows en Linux, en herbruikbare Lazarus-componenten.
   daarna `advanced/htmltabledesigner_advanced.lpk`. Voor het voorbeeldprogramma
   heb je ook het pakket **ExpandPanels** nodig. Open dan
   `advanced/project/project1.lpi`. Dat werkt ook in Lazarus onder Linux (GTK2);
-  met `sh advanced/project/tools/make-deb.sh 1.1.0` maak je daar een `.deb`-pakket.
+  met `sh advanced/project/tools/make-deb.sh 1.2.0` maak je daar een `.deb`-pakket.
 - De help (in het programma via de Help-knop) is beschikbaar in het Nederlands,
   Engels, Frans en Duits, en ook
   [online](https://willem750-win.github.io/AdvancedHtmlDesigner/nl/index.html).

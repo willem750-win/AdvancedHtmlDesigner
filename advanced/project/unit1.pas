@@ -196,7 +196,13 @@ begin
    HtmlTableDesignerAdvanced1.LoadFromHTD(dir + 'htd' + PathDelim + 'temp.htd');
 
    // Dialogs
-  OpenDialog1.Filter := 'HTML Table Designer (*.htd)|*.htd|Alle bestanden (*.*)|*.*';
+  // Een .html die met deze designer bewaard werd, bevat het ontwerp en
+  // kan dus ook geopend worden.
+  OpenDialog1.Filter :=
+    'HTML Table Designer (*.htd;*.html;*.htm)|*.htd;*.html;*.htm|' +
+    'HTML Table Designer (*.htd)|*.htd|' +
+    'HTML Document (*.html;*.htm)|*.html;*.htm|' +
+    'Alle bestanden (*.*)|*.*';
   OpenDialog1.DefaultExt := 'htd';
   OpenDialog1.InitialDir :=
     IncludeTrailingPathDelimiter(
@@ -288,8 +294,19 @@ begin
 end;
 
 procedure TForm1.btLoadClick(Sender: TObject);
+var
+  Ext: string;
 begin
-  if OpenDialog1.Execute then
+  if not OpenDialog1.Execute then
+    Exit;
+
+  Ext := LowerCase(ExtractFileExt(OpenDialog1.FileName));
+  if (Ext = '.html') or (Ext = '.htm') then
+  begin
+    if not HtmlTableDesignerAdvanced1.LoadFromHTML(OpenDialog1.FileName) then
+      ShowMessage(TR('Dit HTML-bestand bevat geen ontwerp van Advanced Html Designer en kan niet geopend worden.'));
+  end
+  else
     HtmlTableDesignerAdvanced1.LoadFromHTD(OpenDialog1.FileName);
 end;
 
@@ -426,6 +443,7 @@ end;
 procedure TForm1.SavHtmlClick(Sender: TObject);
 var
    DialogS:TSaveDialog;
+   SL: TStringList;
 begin
     DialogS:=TSaveDialog.Create(Self);
     try
@@ -438,7 +456,15 @@ begin
 
       if DialogS.Execute then
        begin
-        EHtml.Lines.SaveToFile(DialogS.FileName);
+        // Het ontwerp gaat onzichtbaar mee, zodat dit HTML-bestand
+        // later via Openen opnieuw bewerkt kan worden.
+        SL := TStringList.Create;
+        try
+          SL.Text := HtmlTableDesignerAdvanced1.EmbedDesignInHTML(EHtml.Lines.Text);
+          SL.SaveToFile(DialogS.FileName);
+        finally
+          SL.Free;
+        end;
        end;
    finally
     // Always free the dialog from memory after use

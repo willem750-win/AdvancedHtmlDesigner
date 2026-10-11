@@ -30,7 +30,7 @@
   <table>
     <tr><th>Bouton</th><th>Que fait-il ?</th></tr>
     <tr><td class="name"><img src="../img/form-save.png" class="ico" alt="">Enregistrer le concepteur de tableau</td><td>Enregistre toute la conception (tableau, mise en forme, images, blocs de texte et page) dans un fichier <code>.htd</code>. Par défaut dans le dossier <code>htd</code> à côté du programme.</td></tr>
-    <tr><td class="name"><img src="../img/form-open.png" class="ico" alt="">Ouvrir le concepteur de tableau</td><td>Ouvre un fichier <code>.htd</code> enregistré auparavant.</td></tr>
+    <tr><td class="name"><img src="../img/form-open.png" class="ico" alt="">Ouvrir le concepteur de tableau</td><td>Ouvre un fichier <code>.htd</code> enregistré auparavant, ou un fichier <code>.html</code> enregistré avec <i>Enregistrer le document HTML</i> (voir <a href="#html-openen">Rouvrir un fichier HTML</a>).</td></tr>
   </table>
   <p>Au démarrage, le dernier fichier de travail <code>htd\temp.htd</code> est chargé automatiquement.</p>
 
@@ -49,6 +49,15 @@
   <p>L'onglet Document Html contient en plus <img src="../img/form-testbrowser.png" class="ico" alt=""><b>Ouvrir le navigateur de test</b> : il affiche le résultat
   dans votre navigateur habituel. Le volet se referme ensuite.</p>
 
+  <h2 id="html-openen">Rouvrir un fichier HTML</h2>
+  <p>Un document HTML enregistré avec <i>Enregistrer le document HTML</i> contient aussi, de manière invisible, toute votre conception, images comprises.
+  Vous pouvez rouvrir plus tard un tel fichier <code>.html</code> avec <img src="../img/form-open.png" class="ico" alt=""><b>Ouvrir le concepteur de tableau</b> et continuer à le modifier, même sans le fichier <code>.htd</code>.</p>
+  <ul>
+    <li>Rien de cela n'apparaît dans le navigateur : la conception se trouve dans un bloc que les navigateurs n'affichent pas.</li>
+    <li>Si vous ouvrez le fichier sur un autre ordinateur, les images sont extraites dans un dossier à côté du fichier HTML (p. ex. <code>page_images</code>).</li>
+    <li>Les fichiers HTML ordinaires (d'un site web ou d'un autre programme) ne peuvent pas être ouverts ; un message s'affiche alors.</li>
+    <li>De grandes images rendent le fichier HTML plus volumineux, car les images sont enregistrées dans la conception.</li>
+  </ul>
   <div class="tip"><strong>Images :</strong> le HTML fait référence au dossier <code>images</code>.
   Si vous déplacez la page ailleurs, emportez aussi ce dossier.</div>
 

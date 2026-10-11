@@ -30,7 +30,7 @@
   <table>
     <tr><th>Schaltfläche</th><th>Was macht sie?</th></tr>
     <tr><td class="name"><img src="../img/form-save.png" class="ico" alt="">Tabellendesigner speichern</td><td>Speichert den vollständigen Entwurf (Tabelle, Formatierung, Bilder, Textblöcke und Seite) als <code>.htd</code>-Datei. Standardmäßig im Ordner <code>htd</code> neben dem Programm.</td></tr>
-    <tr><td class="name"><img src="../img/form-open.png" class="ico" alt="">Tabellendesigner öffnen</td><td>Öffnet eine früher gespeicherte <code>.htd</code>-Datei.</td></tr>
+    <tr><td class="name"><img src="../img/form-open.png" class="ico" alt="">Tabellendesigner öffnen</td><td>Öffnet eine früher gespeicherte <code>.htd</code>-Datei oder eine <code>.html</code>-Datei, die Sie mit <i>HTML-Dokument speichern</i> gespeichert haben (siehe <a href="#html-openen">HTML erneut öffnen</a>).</td></tr>
   </table>
   <p>Beim Start wird automatisch die letzte Arbeitsdatei <code>htd\temp.htd</code> geladen.</p>
 
@@ -49,6 +49,15 @@
   <p>Die Registerkarte Html-Dokument hat außerdem <img src="../img/form-testbrowser.png" class="ico" alt=""><b>Test-Browser öffnen</b>: damit sehen Sie das Ergebnis
   in Ihrem normalen Webbrowser. Der Bereich klappt danach wieder zu.</p>
 
+  <h2 id="html-openen">HTML erneut öffnen</h2>
+  <p>Ein mit <i>HTML-Dokument speichern</i> gespeichertes HTML-Dokument enthält unsichtbar auch Ihren vollständigen Entwurf, einschließlich der Bilder.
+  Sie können eine solche <code>.html</code>-Datei später mit <img src="../img/form-open.png" class="ico" alt=""><b>Tabellendesigner öffnen</b> wieder öffnen und weiter bearbeiten, auch wenn Sie die <code>.htd</code>-Datei nicht mehr haben.</p>
+  <ul>
+    <li>Im Browser sehen Sie davon nichts: der Entwurf steht in einem Block, den Browser nicht anzeigen.</li>
+    <li>Öffnen Sie die Datei auf einem anderen Computer, werden die Bilder in einen Ordner neben der HTML-Datei entpackt (z. B. <code>seite_images</code>).</li>
+    <li>Gewöhnliche HTML-Dateien (von einer Website oder aus einem anderen Programm) können nicht geöffnet werden; Sie erhalten dann eine Meldung.</li>
+    <li>Große Bilder machen die HTML-Datei größer, weil die Bilder im Entwurf gespeichert werden.</li>
+  </ul>
   <div class="tip"><strong>Bilder:</strong> das HTML verweist auf den Ordner <code>images</code>.
   Wenn Sie die Seite an einen anderen Ort verschieben, nehmen Sie diesen Ordner mit.</div>
 

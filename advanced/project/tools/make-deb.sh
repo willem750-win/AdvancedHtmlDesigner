@@ -4,7 +4,7 @@
 #
 # Uitvoeren ONDER LINUX, nadat het project in Lazarus (GTK2) gecompileerd is:
 #
-#     sh project/tools/make-deb.sh            (versie 1.1.0)
+#     sh project/tools/make-deb.sh            (versie 1.2.0)
 #     sh project/tools/make-deb.sh 1.2.0      (eigen versienummer)
 #
 # Resultaat: project/tools/deb/advanced-html-designer_<versie>_<arch>.deb
@@ -21,7 +21,7 @@
 # ---------------------------------------------------------------------------
 set -e
 
-VERSION="${1:-1.1.0}"
+VERSION="${1:-1.2.0}"
 PKG=advanced-html-designer
 EXE_NAME="Advanced Html Designer"   # = Doelbestandsnaam in project1.lpi
 
