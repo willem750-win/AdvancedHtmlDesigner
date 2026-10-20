@@ -716,8 +716,6 @@ const
   ============================================================================= }
 
 constructor THtmlTableDesignerAdvanced.Create(AOwner: TComponent);
-var
-  DefaultLangFile: string;
 begin
  inherited Create(AOwner);
 
@@ -731,12 +729,8 @@ begin
   // ook zonder eerst de "Taal..."-editor geopend te hebben.
   if not (csDesigning in ComponentState) then
     begin
-    DefaultLangFile :=
-      IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) +
-      'talen.lng';
-
-    if FileExists(DefaultLangFile) then
-      HtmlTableDesignerLang.LoadLanguageFile(DefaultLangFile);
+    // talen-standaard.lng + talen.lng (eigen vertalingen gaan voor)
+    HtmlTableDesignerLang.LoadProgramLanguageFiles(ExtractFilePath(Application.ExeName));
     end;
 
   FFloatingOffsetX := 0;
@@ -1674,19 +1668,13 @@ begin
 end;
 
 procedure THtmlTableDesignerAdvanced.SettingsLanguageClick(Sender: TObject);
-var
-  DefaultLangFile: string;
 begin
   // Automatisch 'talen.lng' naast de .exe inladen als het er staat, zodat
   // de editor meteen met de vertalingen van deze toepassing opent (i.p.v.
   // een lege NL-kolom met toevallig-Engelse broncodetekst). Onschadelijk om
   // dit elke keer opnieuw te doen: bestaande keys worden gewoon herladen.
-  DefaultLangFile :=
-    IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) +
-    'talen.lng';
-
-  if FileExists(DefaultLangFile) then
-    HtmlTableDesignerLang.LoadLanguageFile(DefaultLangFile);
+  // talen-standaard.lng + talen.lng (eigen vertalingen gaan voor)
+  HtmlTableDesignerLang.LoadProgramLanguageFiles(ExtractFilePath(Application.ExeName));
 
   LangEditorForm.ShowLangEditor;
 

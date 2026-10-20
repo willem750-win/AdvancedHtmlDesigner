@@ -62,6 +62,12 @@ procedure SetTranslation(const AKey: string; ALang: TUILanguage; const AValue: s
 procedure LoadLanguageFile(const AFileName: string);
 procedure SaveLanguageFile(const AFileName: string);
 
+// Laadt de vertalingen van het programma in ADir: eerst talen-standaard.lng
+// (meegeleverd, wordt bij elke update vervangen), daarna talen.lng (kan door
+// de gebruiker bewerkt zijn en gaat dus voor). Zo komen nieuwe teksten van een
+// update er vanzelf bij, zonder eigen vertalingen te overschrijven.
+procedure LoadProgramLanguageFiles(const ADir: string);
+
 // Voor de editor: alle keys in invoegvolgorde.
 function LangEntryCount: Integer;
 function LangEntryByIndex(AIndex: Integer): TLangEntry;
@@ -248,6 +254,12 @@ begin
   end;
 
   LangTableDirty := False;
+end;
+
+procedure LoadProgramLanguageFiles(const ADir: string);
+begin
+  LoadLanguageFile(IncludeTrailingPathDelimiter(ADir) + 'talen-standaard.lng');
+  LoadLanguageFile(IncludeTrailingPathDelimiter(ADir) + 'talen.lng');
 end;
 
 procedure SaveLanguageFile(const AFileName: string);

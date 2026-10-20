@@ -4,8 +4,8 @@
 #
 # Uitvoeren ONDER LINUX, nadat het project in Lazarus (GTK2) gecompileerd is:
 #
-#     sh project/tools/make-deb.sh            (versie 1.4.0)
-#     sh project/tools/make-deb.sh 1.4.0      (eigen versienummer)
+#     sh project/tools/make-deb.sh            (versie 1.4.1)
+#     sh project/tools/make-deb.sh 1.4.1      (eigen versienummer)
 #
 # Resultaat: project/tools/deb/advanced-html-designer_<versie>_<arch>.deb
 # Installeren:  sudo apt install ./advanced-html-designer_<versie>_<arch>.deb
@@ -25,7 +25,7 @@
 # ---------------------------------------------------------------------------
 set -e
 
-VERSION="${1:-1.4.0}"
+VERSION="${1:-1.4.1}"
 PKG=advanced-html-designer
 EXE_NAME="Advanced Html Designer"   # = Doelbestandsnaam in project1.lpi
 
@@ -53,6 +53,7 @@ mkdir -p "$STAGE/DEBIAN" \
 cp "$PROJECT/$EXE_NAME" "$STAGE/opt/$PKG/"
 strip "$STAGE/opt/$PKG/$EXE_NAME" 2>/dev/null || true
 cp "$PROJECT/talen.lng" "$STAGE/opt/$PKG/"
+cp "$PROJECT/talen.lng" "$STAGE/opt/$PKG/talen-standaard.lng"   # altijd vernieuwen
 cp -r "$PROJECT/help" "$STAGE/opt/$PKG/help"
 cp -r "$PROJECT/lessen" "$STAGE/opt/$PKG/lessen"   # voorbeelden van het leerpad
 mkdir -p "$STAGE/opt/$PKG/htd"
@@ -75,8 +76,9 @@ DST="\${XDG_DATA_HOME:-\$HOME/.local/share}/$PKG"
 
 if [ "\$(cat "\$DST/VERSION" 2>/dev/null)" != "\$(cat "\$SRC/VERSION")" ]; then
   mkdir -p "\$DST/htd"
-  # Programma, help, voorbeelden van het leerpad en licentie altijd vernieuwen
-  cp -f "\$SRC/$EXE_NAME" "\$SRC/LICENSE" "\$DST/"
+  # Programma, help, voorbeelden van het leerpad, standaardvertalingen en
+  # licentie altijd vernieuwen
+  cp -f "\$SRC/$EXE_NAME" "\$SRC/LICENSE" "\$SRC/talen-standaard.lng" "\$DST/"
   rm -rf "\$DST/help" "\$DST/lessen"
   cp -r "\$SRC/help" "\$DST/help"
   cp -r "\$SRC/lessen" "\$DST/lessen"

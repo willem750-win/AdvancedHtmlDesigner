@@ -19,7 +19,8 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="4"/>
-      <StringTable FileDescription="Advanced Html Designer" InternalName="AdvancedHtmlDesigner" OriginalFilename="Advanced Html Designer.exe" ProductName="Advanced Html Designer" ProductVersion="1.4"/>
+      <RevisionNr Value="1"/>
+      <StringTable FileDescription="Advanced Html Designer" InternalName="AdvancedHtmlDesigner" OriginalFilename="Advanced Html Designer.exe" ProductName="Advanced Html Designer" ProductVersion="1.4.1"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
