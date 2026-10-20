@@ -51,6 +51,8 @@ type
 
   // een link in de help naar een paneelbestand (.lpl) opent dat paneel in Logic
   TOpenPanelEvent = procedure(const AFileName: string) of object;
+  // gemeld als een PDF van SaveAsPdf klaar is (AOk = gelukt)
+  TPdfSavedEvent = procedure(const AFileName: string; AOk: Boolean) of object;
 
 const
   MINIBROWSER_SHOWDEVTOOLS    = WM_APP + $101;
@@ -70,6 +72,7 @@ const
   MINIBROWSER_MEDIAACCESSRQST = WM_APP + $10F;
   MINIBROWSER_BLOCKED         = WM_APP + $110;   // internetadres tegengehouden
   MINIBROWSER_OPENPANEL       = WM_APP + $111;   // link naar een .lpl-paneel
+  MINIBROWSER_SAVEPDF         = WM_APP + $112;   // pagina geladen: nu als PDF bewaren
 
   // Vergrendelde bediening: geen adresbalk, geen ontwikkelaarstools, eenvoudig
   // snelmenu. Of internet mag, regelt MiniBrowserLocalOnly (hieronder).
@@ -308,6 +311,12 @@ type
     FPendingURL : string;
     FPanelToOpen : string;   // .lpl uit een link in de help (zie OpenPanelMsg)
 
+    // SaveAsPdf: na het laden van de pagina een PDF maken
+    FPdfFile : string;
+    FPdfWidthMM, FPdfHeightMM : Double;
+    FPdfWaiting : Boolean;   // wacht tot de pagina geladen is
+    FPdfPage : string;       // bestandsnaam van die pagina
+
     procedure AddURL(const aURL : string);
 
     procedure ShowDevTools(aPoint : TPoint); overload;
@@ -334,6 +343,7 @@ type
     procedure TakeSnapshotMsg(var aMessage : TMessage); message MINIBROWSER_TAKESNAPSHOT;
     procedure CookiesFlushedMsg(var aMessage : TMessage); message MINIBROWSER_COOKIESFLUSHED;
     procedure PrintPDFEndMsg(var aMessage : TMessage); message MINIBROWSER_PDFPRINT_END;
+    procedure SavePdfMsg(var aMessage : TMessage); message MINIBROWSER_SAVEPDF;
     procedure PreferencesAvailableMsg(var aMessage : TMessage); message MINIBROWSER_PREFS_AVLBL;        
     procedure DevToolsDataAvailableMsg(var aMessage : TMessage); message MINIBROWSER_DTDATA_AVLBL;      
     procedure MediaAccessRequestMsg(var aMessage : TMessage); message MINIBROWSER_MEDIAACCESSRQST;
@@ -349,12 +359,18 @@ type
     procedure LoadHelpPage(const Page: string);
 
     procedure LoadURLString(const AURL: string);
+    // Laadt AURL en bewaart de pagina als PDF in APdfFile, op papier van
+    // AWidthMM x AHeightMM zonder extra marges en met achtergrondkleuren.
+    // Het resultaat komt via OnPdfSaved.
+    procedure SaveAsPdf(const AURL, APdfFile: string; AWidthMM, AHeightMM: Double);
   end;
 
 var
   MiniBrowserFrm : TMiniBrowserFrm;
   // ingevuld door het hoofdvenster: opent een paneel uit een link in de help
   OnHelpOpenPanel : TOpenPanelEvent = nil;
+  // ingevuld door het hoofdvenster: melding als SaveAsPdf klaar is
+  OnPdfSaved : TPdfSavedEvent = nil;
   // True: alleen lokale bestanden (de help); False: ook internet (het voorbeeld
   // van een HTML-ontwerp, dat afbeeldingen of lettertypes van internet kan gebruiken)
   MiniBrowserLocalOnly : Boolean = True;
@@ -1068,6 +1084,9 @@ begin
     begin
       StatusPnl.Caption         := 'Finished';
       ReloadBtn.Enabled         := True;
+      // SaveAsPdf: de pagina is geladen, de PDF in de hoofdthread maken
+      if FPdfWaiting then
+        PostMessage(Handle, MINIBROWSER_SAVEPDF, 0, 0);
       StopBtn.Enabled           := False;
     end;
 end;
@@ -1450,8 +1469,47 @@ begin
   showmessage('The cookies were flushed successfully');
 end;
 
-procedure TMiniBrowserFrm.PrintPDFEndMsg(var aMessage : TMessage);
+procedure TMiniBrowserFrm.SavePdfMsg(var aMessage : TMessage);
 begin
+  if not FPdfWaiting then Exit;
+  // Pas als onze pagina geladen is (niet de lege startpagina van een
+  // browser die net opgestart is).
+  if Pos(LowerCase(FPdfPage), LowerCase(Chromium1.DocumentURL)) = 0 then Exit;
+  FPdfWaiting := False;
+
+  Chromium1.PDFPrintOptions.PaperWidthMM    := FPdfWidthMM;
+  Chromium1.PDFPrintOptions.PaperHeightMM   := FPdfHeightMM;
+  Chromium1.PDFPrintOptions.Landscape       := False;   // breedte en hoogte bepalen de stand
+  Chromium1.PDFPrintOptions.PrintBackground := True;    // cel- en paginakleuren meenemen
+  Chromium1.PDFPrintOptions.MarginType      := PDF_PRINT_MARGIN_DEFAULT; // marges uit de pagina (@page)
+  Chromium1.PDFPrintOptions.PreferCSSPageSize := True;  // papierformaat uit de pagina (@page)
+  Chromium1.PDFPrintOptions.Scale           := 1;
+  Chromium1.PrintToPDF(FPdfFile);
+end;
+
+procedure TMiniBrowserFrm.SaveAsPdf(const AURL, APdfFile: string; AWidthMM, AHeightMM: Double);
+begin
+  FPdfFile     := APdfFile;
+  FPdfWidthMM  := AWidthMM;
+  FPdfHeightMM := AHeightMM;
+  FPdfPage     := Copy(AURL, LastDelimiter('/', AURL) + 1, MaxInt);
+  FPdfWaiting  := True;
+  LoadURLString(AURL);
+end;
+
+procedure TMiniBrowserFrm.PrintPDFEndMsg(var aMessage : TMessage);
+var
+  F: string;
+begin
+  // PDF van SaveAsPdf: het hoofdvenster meldt het resultaat (vertaald)
+  if (FPdfFile <> '') and Assigned(OnPdfSaved) then
+  begin
+    F := FPdfFile;
+    FPdfFile := '';
+    OnPdfSaved(F, aMessage.lParam <> 0);
+    Exit;
+  end;
+
   if (aMessage.lParam <> 0) then
     showmessage('The PDF file was generated successfully')
    else

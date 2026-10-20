@@ -14,7 +14,7 @@ uses
   // De ingebouwde CEF-browser (MiniBrowser) voor het voorbeeld en de help wordt
   // enkel onder Windows gebruikt; onder Linux opent alles in de systeembrowser.
   {$IFDEF WINDOWS}
-  , uMiniBrowser, uPreferences, uSimpleTextViewer, uCEFApplication
+  , uPreferences, uSimpleTextViewer, uMiniBrowser, uCEFApplication
   {$ENDIF}
   ;
 

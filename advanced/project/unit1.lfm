@@ -2716,6 +2716,18 @@ object Form1: TForm1
             ImageIndex = 4
             OnClick = SavHtmlClick
           end
+          object BtSavePdf: TSpeedButton
+            Left = 47
+            Height = 22
+            Hint = 'Bewaar als PDF...'
+            Top = 1
+            Width = 40
+            Align = alLeft
+            Caption = 'PDF'
+            Font.Style = [fsBold]
+            ParentFont = False
+            OnClick = BtSavePdfClick
+          end
           object BtTestBrowser: TSpeedButton
             Left = 633
             Height = 22

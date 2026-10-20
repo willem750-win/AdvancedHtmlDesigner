@@ -20,6 +20,7 @@ type
     btnKopToKlembord1: TSpeedButton;
     btSave: TSpeedButton;
     BtTestBrowser: TSpeedButton;
+    BtSavePdf: TSpeedButton;
     EHtml: TSynEdit;
     EHtml1: TSynEdit;
     HtmlTableDesignerAdvanced1: THtmlTableDesignerAdvanced;
@@ -52,6 +53,7 @@ type
     procedure btLoadClick(Sender: TObject);
     procedure btSaveClick(Sender: TObject);
     procedure BtTestBrowserClick(Sender: TObject);
+    procedure BtSavePdfClick(Sender: TObject);
     procedure btWcloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure HtmlTableDesignerAdvanced1CellClick(Sender: TObject; ACol,
@@ -73,6 +75,7 @@ type
     FLastScrollY: Integer;
     FUpdatingPreview: Boolean;
     FPendingHtml: string;
+    FLastSaveDir: string;  // laatst gekozen map voor HTML of PDF
     // Drag Form
     FDragging: Boolean;
     FMouseDownPos: TPoint;
@@ -89,9 +92,13 @@ type
     procedure OpenInBrowser(const AFileName: string; ALocalOnly: Boolean);
     // opent een voorbeeldontwerp (.htd) uit het leerpad in de designer
     procedure OpenDesignFromHelp(const AFileName: string);
+    // melding als de PDF klaar is
+    procedure PdfSaved(const AFileName: string; AOk: Boolean);
 
   public
-
+    // Schrijft het HTML-document voor een PDF (previewPdf.html): met het
+    // papierformaat van de pagina (@page) en met achtergrondkleuren.
+    function WritePdfHtml(out AWidthMM, AHeightMM: Double): string;
   end;
 
 var
@@ -103,8 +110,21 @@ implementation
 
 {$IFDEF WINDOWS}
 uses
-  uMiniBrowser;
+  uMiniBrowser, WinDirs;
+{$ELSE}
+uses
+  Process, FileUtil;
 {$ENDIF}
+
+// De map Documenten van de gebruiker (onder Linux de persoonlijke map)
+function DocumentsDir: string;
+begin
+  {$IFDEF WINDOWS}
+  Result := GetWindowsSpecialDir(CSIDL_PERSONAL);
+  {$ELSE}
+  Result := GetUserDir;
+  {$ENDIF}
+end;
 
 const
   // Online help (GitHub Pages), gebruikt als de map help naast de .exe ontbreekt
@@ -112,18 +132,30 @@ const
 
 { TForm1 }
 
-procedure TForm1.OpenInBrowser(const AFileName: string; ALocalOnly: Boolean);
+{$IFDEF WINDOWS}
+procedure EnsureMiniBrowser(AOwner: TForm);
 begin
-  {$IFDEF WINDOWS}
   if not Assigned(MiniBrowserFrm) then
   begin
     MiniBrowserFrm := TMiniBrowserFrm.Create(Application);
     // blijft voor het hoofdvenster, maar niet boven andere programma's
     MiniBrowserFrm.PopupMode := pmExplicit;
-    MiniBrowserFrm.PopupParent := Self;
+    MiniBrowserFrm.PopupParent := AOwner;
   end;
+end;
+{$ENDIF}
+
+function FileURL(const AFileName: string): string;
+begin
+  Result := 'file:///' + StringReplace(AFileName, '\', '/', [rfReplaceAll]);
+end;
+
+procedure TForm1.OpenInBrowser(const AFileName: string; ALocalOnly: Boolean);
+begin
+  {$IFDEF WINDOWS}
+  EnsureMiniBrowser(Self);
   MiniBrowserLocalOnly := ALocalOnly;
-  MiniBrowserFrm.LoadURLString('file:///' + StringReplace(AFileName, '\', '/', [rfReplaceAll]));
+  MiniBrowserFrm.LoadURLString(FileURL(AFileName));
   {$ELSE}
   OpenDocument(AFileName);
   {$ENDIF}
@@ -200,6 +232,7 @@ begin
    {$IFDEF WINDOWS}
    // "Open dit voorbeeld" in het leerpad opent het ontwerp in de designer
    OnHelpOpenPanel := @OpenDesignFromHelp;
+   OnPdfSaved := @PdfSaved;
    {$ENDIF}
 
    FLastScrollX := -1;
@@ -291,6 +324,7 @@ begin
   SavHtml.Hint := TR('Bewaar HTML Document...');
   BtTestBrowser.Caption := TR('Open test-browser');
   BtTestBrowser.Hint := TR('Toon het HTML document in de test-browser');
+  BtSavePdf.Hint := TR('Bewaar als PDF...');
 
   TabSheet3.Hint := TR('Html-Panel');
   TabSheet3.Caption := TR('Html-Tabel');
@@ -326,6 +360,137 @@ begin
 
   BtTestBrowser.Enabled := False;
   MyRollOut1.Collapsed := True;
+end;
+
+function TForm1.WritePdfHtml(out AWidthMM, AHeightMM: Double): string;
+var
+  Html, PageCss: string;
+  FS: TFormatSettings;
+  SL: TStringList;
+  P: Integer;
+begin
+  // paginaformaat van de designer (pixels op 96 dpi) in mm
+  AWidthMM := HtmlTableDesignerAdvanced1.PageWidth * 25.4 / 96;
+  AHeightMM := HtmlTableDesignerAdvanced1.PageHeight * 25.4 / 96;
+
+  FS := DefaultFormatSettings;
+  FS.DecimalSeparator := '.';
+  // De eerste pagina zonder marge boven (de designer heeft de plaats al
+  // bepaald); een lange tabel loopt door op volgende pagina's, die een marge
+  // boven krijgen (geen marge onder: dan loopt een gekleurde achtergrond door
+  // tot de rand). Geen minimale hoogte, anders volgt een lege pagina.
+  PageCss :=
+    '  <style>' + LineEnding +
+    '    @page { size: ' + FormatFloat('0.0', AWidthMM, FS) + 'mm ' +
+    FormatFloat('0.0', AHeightMM, FS) + 'mm; margin: 12mm 0 0 0; }' + LineEnding +
+    '    @page :first { margin-top: 0; }' + LineEnding +
+    '    html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }' + LineEnding +
+    '    .page-designer { min-height: 0; }' + LineEnding +
+    '    tr { break-inside: avoid; }' + LineEnding +
+    '  </style>' + LineEnding;
+
+  Html := HtmlTableDesignerAdvanced1.ToHTMLDocument;
+  P := Pos('</head>', Html);
+  if P > 0 then
+    Insert(PageCss, Html, P);
+
+  Result := IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) + 'previewPdf.html';
+  SL := TStringList.Create;
+  try
+    SL.Text := Html;
+    SL.SaveToFile(Result);
+  finally
+    SL.Free;
+  end;
+end;
+
+procedure TForm1.PdfSaved(const AFileName: string; AOk: Boolean);
+begin
+  if AOk then
+  begin
+    if MessageDlg(TR('De PDF is bewaard:') + LineEnding + AFileName + LineEnding + LineEnding +
+      TR('Wil je de PDF nu openen?'), mtInformation, [mbYes, mbNo], 0) = mrYes then
+      OpenDocument(AFileName);
+  end
+  else
+    MessageDlg(TR('De PDF kon niet bewaard worden. Is het bestand misschien nog geopend in een ander programma?'),
+      mtError, [mbOK], 0);
+end;
+
+procedure TForm1.BtSavePdfClick(Sender: TObject);
+var
+  Dlg: TSaveDialog;
+  HtmlFile: string;
+  WidthMM, HeightMM: Double;
+  {$IFNDEF WINDOWS}
+  Chrome: string;
+  Proc: TProcess;
+  {$ENDIF}
+begin
+  Dlg := TSaveDialog.Create(nil);
+  try
+    Dlg.Title := TR('Bewaar als PDF');
+    Dlg.Filter := 'PDF (*.pdf)|*.pdf';
+    Dlg.DefaultExt := 'pdf';
+    Dlg.Options := Dlg.Options + [ofOverwritePrompt];
+    // De eerste keer in Documenten (niet naast het programma), daarna in de
+    // laatst gekozen map.
+    if FLastSaveDir <> '' then
+      Dlg.InitialDir := FLastSaveDir
+    else
+      Dlg.InitialDir := DocumentsDir;
+    if not Dlg.Execute then
+      Exit;
+    FLastSaveDir := ExtractFilePath(Dlg.FileName);
+
+    HtmlFile := WritePdfHtml(WidthMM, HeightMM);
+    MyRollOut1.Collapsed := True;
+
+    {$IFDEF WINDOWS}
+    // De ingebouwde browser toont de pagina en bewaart ze daarna als PDF;
+    // het resultaat komt in PdfSaved.
+    EnsureMiniBrowser(Self);
+    MiniBrowserLocalOnly := False;
+    MiniBrowserFrm.SaveAsPdf(FileURL(HtmlFile), Dlg.FileName, WidthMM, HeightMM);
+    {$ELSE}
+    // Geen ingebouwde browser: Chrome of Chromium maakt de PDF (zonder venster).
+    Chrome := FindDefaultExecutablePath('chromium');
+    if Chrome = '' then Chrome := FindDefaultExecutablePath('chromium-browser');
+    if Chrome = '' then Chrome := FindDefaultExecutablePath('google-chrome');
+    if Chrome = '' then Chrome := FindDefaultExecutablePath('google-chrome-stable');
+    if Chrome = '' then
+    begin
+      MessageDlg(TR('Voor een PDF is Chrome of Chromium nodig. Open de test-browser en kies daar Afdrukken > Opslaan als PDF.'),
+        mtInformation, [mbOK], 0);
+      OpenDocument(HtmlFile);
+      Exit;
+    end;
+    if FileExists(Dlg.FileName) then
+      DeleteFile(Dlg.FileName);
+    Proc := TProcess.Create(nil);
+    try
+      Proc.Executable := Chrome;
+      Proc.Parameters.Add('--headless');
+      Proc.Parameters.Add('--disable-gpu');
+      Proc.Parameters.Add('--no-pdf-header-footer');
+      Proc.Parameters.Add('--print-to-pdf-no-header');
+      Proc.Parameters.Add('--print-to-pdf=' + Dlg.FileName);
+      Proc.Parameters.Add(FileURL(HtmlFile));
+      Proc.Options := [poWaitOnExit, poNoConsole];
+      Screen.Cursor := crHourGlass;
+      try
+        Proc.Execute;
+      finally
+        Screen.Cursor := crDefault;
+      end;
+    finally
+      Proc.Free;
+    end;
+    PdfSaved(Dlg.FileName, FileExists(Dlg.FileName));
+    {$ENDIF}
+  finally
+    Dlg.Free;
+  end;
 end;
 
 procedure TForm1.btWcloseClick(Sender: TObject);
@@ -489,14 +654,20 @@ begin
     DialogS:=TSaveDialog.Create(Self);
     try
        // Set DailogS properties
-      DialogS.Title :=  'Bewaar HTML-bestand';
+      DialogS.Title :=  TR('Bewaar HTML Document...');
       DialogS.Filter := 'HTML Document (*.html)|*.html|Alle bestanden (*.*)|*.*';
       DialogS.DefaultExt := 'html';
-      DialogS.InitialDir :=
-         IncludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName)) + 'html';
+      DialogS.Options := DialogS.Options + [ofOverwritePrompt];
+      // De eerste keer in Documenten (niet naast het programma), daarna in de
+      // laatst gekozen map (dezelfde als bij Bewaar als PDF).
+      if FLastSaveDir <> '' then
+        DialogS.InitialDir := FLastSaveDir
+      else
+        DialogS.InitialDir := DocumentsDir;
 
       if DialogS.Execute then
        begin
+        FLastSaveDir := ExtractFilePath(DialogS.FileName);
         // Het ontwerp gaat onzichtbaar mee, zodat dit HTML-bestand
         // later via Openen opnieuw bewerkt kan worden.
         SL := TStringList.Create;

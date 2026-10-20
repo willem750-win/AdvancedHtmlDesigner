@@ -17,6 +17,7 @@ advanced/project/tools/deb/
 # Bestanden die het programma zelf aanmaakt tijdens het gebruik
 DesignerDefaults.ini
 previewN.html
+previewPdf.html
 advanced/project/htd/*.htd
 advanced/project/images/
 advanced/project/html/
