@@ -15,10 +15,12 @@ program for Windows and Linux, and as reusable Lazarus components.
 - Images in cells (left / centre / right, size), text and image hyperlinks
 - Free-floating **text blocks** anywhere on the page, positioned with the mouse or to the millimetre
 - Export as a complete HTML document or as table-only HTML, preview in your browser
+- **Save as PDF** in the paper size of the page, with colours, images, text blocks and clickable links
 - Save and load designs (`.htd`)
 - Re-open a saved HTML document and keep editing it: the design (including images) is embedded invisibly in the `.html`
 - User interface in **Dutch, English, French and German**, with a built-in translation editor
 - Built-in help in all four languages — also [online](https://willem750-win.github.io/AdvancedHtmlDesigner/)
+- A **learning path** of 8 lessons with examples and exercises (in all four languages), from a first table to your own web page
 
 ## Download
 
@@ -108,6 +110,10 @@ Windows en Linux, en herbruikbare Lazarus-componenten.
 Een HTML-document dat je met het programma bewaart, kun je later opnieuw
 openen en verder bewerken: het ontwerp (met de afbeeldingen) zit onzichtbaar
 in het `.html`-bestand.
+
+Je ontwerp kun je ook als **PDF** bewaren. Een **leerpad** van 8 lessen in de help
+(Nederlands, Engels, Frans en Duits) leidt leerlingen en cursisten stap voor stap van
+een eerste tabel naar een eigen webpagina.
 
 - **Windows:** start `AdvancedHtmlDesigner-<versie>-setup.exe` van
   [Releases](../../releases). Het programma wordt voor jou geïnstalleerd (geen
