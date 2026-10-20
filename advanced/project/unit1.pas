@@ -84,6 +84,9 @@ type
     // rechtstreeks als OnLanguageChanged gekoppeld kan worden.
     procedure ApplyFormLanguage(Sender: TObject);
 
+    // Opent een lokaal bestand: onder Windows in de ingebouwde MiniBrowser
+    // (ALocalOnly: geen internet, zoals bij de help), anders in de systeembrowser.
+    procedure OpenInBrowser(const AFileName: string; ALocalOnly: Boolean);
 
   public
 
@@ -96,11 +99,33 @@ implementation
 
 {$R *.lfm}
 
+{$IFDEF WINDOWS}
+uses
+  uMiniBrowser;
+{$ENDIF}
+
 const
   // Online help (GitHub Pages), gebruikt als de map help naast de .exe ontbreekt
   HelpOnlineURL = 'https://willem750-win.github.io/AdvancedHtmlDesigner/';
 
 { TForm1 }
+
+procedure TForm1.OpenInBrowser(const AFileName: string; ALocalOnly: Boolean);
+begin
+  {$IFDEF WINDOWS}
+  if not Assigned(MiniBrowserFrm) then
+  begin
+    MiniBrowserFrm := TMiniBrowserFrm.Create(Application);
+    // blijft voor het hoofdvenster, maar niet boven andere programma's
+    MiniBrowserFrm.PopupMode := pmExplicit;
+    MiniBrowserFrm.PopupParent := Self;
+  end;
+  MiniBrowserLocalOnly := ALocalOnly;
+  MiniBrowserFrm.LoadURLString('file:///' + StringReplace(AFileName, '\', '/', [rfReplaceAll]));
+  {$ELSE}
+  OpenDocument(AFileName);
+  {$ENDIF}
+end;
 
 {-------------------------------------------------------------------------------
 // Drag Form
@@ -282,7 +307,8 @@ begin
     Exit;
   end;
 
-  OpenDocument(FileName);
+  // voorbeeld: internet toegestaan (afbeeldingen, lettertypes, links)
+  OpenInBrowser(FileName, False);
 
   BtTestBrowser.Enabled := False;
   MyRollOut1.Collapsed := True;
@@ -359,7 +385,8 @@ begin
 
   if FileExists(FileName) then
   begin
-    OpenDocument(FileName);
+    // help: alleen lokaal, zoals in Logic
+    OpenInBrowser(FileName, True);
     Exit;
   end;
 

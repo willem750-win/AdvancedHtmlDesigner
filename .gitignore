@@ -20,3 +20,8 @@ previewN.html
 advanced/project/htd/*.htd
 advanced/project/images/
 advanced/project/html/
+
+# Ingebouwde browser (CEF): runtime en wat hij zelf aanmaakt
+ceflib/
+cache/
+debug.log

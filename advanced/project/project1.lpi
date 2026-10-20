@@ -19,7 +19,7 @@
       <AutoIncrementBuild Value="True"/>
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="2"/>
-      <BuildNr Value="4"/>
+      <BuildNr Value="5"/>
       <StringTable FileDescription="Advanced Html Designer" InternalName="AdvancedHtmlDesigner" OriginalFilename="Advanced Html Designer.exe" ProductName="Advanced Html Designer" ProductVersion="1.2"/>
     </VersionInfo>
     <BuildModes>
@@ -47,6 +47,9 @@
       </Item>
       <Item>
         <PackageName Value="HtmlTableDesigner_advanced"/>
+      </Item>
+      <Item>
+        <PackageName Value="CEF4Delphi_Lazarus"/>
       </Item>
       <Item>
         <PackageName Value="LCL"/>
@@ -95,17 +98,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions>
-      <Item>
-        <Name Value="EAbort"/>
-      </Item>
-      <Item>
-        <Name Value="ECodetoolError"/>
-      </Item>
-      <Item>
-        <Name Value="EFOpenError"/>
-      </Item>
-    </Exceptions>
-  </Debugging>
 </CONFIG>
