@@ -50,6 +50,7 @@ cp "$PROJECT/$EXE_NAME" "$STAGE/opt/$PKG/"
 strip "$STAGE/opt/$PKG/$EXE_NAME" 2>/dev/null || true
 cp "$PROJECT/talen.lng" "$STAGE/opt/$PKG/"
 cp -r "$PROJECT/help" "$STAGE/opt/$PKG/help"
+cp -r "$PROJECT/lessen" "$STAGE/opt/$PKG/lessen"   # voorbeelden van het leerpad
 mkdir -p "$STAGE/opt/$PKG/htd"
 # LICENSE: in de werkmap onder tools/publish, in de GitHub-repository bovenaan
 for LIC in "$TOOLS/publish/LICENSE" "$PROJECT/../../LICENSE"; do
@@ -70,10 +71,11 @@ DST="\${XDG_DATA_HOME:-\$HOME/.local/share}/$PKG"
 
 if [ "\$(cat "\$DST/VERSION" 2>/dev/null)" != "\$(cat "\$SRC/VERSION")" ]; then
   mkdir -p "\$DST/htd"
-  # Programma, help en licentie altijd vernieuwen
+  # Programma, help, voorbeelden van het leerpad en licentie altijd vernieuwen
   cp -f "\$SRC/$EXE_NAME" "\$SRC/LICENSE" "\$DST/"
-  rm -rf "\$DST/help"
+  rm -rf "\$DST/help" "\$DST/lessen"
   cp -r "\$SRC/help" "\$DST/help"
+  cp -r "\$SRC/lessen" "\$DST/lessen"
   # Vertalingen alleen de eerste keer (kunnen door de gebruiker bewerkt zijn)
   [ -f "\$DST/talen.lng" ] || cp "\$SRC/talen.lng" "\$DST/"
   cp -f "\$SRC/VERSION" "\$DST/VERSION"
@@ -116,6 +118,7 @@ Section: web
 Priority: optional
 Architecture: $ARCH
 Depends: libc6, libgtk2.0-0, xdg-utils
+Suggests: chromium | google-chrome-stable
 Installed-Size: $SIZE
 Maintainer: Willy Jansen <willyjansen@telenet.be>
 Description: Visuele ontwerper voor HTML-tabellen en -pagina's
