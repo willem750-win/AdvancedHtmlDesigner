@@ -597,6 +597,10 @@ type
     procedure MouseMove(Shift: TShiftState;X, Y: Integer); override;
     procedure Notification(AComponent: TComponent;Operation: TOperation); override;
     procedure KeyDown(var Key: Word;Shift: TShiftState); override;
+    {$IFNDEF WINDOWS}
+    function DoMouseWheel(Shift: TShiftState; WheelDelta: Integer;
+      MousePos: TPoint): Boolean; override;
+    {$ENDIF}
 
   { --------------------------------------------------------------------------
     Publieke API
@@ -710,6 +714,52 @@ const
   // (RulerSize 20 + 1 px rand). De Move X/Y-spinedits tonen de positie
   // relatief t.o.v. dit nulpunt, in mm (zelfde eenheid als de rulers).
   TableRulerZero = 21;
+
+// Extra verticale ruimte per toolbox-rij. Onder GTK2 is een spinedit hoger
+// dan de knopmaat, dus daar krijgt elke rij wat meer plaats.
+const
+  ToolRowExtra = {$IFDEF LCLGTK2}6{$ELSE}0{$ENDIF};
+
+{$IFDEF LCLGTK2}
+// GTK2 legt een spinedit een minimumhoogte en pijlbreedte op die van de
+// lettergrootte afhangen. Met het standaardfont past de waarde niet in de
+// smalle toolknop-maat; een kleiner font maakt hoogte en pijltjes kleiner.
+const
+  Gtk2SpinExtraWidth = 12;
+  Gtk2SpinFontSize   = 8;
+
+procedure ShrinkSpinEditsForGtk2(AOwner: TComponent);
+var
+  i, BtnW: Integer;
+  C: TControl;
+begin
+  BtnW := THtmlTableDesignerAdvanced(AOwner).FToolButtonWidth;
+
+  for i := 0 to AOwner.ComponentCount - 1 do
+  begin
+    if not (AOwner.Components[i] is TControl) then
+      Continue;
+
+    C := TControl(AOwner.Components[i]);
+
+    if C is TCustomFloatSpinEdit then
+    begin
+      C.AutoSize := False;
+      C.Font.Size := Gtk2SpinFontSize;
+
+      // Volledige rijhoogte benutten, anders valt het onderste pijltje weg.
+      if C.Parent is TTabSheet then
+        C.Height :=
+          THtmlTableDesignerAdvanced(AOwner).FToolButtonHeight + ToolRowExtra;
+    end;
+
+    // Alle toolbox-controls (knoppen en spinedits) even breed maken;
+    // controls in popups of met een afwijkende breedte blijven ongemoeid.
+    if (C.Parent is TTabSheet) and (C.Width = BtnW) then
+      C.Width := BtnW + Gtk2SpinExtraWidth;
+  end;
+end;
+{$ENDIF}
 
 { =============================================================================
   INITIALISATIE EN ALGEMENE TOOLBOX
@@ -829,7 +879,7 @@ begin
   FToolBox.Parent := Self;
   FToolBox.Left:=1;
   FToolBox.Top:=109;
-  FToolBox.Width:=50;
+  FToolBox.Width:=50{$IFDEF LCLGTK2} + Gtk2SpinExtraWidth{$ENDIF};
   FToolBox.BevelOuter := bvRaised;//
   FToolBox.BevelWidth:= 2;
   FToolBox.Caption := '';
@@ -842,7 +892,7 @@ begin
   FToolPages := TPageControl.Create(Self);
   FToolPages.Parent := FToolBox;
   FToolPages.ShowTabs:=false;
-  FToolPages.Width:=44;
+  FToolPages.Width:=44{$IFDEF LCLGTK2} + Gtk2SpinExtraWidth{$ENDIF};
   FToolPages.Left:=3;
   FToolPages.Top:=2;
   UpdateCellToolsHeight;
@@ -889,6 +939,10 @@ begin
   CreateTextBlockTools;
   CreateSettingsTools;
 
+  {$IFDEF LCLGTK2}
+  ShrinkSpinEditsForGtk2(Self);
+  {$ENDIF}
+
   SetFactoryDefaultSettings;
   SettingsToControls;
 
@@ -898,6 +952,45 @@ begin
 
   SetActiveTool(atCell);
 end;
+
+{$IFNDEF WINDOWS}
+// Windows geeft een onbehandeld muiswiel zelf door aan de omringende
+// scrollbox; de LCL doet dat op andere platformen (GTK2) niet. Daarom hier
+// zelf de dichtstbijzijnde scrollende parent verschuiven.
+// Shift + wiel scrolt horizontaal.
+function THtmlTableDesignerAdvanced.DoMouseWheel(Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint): Boolean;
+var
+  P: TWinControl;
+  Bar: TControlScrollBar;
+  Step: Integer;
+begin
+  Result := inherited DoMouseWheel(Shift, WheelDelta, MousePos);
+
+  if Result then
+    Exit;
+
+  P := Parent;
+
+  while Assigned(P) and not (P is TScrollingWinControl) do
+    P := P.Parent;
+
+  if not Assigned(P) then
+    Exit;
+
+  if ssShift in Shift then
+    Bar := TScrollingWinControl(P).HorzScrollBar
+  else
+    Bar := TScrollingWinControl(P).VertScrollBar;
+
+  // 120 = één wielklik; drie "regels" van 20 pixels per klik.
+  Step := (WheelDelta * 60) div 120;
+
+  Bar.Position := Bar.Position - Step;
+
+  Result := True;
+end;
+{$ENDIF}
 
 destructor THtmlTableDesignerAdvanced.Destroy;
 begin
@@ -1027,6 +1120,10 @@ begin
 
   UpdateSettingsToolsLayout;
 
+  {$IFDEF LCLGTK2}
+  ShrinkSpinEditsForGtk2(Self);
+  {$ENDIF}
+
   Invalidate;
 end;
 
@@ -1043,6 +1140,10 @@ begin
   UpdateTextBlockToolsLayout;
 
   UpdateSettingsToolsLayout;
+
+  {$IFDEF LCLGTK2}
+  ShrinkSpinEditsForGtk2(Self);
+  {$ENDIF}
 
   UpdateActiveToolsHeight;
 
@@ -1186,7 +1287,7 @@ begin
 
   NewHeight :=
     TopMargin +
-    (AButtonCount * FToolButtonHeight) +
+    (AButtonCount * (FToolButtonHeight + ToolRowExtra)) +
     ((AButtonCount - 1) * Gap) +
     BottomMargin + 25;
 
@@ -1240,7 +1341,7 @@ const
   StartX = 4;
   StartY = 2;
   Gap    = 3;
-  SelectorButtonWidth  = 38;
+  SelectorButtonWidth  = 38{$IFDEF LCLGTK2} + Gtk2SpinExtraWidth{$ENDIF};
   SelectorButtonHeight = 20;
 var
   Y: Integer;
@@ -1254,7 +1355,7 @@ begin
 
   FToolSelector.Left := 4;
   FToolSelector.Top := 19;
-  FToolSelector.Width := 45;
+  FToolSelector.Width := 45{$IFDEF LCLGTK2} + Gtk2SpinExtraWidth{$ENDIF};
   FToolSelector.Height := 90;
   FToolSelector.Hint := TRH(FToolSelector, 'Tool selector') ;
   FToolSelector.Caption := '';
@@ -2402,7 +2503,7 @@ begin
   FBtTableNew.Hint := TRH(FBtTableNew, 'Clear table-cells content');
   FBtTableNew.ShowHint := True;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // add Row   2
   FBtTableAddRow := TSpeedButton.Create(Self);
@@ -2421,7 +2522,7 @@ begin
   FBtTableAddRow.Hint := TRH(FBtTableAddRow, 'Add row');
   FBtTableNew.ShowHint := True;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // add column  3
   FBtTableAddColumn := TSpeedButton.Create(Self);
@@ -2440,7 +2541,7 @@ begin
   FBtTableAddColumn.Hint := TRH(FBtTableAddColumn, 'Add column');
   FBtTableAddColumn.ShowHint := True;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // delete row  4
   FBtTableDeleteRow := TSpeedButton.Create(Self);
@@ -2459,7 +2560,7 @@ begin
   FBtTableDeleteRow.Hint := TRH(FBtTableDeleteRow, 'Delete row');
   FBtTableAddColumn.ShowHint := True;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // delete column  5
   FBtTableDeleteColumn := TSpeedButton.Create(Self);
@@ -2478,7 +2579,7 @@ begin
   FBtTableDeleteColumn.Hint := TRH(FBtTableDeleteColumn, 'Delete column');
   FBtTableDeleteColumn.ShowHint := True;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Merge cells
   FBtTableMergeCells := TSpeedButton.Create(Self);
@@ -2497,7 +2598,7 @@ begin
   FBtTableMergeCells.Hint := TRH(FBtTableMergeCells, 'Merge cells');
   FBtTableMergeCells.ShowHint := True;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Unmerge cells
   FBtTableUnMergeCells := TSpeedButton.Create(Self);
@@ -2516,7 +2617,7 @@ begin
   FBtTableUnMergeCells.Hint := TRH(FBtTableUnMergeCells, 'UnMerge cells');
   FBtTableUnMergeCells.ShowHint := True;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   //----------------------------------------------------------------------------
   // nog bij te voegen
   //----------------------------------------------------------------------------
@@ -2539,7 +2640,7 @@ begin
   FBtTableGridLineWidth.Increment:=1;
   FBtTableGridLineWidth.OnChange := @TableGridLineSizeChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
    // Grid Row height  7
   FBtTableRowHeight := TSpinEdit.Create(Self);
@@ -2559,7 +2660,7 @@ begin
   FBtTableRowHeight.Increment:=3;
   FBtTableRowHeight.OnChange := @TableRowHeightChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Grid Column Width   8
   FBtTableColumnWidth := TSpinEdit.Create(Self);
@@ -2579,7 +2680,7 @@ begin
   FBtTableColumnWidth.Increment:=3;
     FBtTableColumnWidth.OnChange := @TableColumnWidthChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Table move  X    9
 
@@ -2603,7 +2704,7 @@ begin
   FBtTableMoveX.Increment:=1;
      FBtTableMoveX.OnChange := @TableMoveXChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Table move  Y   10
 
@@ -2626,7 +2727,7 @@ begin
   FBtTableMoveY.Increment:=1;
       FBtTableMoveY.OnChange := @TableMoveYChanged;
 
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Table border color     11
 
@@ -2644,7 +2745,7 @@ begin
 
    FBtTableBorderColor.OnColorChanged := @TableBorderColorChanged;
 
-   Inc(Y, FToolButtonHeight + Gap);
+   Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Table Border width 12
 
@@ -2665,7 +2766,7 @@ begin
 
    FBtTableBorderWidth.OnChange := @TableBorderWidthChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Table border radius 13
   FBtTableBorderRadius := TSpinEdit.Create(Self);
@@ -2687,7 +2788,7 @@ begin
 
    FBtTableBorderRadius.OnChange := @TableBorderRadiusChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Cell corner radius (geldt voor alle cellen van de tabel)
   FBtCellRadius := TSpinEdit.Create(Self);
@@ -2707,7 +2808,7 @@ begin
   FBtCellRadius.Increment:= 5;
   FBtCellRadius.OnChange := @CellRadiusChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // TableBackground Color 14
 
@@ -2725,7 +2826,7 @@ begin
 
   FBtTableBackgroundColor.OnColorChanged := @TablebackgroundColorChanged;
 
-   Inc(Y, FToolButtonHeight + Gap);
+   Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Header Color
@@ -2747,7 +2848,7 @@ begin
      @TableHeaderColorChanged;
 
 
-   Inc(Y, FToolButtonHeight + Gap);
+   Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
 
   // Table border style 15
@@ -2795,9 +2896,9 @@ var
     );
 
     if AGroupEnd then
-      Inc(Y, FToolButtonHeight + GroupGap)
+      Inc(Y, FToolButtonHeight + ToolRowExtra + GroupGap)
     else
-      Inc(Y, FToolButtonHeight + Gap);
+      Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
 
 begin
@@ -3560,7 +3661,7 @@ begin
   FBtCellBold.OnClick := @CellBoldClick;
 
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Italic
@@ -3583,7 +3684,7 @@ begin
   FBtCellItalic.ShowHint := True;
   FBtCellItalic.OnClick := @CellItalicClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Underline
@@ -3606,7 +3707,7 @@ begin
   FBtCellUnderline.ShowHint := True;
   FBtCellUnderline.OnClick := @CellUnderlineClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Align Left
@@ -3628,7 +3729,7 @@ begin
   FBtCellAlignLeft.ShowHint := True;
   FBtCellAlignLeft.OnClick := @CellAlignLeftClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Align Center
@@ -3650,7 +3751,7 @@ begin
   FBtCellAlignCenter.ShowHint := True;
   FBtCellAlignCenter.OnClick := @CellAlignCenterClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
 
   // ------------------------------------------------------------
@@ -3676,7 +3777,7 @@ begin
   FBtCellAlignRight.ShowHint := True;
   FBtCellAlignRight.OnClick := @CellAlignRightClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // create Hyperlink  Text
@@ -3695,7 +3796,7 @@ begin
   FBtCellCreateTextHyperlink.ShowHint := True;
   FBtCellCreateTextHyperlink.OnClick := @CellCreateTextHyperlinkClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   // ------------------------------------------------------------
   // Delete Hyperlink  Text
   // ------------------------------------------------------------
@@ -3713,7 +3814,7 @@ begin
   FBtCellDelTextHyperlink.ShowHint := True;
   FBtCellDelTextHyperlink.OnClick := @CellDelTextHyperlinkClick;
 
-  Inc(Y, FToolButtonHeight + Gap );
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap );
 
   // Copy
   FBtCellCopy := TSpeedButton.Create(Self);
@@ -3729,7 +3830,7 @@ begin
   FBtCellCopy.ShowHint := True;
   FBtCellCopy.OnClick := @CellCopyClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Paste
   FBtCellPaste := TSpeedButton.Create(Self);
@@ -3745,7 +3846,7 @@ begin
   FBtCellPaste.ShowHint := True;
   FBtCellPaste.OnClick := @CellPasteClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtCellColor := TColorButton.Create(Self);
   FBtCellColor.Parent := FTabCell;
@@ -3760,7 +3861,7 @@ begin
   FBtCellColor.OnColorChanged := @CellColorChanged;
 
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtCellFontSize := TSpinEdit.Create(Self);
   FBtCellFontSize.Parent := FTabCell;
@@ -3780,7 +3881,7 @@ begin
 
 
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtTextColor := TColorButton.Create(Self);
   FBtTextColor.Parent := FTabCell;
@@ -3794,7 +3895,7 @@ begin
   FBtTextColor.ShowHint := True;
   FBtTextColor.OnColorChanged := @TextColorChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtAddImage := TSpeedButton.Create(Self);
   FBtAddImage.Parent := FTabCell;
@@ -3809,7 +3910,7 @@ begin
   FBtAddImage.ShowHint := True;
   FBtAddImage.OnClick := @AddImageClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtDelImage := TSpeedButton.Create(Self);
   FBtDelImage.Parent := FTabCell;
@@ -3824,7 +3925,7 @@ begin
   FBtDelImage.ShowHint := True;
   FBtDelImage.OnClick := @DelImageClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtImageLeft := TSpeedButton.Create(Self);
   FBtImageLeft.Parent := FTabCell;
@@ -3842,7 +3943,7 @@ begin
   FBtImageLeft.AllowAllUp := False;
   FBtImageLeft.OnClick := @ImageLeftClick;
 
-Inc(Y, FToolButtonHeight + Gap);
+Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtImageCenter := TSpeedButton.Create(Self);
   FBtImageCenter.Parent := FTabCell;
@@ -3859,7 +3960,7 @@ Inc(Y, FToolButtonHeight + Gap);
   FBtImageCenter.AllowAllUp := False;
   FBtImageCenter.OnClick := @ImageCenterClick;
 
-Inc(Y, FToolButtonHeight + Gap);
+Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtImageRight := TSpeedButton.Create(Self);
   FBtImageRight.Parent := FTabCell;
@@ -3877,7 +3978,7 @@ Inc(Y, FToolButtonHeight + Gap);
 
   FBtImageRight.OnClick := @ImageRightClick;
 
-Inc(Y, FToolButtonHeight + Gap);
+Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // Image size (Original / Fit / Stretch) via popup
   CreateImageSizePopup;
@@ -3912,7 +4013,7 @@ Inc(Y, (FToolButtonHeight) + Gap);
   FBtCellCreateHyperlink.OnClick := @CellCreateHyperlinkClick;
 
   // Delete Hperlink Image
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtCellDelHyperlink := TSpeedButton.Create(Self);
   FBtCellDelHyperlink.Parent := FTabCell;
@@ -3927,7 +4028,7 @@ Inc(Y, (FToolButtonHeight) + Gap);
   FBtCellDelHyperlink.ShowHint := True;
   FBtCellDelHyperlink.OnClick := @CellDelHyperlinkClick;
 
-  Inc(Y, FToolButtonHeight + Gap + 8);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap + 8);
 
   // Cell border style
   FBtCellBorderStyle := TBorderStyleButton.Create(Self);
@@ -3972,7 +4073,7 @@ begin
       FToolButtonHeight
     );
 
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
 
   // ------------------------------------------------------------
@@ -3988,7 +4089,7 @@ begin
       FToolButtonHeight
     );
 
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
 
   // ------------------------------------------------------------
@@ -4004,7 +4105,7 @@ begin
       FToolButtonHeight
     );
 
-    Inc(Y, FToolButtonHeight + Gap +5);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap +5);
   end;
 
   // ------------------------------------------------------------
@@ -4020,7 +4121,7 @@ begin
       FToolButtonHeight
     );
 
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
 
   // ------------------------------------------------------------
@@ -4035,7 +4136,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
 
   // ------------------------------------------------------------
@@ -4050,7 +4151,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap + 5);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap + 5);
   end;
   // ------------------------------------------------------------
   // Create HyperLink cell
@@ -4063,7 +4164,7 @@ begin
     FToolButtonWidth,
     FToolButtonHeight
    );
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Delete HyperLink cell
@@ -4076,7 +4177,7 @@ begin
     FToolButtonWidth,
     FToolButtonHeight
    );
-  Inc(Y, FToolButtonHeight + Gap +5);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap +5);
   end;
   // ------------------------------------------------------------
   // Copy
@@ -4090,7 +4191,7 @@ begin
       FToolButtonHeight
     );
 
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Paste
@@ -4103,7 +4204,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap +5 );
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap +5 );
   end;
   // ------------------------------------------------------------
   // Cell color
@@ -4116,7 +4217,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Text color
@@ -4129,7 +4230,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Font size
@@ -4143,7 +4244,7 @@ begin
       FToolButtonHeight + 5
     );
 
-    Inc(Y, FToolButtonHeight + Gap + 5);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap + 5);
   end;
   // ------------------------------------------------------------
   // Add image
@@ -4156,7 +4257,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Delete image
@@ -4169,7 +4270,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Image left
@@ -4182,7 +4283,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Image center
@@ -4195,7 +4296,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
 
   // ------------------------------------------------------------
@@ -4209,7 +4310,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Image size (popup)
@@ -4223,7 +4324,7 @@ begin
       FToolButtonHeight
     );
   end;
-    Inc(Y, FToolButtonHeight + Gap + 5);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap + 5);
   // ------------------------------------------------------------
   // Create hyperlink
   // ------------------------------------------------------------
@@ -4235,7 +4336,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap);
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
   // ------------------------------------------------------------
   // Delete hyperlink
@@ -4248,7 +4349,7 @@ begin
       FToolButtonWidth,
       FToolButtonHeight
     );
-    Inc(Y, FToolButtonHeight + Gap + 8 );
+    Inc(Y, FToolButtonHeight + ToolRowExtra + Gap + 8 );
   end;
 
   // ------------------------------------------------------------
@@ -5420,7 +5521,7 @@ begin
   FBtTBAdd.ShowHint := True;
   FBtTBAdd.OnClick := @TBAddButtonClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
    // ------------------------------------------------------------
   // Delete TextBlock
@@ -5441,7 +5542,7 @@ begin
   FBtTBDelete.ShowHint := True;
   FBtTBDelete.OnClick := @TBDeleteButtonClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Move X (mm t.o.v. nulpunt rulers)
@@ -5466,7 +5567,7 @@ begin
                         ' change only Horizontally( X )');
   FBtTBMoveX.OnChange := @TBMoveXChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Move Y (mm t.o.v. nulpunt rulers)
@@ -5491,7 +5592,7 @@ begin
                         ' change only Vertically( Y )');
   FBtTBMoveY.OnChange := @TBMoveYChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Bold
@@ -5511,7 +5612,7 @@ begin
   FBtTBBold.Hint := TRH(FBtTBBold, 'Bold');
   FBtTBBold.OnClick := @TBBoldClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Italic
@@ -5531,7 +5632,7 @@ begin
   FBtTBItalic.Hint := TRH(FBtTBItalic, 'Italic');
   FBtTBItalic.OnClick := @TBItalicClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Underline
@@ -5551,7 +5652,7 @@ begin
   FBtTBUnderline.Hint := TRH(FBtTBUnderline, 'Underline');
   FBtTBUnderline.OnClick := @TBUnderlineClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Align Left
@@ -5571,7 +5672,7 @@ begin
   FBtTBAlignLeft.Hint := TRH(FBtTBAlignLeft, 'Align Left');
   FBtTBAlignLeft.OnClick := @TBAlignLeftClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Align Center
@@ -5591,7 +5692,7 @@ begin
   FBtTBAlignCenter.Hint := TRH(FBtTBAlignCenter, 'Align Center');
   FBtTBAlignCenter.OnClick := @TBAlignCenterClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Align Right
@@ -5611,7 +5712,7 @@ begin
   FBtTBAlignRight.Hint := TRH(FBtTBAlignRight, 'Align Right');
   FBtTBAlignRight.OnClick := @TBAlignRightClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   // ------------------------------------------------------------
   // Text Color
   // ------------------------------------------------------------
@@ -5627,7 +5728,7 @@ begin
   FBtTBColor.Hint := TRH(FBtTBColor, 'Text Color');
   FBtTBColor.OnColorChanged := @TBColorChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
    // ------------------------------------------------------------
   // Font Size
@@ -5648,7 +5749,7 @@ begin
   FBtTBFontSize.Hint := TRH(FBtTBFontSize, 'Font Size');
   FBtTBFontSize.OnChange := @TBFontSizeChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Create Hyperlink
@@ -5666,7 +5767,7 @@ begin
   FBtTBCreateHyperlink.Hint := TRH(FBtTBCreateHyperlink, 'Create Hyperlink');
   FBtTBCreateHyperlink.OnClick := @TBCreateHyperlinkClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Delete Hyperlink
@@ -5684,7 +5785,7 @@ begin
   FBtTBDelHyperlink.Hint := TRH(FBtTBDelHyperlink, 'Delete Hyperlink');
   FBtTBDelHyperlink.OnClick := @TBDelHyperlinkClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   //------------------------------------------------------------
   // Transparant TextBlok
@@ -5704,7 +5805,7 @@ begin
   FBtTBTransparent.Hint := TRH(FBtTBTransparent, 'Set TextBlock transparancy True/False ');
   FBtTBTransparent.OnClick := @TBTransparentClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Color TextBox
@@ -5721,7 +5822,7 @@ begin
   FBtTBGColor.Hint := TRH(FBtTBGColor, 'TextBlock color');
   FBtTBGColor.OnColorChanged := @TBBGColorChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
 
 
@@ -5744,7 +5845,7 @@ begin
   FBtTBBorderSize.Hint := TRH(FBtTBBorderSize, 'Border width');
   FBtTBBorderSize.OnChange := @TBBorderSizeChanged;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   // ------------------------------------------------------------
   // Border Style
   // ------------------------------------------------------------
@@ -5788,9 +5889,9 @@ var
     );
 
     if AGroupEnd then
-      Inc(Y, FToolButtonHeight + GroupGap)
+      Inc(Y, FToolButtonHeight + ToolRowExtra + GroupGap)
     else
-      Inc(Y, FToolButtonHeight + Gap);
+      Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
 
 begin
@@ -6638,7 +6739,7 @@ begin
   FBtSetLoad.ShowHint := True;
   FBtSetLoad.OnClick := @SettingsLoadClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Save defaults
@@ -6657,7 +6758,7 @@ begin
   FBtSetSave.ShowHint := True;
   FBtSetSave.OnClick := @SettingsSaveClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Reset defaults
@@ -6676,7 +6777,7 @@ begin
   FBtSetReset.ShowHint := True;
   FBtSetReset.OnClick := @SettingsResetClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Apply defaults
@@ -6695,7 +6796,7 @@ begin
   FBtSetApply.ShowHint := True;
   FBtSetApply.OnClick := @SettingsApplyClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Taal / vertalingen
@@ -6714,7 +6815,7 @@ begin
   FBtSetLanguage.ShowHint := True;
   FBtSetLanguage.OnClick := @SettingsLanguageClick;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   FBtLanguage := TSpeedButton.Create(Self);
   FBtLanguage.Parent := FTabSettings;
@@ -6730,7 +6831,7 @@ begin
   FBtLanguage.OnClick := @LanguageButtonClick;
   UpdateLanguageButton;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6755,7 +6856,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6780,7 +6881,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6805,7 +6906,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6827,7 +6928,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6849,7 +6950,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6872,7 +6973,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6895,7 +6996,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6918,7 +7019,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   Inc(Y, 5);
 
   // ------------------------------------------------------------
@@ -6943,7 +7044,7 @@ begin
 
   CreatePageSizePopup;
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Page Width label
@@ -6969,7 +7070,7 @@ begin
     FToolButtonHeight
   );
 
-  Inc(Y, FToolButtonHeight + Gap);
+  Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
 
   // ------------------------------------------------------------
   // Page Height label
@@ -7001,6 +7102,10 @@ begin
 
   UpdateSettingsToolsIcons;
   UpdateSettingsToolsLayout;
+
+  {$IFDEF LCLGTK2}
+  ShrinkSpinEditsForGtk2(Self);
+  {$ENDIF}
   UpdatePageSizeButton;
 end;
 
@@ -7028,9 +7133,9 @@ var
     );
 
     if AGroupEnd then
-      Inc(Y, FToolButtonHeight + GroupGap)
+      Inc(Y, FToolButtonHeight + ToolRowExtra + GroupGap)
     else
-      Inc(Y, FToolButtonHeight + Gap);
+      Inc(Y, FToolButtonHeight + ToolRowExtra + Gap);
   end;
 
 begin
