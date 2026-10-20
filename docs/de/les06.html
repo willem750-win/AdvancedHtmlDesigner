@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lektion 6 - Hyperlinks - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les06.html">NL</a><a href="../en/les06.html">EN</a><a href="../fr/les06.html">FR</a><a href="../de/les06.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <a href="leerpad.html" class="active">Lernpfad</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Lernpfad</a> &rsaquo; Lektion 6</p>
+  <h1>Hyperlinks</h1>
+  <div class="goal"><strong>Ziel:</strong> Text und Bilder zu einem <b>Hyperlink</b> machen, sodass Sie mit einem Klick zu einer
+  anderen Website gelangen. Sie erstellen eine Seite mit Ihren Lieblingswebsites.</div>
+
+  <p><a class="open" href="../../lessen/de/les06-websites.htd">&#9654; Dieses Beispiel öffnen</a></p>
+  <figure>
+    <img src="../img/les06-websites-de.png" alt="Tabelle mit Lieblingswebsites: ein runder Knopf, der Name als Link und eine Erklärung">
+    <figcaption>Sowohl der Name als auch der runde Knopf sind Links. Klicken Sie im Browser darauf, öffnet sich die Website.</figcaption>
+  </figure>
+
+  <h2>Was ist ein Hyperlink?</h2>
+  <p>Ein Hyperlink (kurz <b>Link</b>) ist ein Text oder ein Bild, auf das man klicken kann. Hinter dem Link steht eine
+  <b>Adresse</b> (URL), zum Beispiel <code>https://de.wikipedia.org</code>. Im Browser ist ein Textlink meist blau und
+  unterstrichen.</p>
+
+  <h2>Zwei Arten von Links</h2>
+  <ul>
+    <li><b>Text-Hyperlink</b>: Klicken Sie auf die Zelle und auf der Registerkarte
+      <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Zelle (C)</a> auf
+      <img src="../img/cell-textlink-add.png" class="ico" alt=""><b>TH+</b>. Sie bekommen zwei Fragen: zuerst die
+      <b>Adresse</b> (URL), dann den <b>Text</b>, der als Link erscheint (standardmäßig der Text, der schon in der Zelle steht).
+      Mit <img src="../img/cell-textlink-del.png" class="ico" alt=""><b>TH-</b> entfernen Sie den Link wieder; der Text bleibt stehen.</li>
+    <li><b>Bild-Hyperlink</b>: Klicken Sie auf eine Zelle mit einem Bild und auf
+      <img src="../img/img-link-add.png" class="ico" alt=""><b>HL+</b> (Bild-Hyperlink erstellen). Geben Sie die Adresse ein.
+      Mit <img src="../img/img-link-del.png" class="ico" alt=""><b>HL-</b> entfernen Sie den Link.</li>
+  </ul>
+  <div class="tip"><strong>Achtung:</strong> Geben Sie die Adresse immer vollständig ein, mit <code>https://</code> davor. Kopieren
+  Sie sie am besten aus der Adressleiste Ihres Browsers, dann machen Sie keine Tippfehler.</div>
+
+  <h2>So machen Sie es selbst</h2>
+  <ol class="steps">
+    <li>Erstellen Sie eine Tabelle mit 3 Spalten und 6 Zeilen, mit einem Titel und den Überschriften <i>Website</i> und <i>Wofür nutze ich sie?</i></li>
+    <li>Geben Sie in die zweite Spalte die Namen der Websites ein und in die dritte, wofür Sie sie nutzen.</li>
+    <li>Machen Sie aus jedem Namen mit <b>TH+</b> einen Text-Hyperlink.</li>
+    <li>Setzen Sie in die erste Spalte mit <b>Bild hinzufügen</b> einen Knopf (z. B. <code>knop-w.png</code> aus
+      <code>lessen\afbeeldingen</code>) und machen Sie daraus mit <b>HL+</b> einen Bild-Hyperlink.</li>
+    <li>Testen Sie Ihre Links: Klicken Sie unten auf <i>Hier klicken für Extrafunktionen</i>, öffnen Sie den Test-Browser und klicken Sie auf jeden Link.</li>
+  </ol>
+
+  <h2>Hinter den Kulissen</h2>
+  <p>Im HTML-Code ist ein Link ein <code>&lt;a&gt;</code>-Element. Die Adresse steht in <code>href</code>:</p>
+  <pre><code>&lt;a href="https://de.wikipedia.org"&gt;Wikipedia&lt;/a&gt;</code></pre>
+  <p>Bei einem Bild-Hyperlink steht das <code>&lt;img&gt;</code> zwischen <code>&lt;a&gt;</code> und <code>&lt;/a&gt;</code>.</p>
+
+  <h2>Aufgabe</h2>
+  <p>Fügen Sie unten eine Zeile mit einer Website hinzu, die Sie oft nutzen (zum Beispiel die Website Ihrer Schule oder Ihres Sportvereins).
+  Machen Sie sowohl den Namen als auch den Knopf anklickbar und testen Sie den Link.</p>
+  <details>
+    <summary>Lösung</summary>
+    <p>Klicken Sie auf der Registerkarte <b>Tabelle</b> auf <b>AR</b>. Geben Sie in die neue Zeile den Namen und die Erklärung ein. Klicken Sie
+    auf die Zelle mit dem Namen und auf <b>TH+</b>; fügen Sie die Adresse aus Ihrem Browser ein und bestätigen Sie den Text. Wählen Sie in der
+    ersten Spalte mit <b>Bild hinzufügen</b> einen Knopf, klicken Sie auf <b>HL+</b> und fügen Sie dieselbe Adresse ein. Öffnen Sie den
+    Test-Browser und klicken Sie auf beide Links.</p>
+  </details>
+
+  <p class="crumb">Arbeiten Sie unter Linux? Öffnen Sie das Beispiel dann selbst mit <b>Tabellendesigner öffnen</b>: Ordner
+  <code>lessen/de</code>, Datei <code>les06-websites.htd</code>.</p>
+
+  <div class="pager"><a href="les05.html">&larr; Lektion 5: Bilder</a><a href="les07.html">Lektion 7: Textblöcke &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

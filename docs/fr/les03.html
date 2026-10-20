@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leçon 3 - Fusionner des cellules - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les03.html">NL</a><a href="../en/les03.html">EN</a><a href="../fr/les03.html" class="cur">FR</a><a href="../de/les03.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <a href="leerpad.html" class="active">Parcours d'apprentissage</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Parcours d'apprentissage</a> &rsaquo; Leçon 3</p>
+  <h1>Fusionner des cellules</h1>
+  <div class="goal"><strong>Objectif :</strong> fusionner plusieurs cellules en une seule grande cellule, pour un titre au-dessus
+  du tableau ou un cours qui dure deux heures.</div>
+
+  <p><a class="open" href="../../lessen/fr/les03-lessenrooster.htd">&#9654; Ouvrir cet exemple</a></p>
+  <figure>
+    <img src="../img/les03-lessenrooster-fr.png" alt="Horaire de classe avec des cellules fusionnées">
+    <figcaption>Un horaire de classe : le titre occupe toute la largeur, l'informatique et le sport durent deux heures, et la pause de midi vaut pour tous les jours.</figcaption>
+  </figure>
+
+  <h2>Fusionner et dissocier</h2>
+  <ul>
+    <li><b>Fusionner :</b> faites glisser la souris sur les cellules qui doivent devenir une seule cellule et, dans l'onglet
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tableau (T)</a>, cliquez sur <b>MC</b> (Fusionner les cellules).</li>
+    <li>Cela fonctionne <b>côte à côte</b> (sur plusieurs colonnes), <b>l'une sous l'autre</b> (sur plusieurs lignes) ou les deux.</li>
+    <li><b>Dissocier :</b> cliquez sur une cellule fusionnée puis sur <b>UMC</b> (Dissocier les cellules).</li>
+  </ul>
+  <div class="tip"><strong>Attention :</strong> si les cellules que vous fusionnez contenaient déjà du texte, ce texte se retrouve
+  sur plusieurs lignes dans la nouvelle cellule. Supprimez ce dont vous n'avez pas besoin.</div>
+
+  <h2>À vous de jouer</h2>
+  <ol class="steps">
+    <li>Créez un tableau de 6 colonnes et 8 lignes (avec <b>AC</b> et <b>AR</b>).</li>
+    <li><b>Titre :</b> faites glisser la souris sur les 6 cellules de la ligne du haut, cliquez sur <b>MC</b> et tapez <i>Horaire 3B</i>.
+      Mettez le titre en gras, plus grand et centré, avec une couleur de cellule foncée et un texte blanc (voir <a href="les02.html">leçon 2</a>).</li>
+    <li><b>Jours et heures :</b> tapez dans la ligne 2 <i>Heure, Lundi ... Vendredi</i> et dans la première colonne les heures de début.</li>
+    <li><b>Un cours de deux heures :</b> le mardi, faites glisser la souris sur les cellules de 9h20 et 10h25, cliquez sur <b>MC</b> et tapez <i>Informatique</i>.
+      Faites de même pour <i>Sport</i> le mercredi.</li>
+    <li><b>Pause de midi :</b> dans la ligne de 12h00, faites glisser la souris du lundi au vendredi, cliquez sur <b>MC</b> et tapez <i>Pause de midi</i>.</li>
+    <li>Complétez les autres cours et donnez une couleur aux cellules d'en-tête et de pause.</li>
+  </ol>
+
+  <h2>Dans les coulisses</h2>
+  <p>Dans le code HTML (dépliez le volet en bas), vous voyez comment fonctionne la fusion : une cellule sur plusieurs colonnes
+  reçoit <code>colspan</code>, une cellule sur plusieurs lignes reçoit <code>rowspan</code>. Le titre a par exemple
+  <code>colspan="6"</code>.</p>
+
+  <h2>Exercice</h2>
+  <p>Le vendredi après-midi, il y a deux heures de <i>Projet</i> à la place des arts plastiques et de l'économie. Adaptez l'horaire.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Le vendredi, faites glisser la souris sur les cellules de 13h00 et 13h50 et cliquez sur <b>MC</b>. L'ancien texte des deux cellules
+    se trouve maintenant sur deux lignes dans la nouvelle cellule : double-cliquez, effacez ce texte et tapez <i>Projet</i>. Dans le code HTML,
+    la cellule a maintenant <code>rowspan="2"</code>.</p>
+  </details>
+
+  <p class="crumb">Vous travaillez sous Linux ? Ouvrez alors l'exemple vous-même avec <b>Ouvrir le concepteur de tableau</b> : dossier
+  <code>lessen/fr</code>, fichier <code>les03-lessenrooster.htd</code>.</p>
+
+  <div class="pager"><a href="les02.html">&larr; Leçon 2 : Mettre en forme les cellules</a><a href="les04.html">Leçon 4 : Bordures et coins arrondis &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

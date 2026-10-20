@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 8 - From design to website - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les08.html">NL</a><a href="../en/les08.html" class="cur">EN</a><a href="../fr/les08.html">FR</a><a href="../de/les08.html">DE</a></div>
+  <a href="index.html">Home</a>
+  <a href="werkwijze.html">Getting started</a>
+  <a href="leerpad.html" class="active">Learning path</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Table tab (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell tab (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Text block tab (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Settings tab (S)</a>
+  <div class="group">More</div>
+  <a href="muis-toetsen.html">Mouse &amp; keys</a>
+  <a href="bestanden.html">Files &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Learning path</a> &rsaquo; Lesson 8</p>
+  <h1>From design to website</h1>
+  <div class="goal"><strong>Goal:</strong> save your design as a real web page (<code>.html</code>), understand the HTML
+  code and open a saved page again later to carry on working.</div>
+
+  <p><a class="open" href="../../lessen/en/les08-fruitwinkel.htd">&#9654; Open this example</a></p>
+  <figure>
+    <img src="../img/les08-fruitwinkel-en.png" alt="Web page of a fruit shop with a title, a table of fruit and prices, and a footer">
+    <figcaption>Everything from the previous lessons together: a title and footer (text blocks), images, links, colours and borders.</figcaption>
+  </figure>
+
+  <h2>Design or web page?</h2>
+  <table>
+    <tr><th>File</th><th>What is it?</th><th>Open with</th></tr>
+    <tr><td class="name"><code>.htd</code></td><td>Your <b>design</b>, to keep working on.</td><td>Advanced Html Designer</td></tr>
+    <tr><td class="name"><code>.html</code></td><td>The <b>web page</b>, as visitors see it.</td><td>any web browser (and the designer too)</td></tr>
+  </table>
+
+  <h2>Viewing the HTML code</h2>
+  <p>Click <i>Click here for extra functions</i> at the bottom. The roll-out panel has two tabs:</p>
+  <ul>
+    <li><b>Html Document</b>: the complete web page, with the text blocks and the page settings.</li>
+    <li><b>Html Table</b>: only the table, to paste into an existing web page.</li>
+  </ul>
+  <p>The most important parts of the code:</p>
+  <table>
+    <tr><th>Code</th><th>Meaning</th></tr>
+    <tr><td class="name"><code>&lt;table&gt;</code></td><td>start of the table (<code>&lt;/table&gt;</code> is the end)</td></tr>
+    <tr><td class="name"><code>&lt;tr&gt;</code></td><td>a row (<i>table row</i>)</td></tr>
+    <tr><td class="name"><code>&lt;td&gt;</code></td><td>a cell (<i>table data</i>); <code>colspan</code> and <code>rowspan</code> for merged cells</td></tr>
+    <tr><td class="name"><code>style="..."</code></td><td>the formatting: colours, borders, alignment, font size</td></tr>
+    <tr><td class="name"><code>&lt;a href="..."&gt;</code></td><td>a hyperlink</td></tr>
+    <tr><td class="name"><code>&lt;img src="..."&gt;</code></td><td>an image; the image itself is built into the code (<code>data:image/png...</code>)</td></tr>
+    <tr><td class="name"><code>&lt;div class="designer-textblock"&gt;</code></td><td>a text block</td></tr>
+  </table>
+  <div class="tip"><strong>Note:</strong> the code is made at the moment you open the roll-out panel. Did you change
+  something in the designer after that? Then close the roll-out panel and open it again.</div>
+
+  <h2>Turning it into a web page</h2>
+  <ol class="steps">
+    <li>Open the example (or your own design) and open the roll-out panel.</li>
+    <li>On the <b>Html Document</b> tab click <img src="../img/form-save.png" class="ico" alt=""><b>Save HTML document</b>.</li>
+    <li>Choose a folder and a name, for example <code>fruitshop.html</code>.</li>
+    <li>Double-click the file in Explorer: it opens in your web browser. Click the links to test them.</li>
+  </ol>
+  <p>Because the images are built into the code, your web page is <b>a single file</b>. You can e-mail it, put it on a
+  USB stick or place it on a website. Many web hosts require the home page to be called <code>index.html</code>.</p>
+
+  <h2>Opening a web page again</h2>
+  <p>An <code>.html</code> file saved with <b>Save HTML document</b> also contains your complete design, invisibly.
+  Open it with <img src="../img/form-open.png" class="ico" alt=""><b>Open table designer</b> and you can simply
+  carry on working, even without the <code>.htd</code> file. More about this in <a href="bestanden.html#html-openen">Files &amp; export</a>.</p>
+
+  <h2>Exercise</h2>
+  <p>Save the example as <code>fruitshop.html</code> and open it in your browser. Bananas are getting cheaper: they now cost
+  <i>&euro;1.75 per kg</i>. Change the price in the designer, save the web page again and refresh your browser
+  (<kbd>F5</kbd>). Then find the address of the link behind <i>Bananas</i> in the HTML code.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Close the roll-out panel, double-click the price of the bananas in the designer and type the new price. Open the roll-out panel
+    again, click <b>Save HTML document</b> and choose the same file: the old one is replaced. Press <kbd>F5</kbd> in the browser and you
+    see the new price. In the code the link reads <code>&lt;a href="https://en.wikipedia.org/wiki/Banana"&gt;Bananas&lt;/a&gt;</code>.</p>
+  </details>
+
+  <div class="tip"><strong>Well done!</strong> You have completed the whole learning path. Now make your own web page: about your
+  hobby, your class, your sports club or your holiday. Use everything you have learned.</div>
+
+  <p class="crumb">Working on Linux? Then open the example yourself with <b>Open table designer</b>: folder
+  <code>lessen/en</code>, file <code>les08-fruitwinkel.htd</code>.</p>
+
+  <div class="pager"><a href="les07.html">&larr; Lesson 7: Text blocks</a><a href="leerpad.html">Learning path &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

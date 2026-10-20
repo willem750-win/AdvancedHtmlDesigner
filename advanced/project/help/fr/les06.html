@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leçon 6 - Hyperliens - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les06.html">NL</a><a href="../en/les06.html">EN</a><a href="../fr/les06.html" class="cur">FR</a><a href="../de/les06.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <a href="leerpad.html" class="active">Parcours d'apprentissage</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Parcours d'apprentissage</a> &rsaquo; Leçon 6</p>
+  <h1>Hyperliens</h1>
+  <div class="goal"><strong>Objectif :</strong> transformer du texte et des images en <b>hyperlien</b>, pour aller d'un clic vers
+  un autre site web. Vous créez une page avec vos sites préférés.</div>
+
+  <p><a class="open" href="../../lessen/fr/les06-websites.htd">&#9654; Ouvrir cet exemple</a></p>
+  <figure>
+    <img src="../img/les06-websites-fr.png" alt="Tableau de sites préférés : un bouton rond, le nom comme lien et une explication">
+    <figcaption>Le nom comme le bouton rond sont des liens. Cliquez dessus dans le navigateur et le site s'ouvre.</figcaption>
+  </figure>
+
+  <h2>Qu'est-ce qu'un hyperlien ?</h2>
+  <p>Un hyperlien (ou simplement <b>lien</b>) est un texte ou une image sur lequel on peut cliquer. Derrière le lien se trouve une
+  <b>adresse</b> (URL), par exemple <code>https://fr.wikipedia.org</code>. Dans le navigateur, un lien texte est généralement bleu et
+  souligné.</p>
+
+  <h2>Deux sortes de liens</h2>
+  <ul>
+    <li><b>Hyperlien texte</b> : cliquez sur la cellule puis, dans l'onglet
+      <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cellule (C)</a>, sur
+      <img src="../img/cell-textlink-add.png" class="ico" alt=""><b>TH+</b>. Deux questions suivent : d'abord l'<b>adresse</b> (URL),
+      puis le <b>texte</b> affiché comme lien (par défaut le texte déjà présent dans la cellule).
+      <img src="../img/cell-textlink-del.png" class="ico" alt=""><b>TH-</b> retire le lien ; le texte reste.</li>
+    <li><b>Hyperlien image</b> : cliquez sur une cellule contenant une image puis sur
+      <img src="../img/img-link-add.png" class="ico" alt=""><b>HL+</b> (Créer un hyperlien image). Tapez l'adresse.
+      <img src="../img/img-link-del.png" class="ico" alt=""><b>HL-</b> retire le lien.</li>
+  </ul>
+  <div class="tip"><strong>Attention :</strong> tapez toujours l'adresse complète, avec <code>https://</code> devant. Copiez-la
+  de préférence depuis la barre d'adresse de votre navigateur : vous éviterez les fautes de frappe.</div>
+
+  <h2>À vous de jouer</h2>
+  <ol class="steps">
+    <li>Créez un tableau de 3 colonnes et 6 lignes, avec un titre et les intitulés <i>Site web</i> et <i>À quoi me sert-il ?</i></li>
+    <li>Tapez les noms des sites dans la deuxième colonne et leur utilité dans la troisième.</li>
+    <li>Transformez chaque nom en hyperlien texte avec <b>TH+</b>.</li>
+    <li>Placez un bouton dans la première colonne avec <b>Ajouter une image</b> (par ex. <code>knop-w.png</code> du dossier
+      <code>lessen\afbeeldingen</code>) et faites-en un hyperlien image avec <b>HL+</b>.</li>
+    <li>Testez vos liens : cliquez en bas sur <i>Cliquez ici pour des fonctions supplémentaires</i>, ouvrez le navigateur de test et cliquez sur chaque lien.</li>
+  </ol>
+
+  <h2>Dans les coulisses</h2>
+  <p>Dans le code HTML, un lien est un élément <code>&lt;a&gt;</code>. L'adresse se trouve dans <code>href</code> :</p>
+  <pre><code>&lt;a href="https://fr.wikipedia.org"&gt;Wikipédia&lt;/a&gt;</code></pre>
+  <p>Pour un hyperlien image, l'élément <code>&lt;img&gt;</code> se trouve entre <code>&lt;a&gt;</code> et <code>&lt;/a&gt;</code>.</p>
+
+  <h2>Exercice</h2>
+  <p>Ajoutez en bas une ligne avec un site que vous utilisez souvent (par exemple le site de votre école ou de votre club de sport).
+  Rendez cliquables le nom et le bouton, puis testez le lien.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Dans l'onglet <b>Tableau</b>, cliquez sur <b>AR</b>. Tapez le nom et l'explication dans la nouvelle ligne. Cliquez sur la cellule du nom
+    puis sur <b>TH+</b> ; collez l'adresse depuis votre navigateur et confirmez le texte. Dans la première colonne, choisissez un bouton avec
+    <b>Ajouter une image</b>, cliquez sur <b>HL+</b> et collez la même adresse. Ouvrez le navigateur de test et cliquez sur les deux liens.</p>
+  </details>
+
+  <p class="crumb">Vous travaillez sous Linux ? Ouvrez alors l'exemple vous-même avec <b>Ouvrir le concepteur de tableau</b> : dossier
+  <code>lessen/fr</code>, fichier <code>les06-websites.htd</code>.</p>
+
+  <div class="pager"><a href="les05.html">&larr; Leçon 5 : Images</a><a href="les07.html">Leçon 7 : Blocs de texte &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

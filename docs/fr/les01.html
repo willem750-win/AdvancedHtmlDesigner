@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leçon 1 - Votre premier tableau - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les01.html">NL</a><a href="../en/les01.html">EN</a><a href="../fr/les01.html" class="cur">FR</a><a href="../de/les01.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <a href="leerpad.html" class="active">Parcours d'apprentissage</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Parcours d'apprentissage</a> &rsaquo; Leçon 1</p>
+  <h1>Votre premier tableau</h1>
+  <div class="goal"><strong>Objectif :</strong> créer un tableau simple, saisir du texte dans les cellules, enregistrer votre
+  travail et le voir sous forme de page web.</div>
+
+  <p><a class="open" href="../../lessen/fr/les01-boodschappen.htd">&#9654; Ouvrir cet exemple</a></p>
+  <figure>
+    <img src="../img/les01-boodschappen-fr.png" alt="Liste de courses avec les colonnes Produit, Quantité et Prix">
+    <figcaption>Une liste de courses en trois colonnes, telle qu'elle apparaît dans le navigateur.</figcaption>
+  </figure>
+
+  <h2>Tableau, ligne, colonne et cellule</h2>
+  <ul>
+    <li>Un <b>tableau</b> se compose de <b>lignes</b> (horizontales) et de <b>colonnes</b> (verticales).</li>
+    <li>À l'endroit où une ligne et une colonne se croisent se trouve une <b>cellule</b> : c'est là que va le texte.</li>
+    <li>Au-dessus et à gauche du tableau, vous voyez les <b>en-têtes</b> (A, B, C ... et 1, 2, 3 ...). Ils servent à sélectionner une colonne ou une ligne entière.</li>
+  </ul>
+
+  <h2>À vous de jouer</h2>
+  <ol class="steps">
+    <li>Un nouveau tableau compte 5 colonnes et 5 lignes. Il nous en faut seulement 3 : cliquez sur l'en-tête de colonne <b>D</b> puis, dans
+      l'onglet <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tableau (T)</a>, sur <b>DC</b>
+      (Supprimer la colonne). Faites de même pour la colonne <b>E</b>.</li>
+    <li><b>Double-cliquez</b> sur la première cellule et tapez <i>Produit</i>. Terminez par <kbd>Ctrl</kbd>+<kbd>Entrée</kbd> ou cliquez sur une autre cellule.</li>
+    <li>Tapez de la même façon <i>Quantité</i> et <i>Prix</i> dans les cellules suivantes, puis complétez les courses en dessous.</li>
+    <li>Une colonne est trop étroite ? Faites glisser la ligne de séparation vers la droite dans les en-têtes de colonnes.</li>
+    <li>Enregistrez votre conception avec <img src="../img/form-save.png" class="ico" alt=""><b>Enregistrer le concepteur de tableau</b>. Vous pourrez ainsi continuer plus tard.</li>
+    <li>Cliquez en bas sur <i>Cliquez ici pour des fonctions supplémentaires</i>, puis sur
+      <img src="../img/form-testbrowser.png" class="ico" alt=""><b>Ouvrir le navigateur de test</b> : vous voyez votre tableau comme une page web.</li>
+  </ol>
+
+  <div class="tip"><strong>Bon à savoir :</strong> le fichier <code>.htd</code> est votre <b>conception</b>, sur laquelle vous
+  continuez à travailler. Pour obtenir une vraie page web, enregistrez un fichier <code>.html</code> avec
+  <b>Enregistrer le document HTML</b> dans le volet (voir <a href="bestanden.html">Fichiers &amp; export</a>).</div>
+
+  <h2>Exercice</h2>
+  <p>Ajoutez en bas une ligne avec <i>Œufs</i>, <i>12</i> et <i>3,50 &euro;</i>. Ajoutez ensuite à droite une quatrième colonne
+  <i>Magasin</i> et indiquez où vous achetez chaque produit.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Dans l'onglet <b>Tableau (T)</b>, cliquez sur <b>AR</b> (Ajouter une ligne) : une ligne vide apparaît. Double-cliquez sur les cellules
+    et tapez le texte. <b>AC</b> (Ajouter une colonne) ajoute une colonne ; tapez <i>Magasin</i> dans la cellule du haut
+    et complétez le reste. Enregistrez à nouveau et regardez le résultat dans le navigateur de test.</p>
+  </details>
+
+  <p class="crumb">Vous travaillez sous Linux ? Cette aide s'ouvre alors dans votre navigateur habituel et le bouton ne peut pas
+  ouvrir l'exemple dans le concepteur. Ouvrez-le vous-même avec <b>Ouvrir le concepteur de tableau</b> : dossier
+  <code>lessen/fr</code>, fichier <code>les01-boodschappen.htd</code>.</p>
+
+  <div class="pager"><a href="leerpad.html">&larr; Parcours d'apprentissage</a><a href="les02.html">Leçon 2 : Mettre en forme les cellules &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

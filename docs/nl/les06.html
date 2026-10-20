@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les 6 - Hyperlinks - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les06.html" class="cur">NL</a><a href="../en/les06.html">EN</a><a href="../fr/les06.html">FR</a><a href="../de/les06.html">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Aan de slag</a>
+  <a href="leerpad.html" class="active">Leerpad</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabblad Tabel (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Tabblad Cel (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Tabblad Tekstblok (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Tabblad Instellingen (S)</a>
+  <div class="group">Overige</div>
+  <a href="muis-toetsen.html">Muis &amp; toetsen</a>
+  <a href="bestanden.html">Bestanden &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Leerpad</a> &rsaquo; Les 6</p>
+  <h1>Hyperlinks</h1>
+  <div class="goal"><strong>Doel:</strong> van tekst en afbeeldingen een <b>hyperlink</b> maken, zodat je met een klik naar
+  een andere website gaat. Je maakt een pagina met je favoriete websites.</div>
+
+  <p><a class="open" href="../../lessen/les06-websites.htd">&#9654; Open dit voorbeeld</a></p>
+  <figure>
+    <img src="../img/les06-websites.png" alt="Tabel met favoriete websites: een rond knopje, de naam als link en een uitleg">
+    <figcaption>Zowel de naam als het ronde knopje is een link. Klik je erop in de browser, dan opent de website.</figcaption>
+  </figure>
+
+  <h2>Wat is een hyperlink?</h2>
+  <p>Een hyperlink (kortweg <b>link</b>) is tekst of een afbeelding waarop je kunt klikken. Achter de link zit een
+  <b>adres</b> (URL), bijvoorbeeld <code>https://nl.wikipedia.org</code>. In de browser is een tekstlink meestal blauw en
+  onderstreept.</p>
+
+  <h2>Twee soorten links</h2>
+  <ul>
+    <li><b>Teksthyperlink</b>: klik op de cel en klik op het tabblad
+      <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cel (C)</a> op
+      <img src="../img/cell-textlink-add.png" class="ico" alt=""><b>TH+</b>. Je krijgt twee vragen: eerst het
+      <b>adres</b> (URL), daarna de <b>tekst</b> die als link verschijnt (standaard de tekst die al in de cel staat).
+      Met <img src="../img/cell-textlink-del.png" class="ico" alt=""><b>TH-</b> haal je de link weer weg; de tekst blijft staan.</li>
+    <li><b>Afbeeldingshyperlink</b>: klik op een cel met een afbeelding en klik op
+      <img src="../img/img-link-add.png" class="ico" alt=""><b>HL+</b> (Afbeeldingshyperlink maken). Typ het adres.
+      Met <img src="../img/img-link-del.png" class="ico" alt=""><b>HL-</b> haal je de link weg.</li>
+  </ul>
+  <div class="tip"><strong>Let op:</strong> typ het adres altijd volledig, met <code>https://</code> ervoor. Kopieer het
+  liefst uit de adresbalk van je browser, dan maak je geen tikfouten.</div>
+
+  <h2>Zo maak je het zelf</h2>
+  <ol class="steps">
+    <li>Maak een tabel van 3 kolommen en 6 rijen, met een titel en een kop <i>Website</i> en <i>Waarvoor gebruik ik ze?</i></li>
+    <li>Typ in de tweede kolom de namen van de websites en in de derde kolom waarvoor je ze gebruikt.</li>
+    <li>Maak van elke naam een teksthyperlink met <b>TH+</b>.</li>
+    <li>Zet in de eerste kolom een knopje met <b>Afbeelding toevoegen</b> (bv. <code>knop-w.png</code> uit
+      <code>lessen\afbeeldingen</code>) en maak er met <b>HL+</b> een afbeeldingshyperlink van.</li>
+    <li>Test je links: klik onderaan op <i>Klik hier voor extra functies</i>, open de test-browser en klik op elke link.</li>
+  </ol>
+
+  <h2>Achter de schermen</h2>
+  <p>In de HTML-code is een link een <code>&lt;a&gt;</code>-element. Het adres staat in <code>href</code>:</p>
+  <pre><code>&lt;a href="https://nl.wikipedia.org"&gt;Wikipedia&lt;/a&gt;</code></pre>
+  <p>Bij een afbeeldingshyperlink staat de <code>&lt;img&gt;</code> tussen <code>&lt;a&gt;</code> en <code>&lt;/a&gt;</code>.</p>
+
+  <h2>Opdracht</h2>
+  <p>Voeg onderaan een rij toe met een website die jij vaak gebruikt (bijvoorbeeld de website van je school of je sportclub).
+  Maak zowel de naam als het knopje klikbaar en test de link.</p>
+  <details>
+    <summary>Oplossing</summary>
+    <p>Klik op het tabblad <b>Tabel</b> op <b>AR</b>. Typ in de nieuwe rij de naam en de uitleg. Klik op de cel met de naam en
+    klik op <b>TH+</b>; plak het adres uit je browser en bevestig de tekst. Kies in de eerste kolom een knopje met
+    <b>Afbeelding toevoegen</b>, klik op <b>HL+</b> en plak hetzelfde adres. Open de test-browser en klik op beide links.</p>
+  </details>
+
+  <p class="crumb">Werk je onder Linux? Open het voorbeeld dan zelf met <b>Openen tabel designer</b>: map
+  <code>lessen</code>, bestand <code>les06-websites.htd</code>.</p>
+
+  <div class="pager"><a href="les05.html">&larr; Les 5: Afbeeldingen</a><a href="les07.html">Les 7: Tekstblokken &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

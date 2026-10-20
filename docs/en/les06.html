@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 6 - Hyperlinks - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les06.html">NL</a><a href="../en/les06.html" class="cur">EN</a><a href="../fr/les06.html">FR</a><a href="../de/les06.html">DE</a></div>
+  <a href="index.html">Home</a>
+  <a href="werkwijze.html">Getting started</a>
+  <a href="leerpad.html" class="active">Learning path</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Table tab (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell tab (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Text block tab (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Settings tab (S)</a>
+  <div class="group">More</div>
+  <a href="muis-toetsen.html">Mouse &amp; keys</a>
+  <a href="bestanden.html">Files &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Learning path</a> &rsaquo; Lesson 6</p>
+  <h1>Hyperlinks</h1>
+  <div class="goal"><strong>Goal:</strong> turn text and images into a <b>hyperlink</b>, so that one click takes you to
+  another website. You make a page with your favourite websites.</div>
+
+  <p><a class="open" href="../../lessen/en/les06-websites.htd">&#9654; Open this example</a></p>
+  <figure>
+    <img src="../img/les06-websites-en.png" alt="Table of favourite websites: a round button, the name as a link and an explanation">
+    <figcaption>Both the name and the round button are links. Click them in the browser and the website opens.</figcaption>
+  </figure>
+
+  <h2>What is a hyperlink?</h2>
+  <p>A hyperlink (<b>link</b> for short) is text or an image you can click. Behind the link is an
+  <b>address</b> (URL), for example <code>https://en.wikipedia.org</code>. In the browser a text link is usually blue and
+  underlined.</p>
+
+  <h2>Two kinds of links</h2>
+  <ul>
+    <li><b>Text hyperlink</b>: click the cell and on the
+      <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell (C)</a> tab click
+      <img src="../img/cell-textlink-add.png" class="ico" alt=""><b>TH+</b>. You get two questions: first the
+      <b>address</b> (URL), then the <b>text</b> shown as the link (by default the text already in the cell).
+      <img src="../img/cell-textlink-del.png" class="ico" alt=""><b>TH-</b> removes the link again; the text stays.</li>
+    <li><b>Image hyperlink</b>: click a cell with an image and click
+      <img src="../img/img-link-add.png" class="ico" alt=""><b>HL+</b> (Create image hyperlink). Type the address.
+      <img src="../img/img-link-del.png" class="ico" alt=""><b>HL-</b> removes the link.</li>
+  </ul>
+  <div class="tip"><strong>Note:</strong> always type the full address, starting with <code>https://</code>. Preferably copy
+  it from the address bar of your browser, so you make no typing mistakes.</div>
+
+  <h2>Make it yourself</h2>
+  <ol class="steps">
+    <li>Make a table of 3 columns and 6 rows, with a title and the headings <i>Website</i> and <i>What do I use it for?</i></li>
+    <li>Type the names of the websites in the second column and what you use them for in the third column.</li>
+    <li>Turn every name into a text hyperlink with <b>TH+</b>.</li>
+    <li>Put a button in the first column with <b>Add image</b> (e.g. <code>knop-w.png</code> from
+      <code>lessen\afbeeldingen</code>) and make it an image hyperlink with <b>HL+</b>.</li>
+    <li>Test your links: click <i>Click here for extra functions</i> at the bottom, open the test browser and click every link.</li>
+  </ol>
+
+  <h2>Behind the scenes</h2>
+  <p>In the HTML code a link is an <code>&lt;a&gt;</code> element. The address is in <code>href</code>:</p>
+  <pre><code>&lt;a href="https://en.wikipedia.org"&gt;Wikipedia&lt;/a&gt;</code></pre>
+  <p>With an image hyperlink the <code>&lt;img&gt;</code> is between <code>&lt;a&gt;</code> and <code>&lt;/a&gt;</code>.</p>
+
+  <h2>Exercise</h2>
+  <p>Add a row at the bottom with a website you use often (for example the website of your school or your sports club).
+  Make both the name and the button clickable and test the link.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>On the <b>Table</b> tab click <b>AR</b>. Type the name and the explanation in the new row. Click the cell with the name and
+    click <b>TH+</b>; paste the address from your browser and confirm the text. In the first column choose a button with
+    <b>Add image</b>, click <b>HL+</b> and paste the same address. Open the test browser and click both links.</p>
+  </details>
+
+  <p class="crumb">Working on Linux? Then open the example yourself with <b>Open table designer</b>: folder
+  <code>lessen/en</code>, file <code>les06-websites.htd</code>.</p>
+
+  <div class="pager"><a href="les05.html">&larr; Lesson 5: Images</a><a href="les07.html">Lesson 7: Text blocks &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

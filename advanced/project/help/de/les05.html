@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lektion 5 - Bilder - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les05.html">NL</a><a href="../en/les05.html">EN</a><a href="../fr/les05.html">FR</a><a href="../de/les05.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <a href="leerpad.html" class="active">Lernpfad</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Lernpfad</a> &rsaquo; Lektion 5</p>
+  <h1>Bilder</h1>
+  <div class="goal"><strong>Ziel:</strong> ein Bild in eine Zelle setzen, es ausrichten und die Größe wählen.
+  Sie erstellen ein Produktblatt: Bild links, Angaben rechts.</div>
+
+  <p><a class="open" href="../../lessen/de/les05-productfiche.htd">&#9654; Dieses Beispiel öffnen</a></p>
+  <figure>
+    <img src="../img/les05-productfiche-de.png" alt="Produktblatt eines Apfels mit dem Bild links und den Angaben rechts">
+    <figcaption>Ein Produktblatt: Das Bild steht in einer großen Zelle, die über vier Zeilen läuft.</figcaption>
+  </figure>
+
+  <h2>Die Schaltflächen für Bilder</h2>
+  <p>Sie finden sie auf der Registerkarte <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Zelle (C)</a>.
+  Klicken Sie zuerst auf die Zelle, in die das Bild soll.</p>
+  <ul>
+    <li><img src="../img/img-add.png" class="ico" alt=""><b>Bild hinzufügen</b>: Wählen Sie eine Datei (png, jpg, gif oder bmp).</li>
+    <li><img src="../img/img-left.png" class="ico" alt=""> <img src="../img/img-center.png" class="ico" alt="">
+      <img src="../img/img-right.png" class="ico" alt=""> Bild <b>links</b>, in der <b>Mitte</b> oder <b>rechts</b> in der Zelle.</li>
+    <li><img src="../img/img-size.png" class="ico" alt=""><b>Bildgröße</b>: <i>Image original</i> (Originalgröße),
+      <i>Image fit</i> (passend in die Zelle, ohne Verzerrung) oder <i>Image stretch</i> (auf die ganze Zelle gestreckt).</li>
+    <li><img src="../img/img-del.png" class="ico" alt=""><b>Bild löschen</b>: entfernt das Bild wieder aus der Zelle.</li>
+  </ul>
+
+  <h2>So machen Sie es selbst</h2>
+  <ol class="steps">
+    <li>Erstellen Sie eine Tabelle mit 3 Spalten und 5 Zeilen. Verbinden Sie die oberste Zeile für den Titel.</li>
+    <li>Verbinden Sie in der ersten Spalte die Zellen der Zeilen 2 bis 5: Dort kommt das Bild hin.</li>
+    <li>Machen Sie die erste Spalte breit genug (ziehen Sie in den Spaltenköpfen) und die Zeilen hoch genug.</li>
+    <li>Klicken Sie auf die große Zelle und auf <img src="../img/img-add.png" class="ico" alt=""><b>Bild hinzufügen</b>.
+      Wählen Sie im Ordner <code>lessen\afbeeldingen</code> die Datei <code>appel.png</code>.</li>
+    <li>Klicken Sie auf <img src="../img/img-center.png" class="ico" alt="">, um das Bild zu zentrieren.</li>
+    <li>Geben Sie in die anderen Zellen die Angaben ein: Sorte, Herkunft, Preis und Saison.</li>
+  </ol>
+
+  <div class="tip"><strong>Wo bleibt das Bild?</strong> Der Designer speichert eine Kopie im Ordner <code>html\images</code> neben
+  dem Programm, damit Ihr Entwurf weiter funktioniert, wenn Sie das Original verschieben. Im HTML-Code ist das Bild selbst
+  eingebettet: Ihre Webseite ist also eine einzige Datei, ohne separate Bilder.</div>
+
+  <h2>Welches Bild wählen Sie?</h2>
+  <ul>
+    <li>Verwenden Sie ein <b>kleines</b> Bild: Ein Foto von Ihrem Handy ist viel zu groß für eine Zelle und macht die Seite schwer.</li>
+    <li>Ein <b>png</b> mit durchsichtigem Hintergrund passt schön zu jeder Zellenfarbe.</li>
+    <li>Verwenden Sie nur Bilder, die Sie selbst gemacht haben oder verwenden dürfen.</li>
+  </ul>
+
+  <h2>Aufgabe</h2>
+  <p>Machen Sie daraus ein Produktblatt für eine <b>Birne</b>: Ersetzen Sie das Bild durch <code>peer.png</code> aus dem Ordner
+  <code>lessen\afbeeldingen</code> und passen Sie den Text an. Probieren Sie danach <i>Image stretch</i>: Was geht schief?</p>
+  <details>
+    <summary>Lösung</summary>
+    <p>Klicken Sie auf die Zelle mit dem Apfel und auf <b>Bild hinzufügen</b>: Das neue Bild ersetzt das alte.
+    Wählen Sie <code>peer.png</code> und passen Sie Sorte (z. B. <i>Conference</i>), Preis und Titel an. Mit <i>Image stretch</i> wird das
+    Bild auf die ganze Zelle gestreckt: Die Birne wird breiter und sieht verzerrt aus. Wählen Sie deshalb <i>Image fit</i>,
+    wenn das Bild nicht in die Zelle passt.</p>
+  </details>
+
+  <p class="crumb">Arbeiten Sie unter Linux? Öffnen Sie das Beispiel dann selbst mit <b>Tabellendesigner öffnen</b>: Ordner
+  <code>lessen/de</code>, Datei <code>les05-productfiche.htd</code>.</p>
+
+  <div class="pager"><a href="les04.html">&larr; Lektion 4: Rahmen und abgerundete Ecken</a><a href="les06.html">Lektion 6: Hyperlinks &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

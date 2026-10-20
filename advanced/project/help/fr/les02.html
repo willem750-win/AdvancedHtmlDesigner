@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leçon 2 - Mettre en forme les cellules - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les02.html">NL</a><a href="../en/les02.html">EN</a><a href="../fr/les02.html" class="cur">FR</a><a href="../de/les02.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <a href="leerpad.html" class="active">Parcours d'apprentissage</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Parcours d'apprentissage</a> &rsaquo; Leçon 2</p>
+  <h1>Mettre en forme les cellules</h1>
+  <div class="goal"><strong>Objectif :</strong> mettre le texte en gras, l'aligner et lui donner des couleurs, pour que votre
+  tableau soit clair et soigné.</div>
+
+  <p><a class="open" href="../../lessen/fr/les02-opmaak.htd">&#9654; Ouvrir cet exemple</a></p>
+  <figure>
+    <img src="../img/les02-opmaak-fr.png" alt="Liste de courses mise en forme avec un en-tête bleu foncé et un total">
+    <figcaption>La même liste de courses qu'à la leçon 1, avec un en-tête, des nombres alignés, des lignes de couleurs alternées et un total.</figcaption>
+  </figure>
+
+  <h2>D'abord sélectionner, ensuite mettre en forme</h2>
+  <p>Les boutons de l'onglet <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cellule (C)</a> agissent sur les
+  cellules <b>sélectionnées</b> :</p>
+  <ul>
+    <li>cliquez sur une cellule ;</li>
+    <li>faites glisser la souris sur plusieurs cellules ;</li>
+    <li>cliquez sur un <b>en-tête de ligne</b> (1, 2, 3 ...) ou de <b>colonne</b> (A, B, C ...) pour une ligne ou une colonne entière.</li>
+  </ul>
+
+  <h2>À vous de jouer</h2>
+  <ol class="steps">
+    <li>Ouvrez votre liste de courses de la leçon 1 (ou l'exemple de la leçon 1).</li>
+    <li><b>L'en-tête :</b> cliquez sur l'en-tête de ligne <b>1</b>. Cliquez sur <b>Gras</b> et <b>Centrer</b>, choisissez le bleu foncé comme
+      <b>Couleur de la cellule</b>, le blanc comme <b>Couleur du texte</b> et réglez la <b>Taille de police</b> sur 11.</li>
+    <li><b>Quantité :</b> cliquez sur l'en-tête de colonne <b>B</b> puis sur <b>Centrer</b>.</li>
+    <li><b>Prix :</b> cliquez sur l'en-tête de colonne <b>C</b> puis sur <b>Aligner à droite</b>. Les montants sont ainsi bien alignés.</li>
+    <li><b>Lignes alternées :</b> donnez aux lignes 3 et 5 une couleur de cellule bleu clair. Une longue liste se lit ainsi beaucoup plus facilement.</li>
+    <li><b>Total :</b> ajoutez une ligne avec <b>AR</b> (onglet Tableau), tapez <i>Total</i> et le montant, et mettez la ligne en gras.</li>
+  </ol>
+
+  <div class="tip"><strong>Astuce :</strong> vous avez bien mis en forme une cellule ? Copiez-la avec <kbd>Ctrl</kbd>+<kbd>C</kbd>,
+  sélectionnez une autre cellule et collez avec <kbd>Ctrl</kbd>+<kbd>V</kbd> : le contenu et la mise en forme sont copiés.</div>
+
+  <h2>Pourquoi aligner ?</h2>
+  <p>On lit un texte de gauche à droite : alignez-le donc <b>à gauche</b>. Les nombres et les montants se comparent mieux
+  quand les chiffres sont les uns sous les autres : alignez-les <b>à droite</b>. Les valeurs courtes, comme une quantité,
+  peuvent être <b>centrées</b>.</p>
+
+  <h2>Exercice</h2>
+  <p>Donnez à la ligne <i>Total</i> une couleur de cellule jaune clair et mettez le montant total en <b>rouge</b>. Mettez ensuite
+  le nom <i>Fromage</i> en italique, parce qu'il n'est pas encore acheté.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Cliquez sur l'en-tête de la ligne <i>Total</i> et choisissez le jaune clair comme <b>Couleur de la cellule</b>. Cliquez ensuite
+    uniquement sur la cellule du montant et choisissez le rouge comme <b>Couleur du texte</b>. Cliquez sur la cellule <i>Fromage</i>
+    puis sur <b>Italique</b>.</p>
+  </details>
+
+  <p class="crumb">Vous travaillez sous Linux ? Ouvrez alors l'exemple vous-même avec <b>Ouvrir le concepteur de tableau</b> : dossier
+  <code>lessen/fr</code>, fichier <code>les02-opmaak.htd</code>.</p>
+
+  <div class="pager"><a href="les01.html">&larr; Leçon 1 : Votre premier tableau</a><a href="les03.html">Leçon 3 : Fusionner des cellules &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

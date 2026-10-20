@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lektion 1 - Ihre erste Tabelle - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les01.html">NL</a><a href="../en/les01.html">EN</a><a href="../fr/les01.html">FR</a><a href="../de/les01.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <a href="leerpad.html" class="active">Lernpfad</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Lernpfad</a> &rsaquo; Lektion 1</p>
+  <h1>Ihre erste Tabelle</h1>
+  <div class="goal"><strong>Ziel:</strong> eine einfache Tabelle erstellen, Text in die Zellen eingeben, Ihre Arbeit speichern
+  und als Webseite ansehen.</div>
+
+  <p><a class="open" href="../../lessen/de/les01-boodschappen.htd">&#9654; Dieses Beispiel öffnen</a></p>
+  <figure>
+    <img src="../img/les01-boodschappen-de.png" alt="Einkaufszettel mit den Spalten Produkt, Anzahl und Preis">
+    <figcaption>Ein Einkaufszettel in drei Spalten, wie er im Browser erscheint.</figcaption>
+  </figure>
+
+  <h2>Tabelle, Zeile, Spalte und Zelle</h2>
+  <ul>
+    <li>Eine <b>Tabelle</b> besteht aus <b>Zeilen</b> (waagerecht) und <b>Spalten</b> (senkrecht).</li>
+    <li>Wo sich eine Zeile und eine Spalte kreuzen, liegt eine <b>Zelle</b>: Dort steht der Text.</li>
+    <li>Oberhalb und links der Tabelle sehen Sie die <b>Köpfe</b> (A, B, C ... und 1, 2, 3 ...). Damit wählen Sie eine ganze Spalte oder Zeile aus.</li>
+  </ul>
+
+  <h2>So machen Sie es selbst</h2>
+  <ol class="steps">
+    <li>Eine neue Tabelle hat 5 Spalten und 5 Zeilen. Wir brauchen nur 3: Klicken Sie auf den Spaltenkopf <b>D</b> und auf der Registerkarte
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabelle (T)</a> auf <b>DC</b>
+      (Spalte löschen). Machen Sie dasselbe für Spalte <b>E</b>.</li>
+    <li><b>Doppelklicken</b> Sie auf die erste Zelle und geben Sie <i>Produkt</i> ein. Schließen Sie mit <kbd>Strg</kbd>+<kbd>Enter</kbd> ab oder klicken Sie auf eine andere Zelle.</li>
+    <li>Geben Sie ebenso <i>Anzahl</i> und <i>Preis</i> in die nächsten Zellen ein und tragen Sie darunter die Einkäufe ein.</li>
+    <li>Ist eine Spalte zu schmal? Ziehen Sie in den Spaltenköpfen die Trennlinie nach rechts.</li>
+    <li>Speichern Sie Ihren Entwurf mit <img src="../img/form-save.png" class="ico" alt=""><b>Tabellendesigner speichern</b>. So können Sie später weiterarbeiten.</li>
+    <li>Klicken Sie unten auf <i>Hier klicken für Extrafunktionen</i> und dann auf
+      <img src="../img/form-testbrowser.png" class="ico" alt=""><b>Test-Browser öffnen</b>: Sie sehen Ihre Tabelle als Webseite.</li>
+  </ol>
+
+  <div class="tip"><strong>Gut zu wissen:</strong> Die <code>.htd</code>-Datei ist Ihr <b>Entwurf</b>, an dem Sie weiterarbeiten.
+  Für eine echte Webseite speichern Sie im ausklappbaren Bereich mit <b>HTML-Dokument speichern</b> eine
+  <code>.html</code>-Datei (siehe <a href="bestanden.html">Dateien &amp; Export</a>).</div>
+
+  <h2>Aufgabe</h2>
+  <p>Fügen Sie unten eine Zeile mit <i>Eier</i>, <i>12</i> und <i>3,50 &euro;</i> hinzu. Fügen Sie danach rechts eine vierte Spalte
+  <i>Geschäft</i> hinzu und tragen Sie ein, wo Sie jedes Produkt kaufen.</p>
+  <details>
+    <summary>Lösung</summary>
+    <p>Klicken Sie auf der Registerkarte <b>Tabelle (T)</b> auf <b>AR</b> (Zeile hinzufügen): Eine leere Zeile kommt hinzu. Doppelklicken Sie
+    auf die Zellen und geben Sie den Text ein. Mit <b>AC</b> (Spalte hinzufügen) kommt eine Spalte hinzu; geben Sie in die oberste Zelle
+    <i>Geschäft</i> ein und füllen Sie den Rest aus. Speichern Sie erneut und sehen Sie sich das Ergebnis im Test-Browser an.</p>
+  </details>
+
+  <p class="crumb">Arbeiten Sie unter Linux? Dann öffnet sich diese Hilfe in Ihrem normalen Browser und die Schaltfläche kann das Beispiel
+  nicht im Designer öffnen. Öffnen Sie es dann selbst mit <b>Tabellendesigner öffnen</b>: Ordner <code>lessen/de</code>, Datei
+  <code>les01-boodschappen.htd</code>.</p>
+
+  <div class="pager"><a href="leerpad.html">&larr; Lernpfad</a><a href="les02.html">Lektion 2: Zellen formatieren &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

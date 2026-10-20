@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les 5 - Afbeeldingen - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les05.html" class="cur">NL</a><a href="../en/les05.html">EN</a><a href="../fr/les05.html">FR</a><a href="../de/les05.html">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Aan de slag</a>
+  <a href="leerpad.html" class="active">Leerpad</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabblad Tabel (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Tabblad Cel (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Tabblad Tekstblok (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Tabblad Instellingen (S)</a>
+  <div class="group">Overige</div>
+  <a href="muis-toetsen.html">Muis &amp; toetsen</a>
+  <a href="bestanden.html">Bestanden &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Leerpad</a> &rsaquo; Les 5</p>
+  <h1>Afbeeldingen</h1>
+  <div class="goal"><strong>Doel:</strong> een afbeelding in een cel zetten, ze uitlijnen en de grootte kiezen.
+  Je maakt een productfiche: foto links, uitleg rechts.</div>
+
+  <p><a class="open" href="../../lessen/les05-productfiche.htd">&#9654; Open dit voorbeeld</a></p>
+  <figure>
+    <img src="../img/les05-productfiche.png" alt="Productfiche van een appel met de afbeelding links en de gegevens rechts">
+    <figcaption>Een productfiche: de afbeelding staat in één grote cel die over vier rijen loopt.</figcaption>
+  </figure>
+
+  <h2>De knoppen voor afbeeldingen</h2>
+  <p>Je vindt ze op het tabblad <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cel (C)</a>.
+  Klik eerst op de cel waar de afbeelding moet komen.</p>
+  <ul>
+    <li><img src="../img/img-add.png" class="ico" alt=""><b>Afbeelding toevoegen</b>: kies een bestand (png, jpg, gif of bmp).</li>
+    <li><img src="../img/img-left.png" class="ico" alt=""> <img src="../img/img-center.png" class="ico" alt="">
+      <img src="../img/img-right.png" class="ico" alt=""> afbeelding <b>links</b>, in het <b>midden</b> of <b>rechts</b> in de cel.</li>
+    <li><img src="../img/img-size.png" class="ico" alt=""><b>Afbeeldingsgrootte</b>: <i>Image original</i> (ware grootte),
+      <i>Image fit</i> (passend in de cel, zonder te vervormen) of <i>Image stretch</i> (helemaal uitgerekt).</li>
+    <li><img src="../img/img-del.png" class="ico" alt=""><b>Afbeelding verwijderen</b>: haalt de afbeelding weer uit de cel.</li>
+  </ul>
+
+  <h2>Zo maak je het zelf</h2>
+  <ol class="steps">
+    <li>Maak een tabel van 3 kolommen en 5 rijen. Voeg de bovenste rij samen voor de titel.</li>
+    <li>Voeg in de eerste kolom de cellen van rij 2 tot en met 5 samen: daar komt de afbeelding.</li>
+    <li>Maak de eerste kolom breed genoeg (sleep in de kolomkoppen) en de rijen hoog genoeg.</li>
+    <li>Klik op de grote cel en klik op <img src="../img/img-add.png" class="ico" alt=""><b>Afbeelding toevoegen</b>.
+      Kies in de map <code>lessen\afbeeldingen</code> het bestand <code>appel.png</code>.</li>
+    <li>Klik op <img src="../img/img-center.png" class="ico" alt=""> om de afbeelding te centreren.</li>
+    <li>Typ in de andere cellen de gegevens: soort, herkomst, prijs en seizoen.</li>
+  </ol>
+
+  <div class="tip"><strong>Waar blijft de afbeelding?</strong> De designer bewaart een kopie in de map <code>html\images</code>
+  naast het programma, zodat je ontwerp blijft werken als je het origineel verplaatst. In de HTML-code zit de afbeelding
+  zelf ingebouwd: je webpagina is dus één bestand, zonder aparte afbeeldingen.</div>
+
+  <h2>Welke afbeelding kies je?</h2>
+  <ul>
+    <li>Gebruik een <b>kleine</b> afbeelding: een foto van je gsm is veel te groot voor een cel en maakt de pagina zwaar.</li>
+    <li>Een <b>png</b> met doorzichtige achtergrond past mooi op elke celkleur.</li>
+    <li>Gebruik alleen afbeeldingen die je zelf gemaakt hebt of die je mag gebruiken.</li>
+  </ul>
+
+  <h2>Opdracht</h2>
+  <p>Maak er een productfiche van een <b>peer</b> van: vervang de afbeelding door <code>peer.png</code> uit de map
+  <code>lessen\afbeeldingen</code> en pas de tekst aan. Probeer daarna <i>Image stretch</i>: wat gaat er mis?</p>
+  <details>
+    <summary>Oplossing</summary>
+    <p>Klik op de cel met de appel en klik op <b>Afbeelding toevoegen</b>: de nieuwe afbeelding vervangt de oude.
+    Kies <code>peer.png</code> en pas soort (bv. <i>Conference</i>), prijs en titel aan. Met <i>Image stretch</i> wordt de
+    afbeelding uitgerekt tot de hele cel: de peer wordt breder en ziet er vervormd uit. Kies daarom <i>Image fit</i>
+    als de afbeelding niet in de cel past.</p>
+  </details>
+
+  <p class="crumb">Werk je onder Linux? Open het voorbeeld dan zelf met <b>Openen tabel designer</b>: map
+  <code>lessen</code>, bestand <code>les05-productfiche.htd</code>.</p>
+
+  <div class="pager"><a href="les04.html">&larr; Les 4: Randen en afgeronde hoeken</a><a href="les06.html">Les 6: Hyperlinks &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

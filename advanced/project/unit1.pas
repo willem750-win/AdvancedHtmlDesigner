@@ -87,6 +87,8 @@ type
     // Opent een lokaal bestand: onder Windows in de ingebouwde MiniBrowser
     // (ALocalOnly: geen internet, zoals bij de help), anders in de systeembrowser.
     procedure OpenInBrowser(const AFileName: string; ALocalOnly: Boolean);
+    // opent een voorbeeldontwerp (.htd) uit het leerpad in de designer
+    procedure OpenDesignFromHelp(const AFileName: string);
 
   public
 
@@ -125,6 +127,14 @@ begin
   {$ELSE}
   OpenDocument(AFileName);
   {$ENDIF}
+end;
+
+procedure TForm1.OpenDesignFromHelp(const AFileName: string);
+begin
+  if not FileExists(AFileName) then Exit;
+  MyRollOut1.Collapsed := True;
+  HtmlTableDesignerAdvanced1.LoadFromHTD(AFileName);
+  BringToFront;
 end;
 
 {-------------------------------------------------------------------------------
@@ -186,6 +196,10 @@ var
 begin
    {$IFDEF LINUX}
    MyRollOut1.Visible := not MyRollOut1.Collapsed;
+   {$ENDIF}
+   {$IFDEF WINDOWS}
+   // "Open dit voorbeeld" in het leerpad opent het ontwerp in de designer
+   OnHelpOpenPanel := @OpenDesignFromHelp;
    {$ENDIF}
 
    FLastScrollX := -1;

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lektion 4 - Rahmen und abgerundete Ecken - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les04.html">NL</a><a href="../en/les04.html">EN</a><a href="../fr/les04.html">FR</a><a href="../de/les04.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <a href="leerpad.html" class="active">Lernpfad</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Lernpfad</a> &rsaquo; Lektion 4</p>
+  <h1>Rahmen und abgerundete Ecken</h1>
+  <div class="goal"><strong>Ziel:</strong> den Rahmen der Tabelle und der Zellen wählen: Farbe, Breite, Stil und
+  abgerundete Ecken. So bekommt Ihre Tabelle einen eigenen Stil.</div>
+
+  <p><a class="open" href="../../lessen/de/les04-prijslijst.htd">&#9654; Dieses Beispiel öffnen</a></p>
+  <figure>
+    <img src="../img/les04-prijslijst-de.png" alt="Preisliste einer Eisdiele mit einem braunen, abgerundeten Rahmen">
+    <figcaption>Die Preisliste einer Eisdiele: ein dicker brauner Rahmen mit abgerundeten Ecken und gepunktete Linien zwischen den Preisen.</figcaption>
+  </figure>
+
+  <h2>Zwei Arten von Rahmen</h2>
+  <ul>
+    <li><b>Den Rahmen um die ganze Tabelle</b> stellen Sie auf der Registerkarte
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabelle (T)</a> ein: <b>Rahmenfarbe</b>,
+      <b>Rahmenbreite</b>, <b>Rahmenstil</b> und <b>Rahmenradius</b> (je größer die Zahl, desto runder die Ecken).</li>
+    <li><b>Die Linien zwischen den Zellen</b>: Ihre Dicke wählen Sie mit <b>Gitterlinienbreite</b> (Registerkarte Tabelle). Den Stil wählen Sie
+      pro Zelle mit <b>Zellenrahmenstil</b> auf der Registerkarte <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Zelle (C)</a>:
+      keiner, durchgezogen, gestrichelt, gepunktet oder doppelt.</li>
+  </ul>
+  <div class="tip"><strong>Gut zu wissen:</strong> Den Rahmen um die Tabelle und die abgerundeten Ecken sehen Sie am besten im
+  Test-Browser. Klicken Sie unten auf <i>Hier klicken für Extrafunktionen</i> und dann auf <b>Test-Browser öffnen</b>.</div>
+
+  <h2>So machen Sie es selbst</h2>
+  <ol class="steps">
+    <li>Erstellen Sie eine Tabelle mit 4 Spalten und 6 Zeilen. Verbinden Sie die Zellen der obersten Zeile (siehe <a href="les03.html">Lektion 3</a>)
+      und geben Sie den Namen der Eisdiele ein.</li>
+    <li>Tragen Sie die Sorten (Tüte, Becher, Waffel) und die Preise ein und formatieren Sie die Kopfzeile wie in <a href="les02.html">Lektion 2</a>.</li>
+    <li>Wählen Sie auf der Registerkarte <b>Tabelle</b> als <b>Rahmenfarbe</b> Dunkelbraun und stellen Sie die <b>Rahmenbreite</b> auf 3.</li>
+    <li>Stellen Sie den <b>Rahmenradius</b> auf 14: Die Ecken der Tabelle werden rund.</li>
+    <li>Wählen Sie die Zellen mit den Sorten und Preisen aus (ziehen Sie darüber) und wählen Sie auf der Registerkarte <b>Zelle</b> als
+      <b>Zellenrahmenstil</b> <i>gepunktet</i>.</li>
+    <li>Sehen Sie sich das Ergebnis im Test-Browser an.</li>
+  </ol>
+
+  <h2>Ein passender Rahmen</h2>
+  <p>Ein Rahmen hilft beim Lesen der Tabelle, aber zu viele Linien machen sie unruhig. Verwenden Sie einen <b>dicken Rahmen</b> um die
+  Tabelle und <b>dünne oder helle Linien</b> innen. Wählen Sie eine Rahmenfarbe, die zur Farbe der Kopfzeile passt.</p>
+
+  <h2>Aufgabe</h2>
+  <p>Geben Sie der Tabelle einen <b>doppelten</b> Rahmen statt eines durchgezogenen. Stellen Sie danach den <b>Eckenradius der Zellen</b>
+  auf 6 und sehen Sie im Test-Browser nach, was sich ändert.</p>
+  <details>
+    <summary>Lösung</summary>
+    <p>Wählen Sie auf der Registerkarte <b>Tabelle</b> als <b>Rahmenstil</b> <i>doppelt</i>. Ein doppelter Rahmen braucht etwas Breite:
+    Lassen Sie die <b>Rahmenbreite</b> auf 3 oder mehr. Mit dem <b>Eckenradius der Zellen</b> bekommt jede Zelle eigene runde Ecken,
+    sodass die Zellen wie kleine Knöpfe aussehen.</p>
+  </details>
+
+  <p class="crumb">Arbeiten Sie unter Linux? Öffnen Sie das Beispiel dann selbst mit <b>Tabellendesigner öffnen</b>: Ordner
+  <code>lessen/de</code>, Datei <code>les04-prijslijst.htd</code>.</p>
+
+  <div class="pager"><a href="les03.html">&larr; Lektion 3: Zellen verbinden</a><a href="les05.html">Lektion 5: Bilder &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

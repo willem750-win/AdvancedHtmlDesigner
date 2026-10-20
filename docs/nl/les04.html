@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les 4 - Randen en afgeronde hoeken - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les04.html" class="cur">NL</a><a href="../en/les04.html">EN</a><a href="../fr/les04.html">FR</a><a href="../de/les04.html">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Aan de slag</a>
+  <a href="leerpad.html" class="active">Leerpad</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabblad Tabel (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Tabblad Cel (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Tabblad Tekstblok (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Tabblad Instellingen (S)</a>
+  <div class="group">Overige</div>
+  <a href="muis-toetsen.html">Muis &amp; toetsen</a>
+  <a href="bestanden.html">Bestanden &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Leerpad</a> &rsaquo; Les 4</p>
+  <h1>Randen en afgeronde hoeken</h1>
+  <div class="goal"><strong>Doel:</strong> de rand van de tabel en van de cellen kiezen: kleur, dikte, stijl en
+  afgeronde hoeken. Zo krijgt je tabel een eigen stijl.</div>
+
+  <p><a class="open" href="../../lessen/les04-prijslijst.htd">&#9654; Open dit voorbeeld</a></p>
+  <figure>
+    <img src="../img/les04-prijslijst.png" alt="Prijslijst van een ijssalon met een bruine, afgeronde rand">
+    <figcaption>De prijslijst van een ijssalon: een dikke bruine rand met afgeronde hoeken, en stippellijnen tussen de prijzen.</figcaption>
+  </figure>
+
+  <h2>Twee soorten randen</h2>
+  <ul>
+    <li><b>De rand rond de hele tabel</b> stel je in op het tabblad
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabel (T)</a>: <b>Randkleur tabel</b>,
+      <b>Randdikte tabel</b>, <b>Randstijl tabel</b> en <b>Randafronding tabel</b> (hoe groter het getal, hoe ronder de hoeken).</li>
+    <li><b>De lijnen tussen de cellen</b>: hun dikte kies je met <b>Lijndikte raster</b> (tabblad Tabel). De stijl kies je per cel
+      met <b>Celrandstijl</b> op het tabblad <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cel (C)</a>:
+      geen, doorgetrokken, streepjes, puntjes of dubbel.</li>
+  </ul>
+  <div class="tip"><strong>Goed om te weten:</strong> de rand rond de tabel en de afgeronde hoeken zie je het best in de
+  test-browser. Klik onderaan op <i>Klik hier voor extra functies</i> en daarna op <b>Open test-browser</b>.</div>
+
+  <h2>Zo maak je het zelf</h2>
+  <ol class="steps">
+    <li>Maak een tabel van 4 kolommen en 6 rijen. Voeg de cellen van de bovenste rij samen (zie <a href="les03.html">les 3</a>)
+      en typ de naam van de ijssalon.</li>
+    <li>Vul de soorten (hoorntje, potje, wafel) en de prijzen in, en maak de kop op zoals in <a href="les02.html">les 2</a>.</li>
+    <li>Kies op het tabblad <b>Tabel</b> bij <b>Randkleur tabel</b> donkerbruin en zet <b>Randdikte tabel</b> op 3.</li>
+    <li>Zet <b>Randafronding tabel</b> op 14: de hoeken van de tabel worden rond.</li>
+    <li>Selecteer de cellen met de soorten en prijzen (sleep erover) en kies op het tabblad <b>Cel</b> bij <b>Celrandstijl</b>
+      <i>puntjes</i>.</li>
+    <li>Bekijk het resultaat in de test-browser.</li>
+  </ol>
+
+  <h2>Een rand die past</h2>
+  <p>Een rand helpt om de tabel te lezen, maar te veel lijnen maken ze druk. Gebruik een <b>dikke rand</b> rond de tabel en
+  <b>dunne of lichte lijnen</b> binnenin. Kies een randkleur die past bij de kleur van de kop.</p>
+
+  <h2>Opdracht</h2>
+  <p>Geef de tabel een <b>dubbele</b> rand in plaats van een doorgetrokken rand. Zet daarna <b>Hoekafronding cellen</b>
+  op 6 en kijk in de test-browser wat er verandert.</p>
+  <details>
+    <summary>Oplossing</summary>
+    <p>Kies op het tabblad <b>Tabel</b> bij <b>Randstijl tabel</b> <i>dubbel</i>. Een dubbele rand heeft wat dikte nodig:
+    laat <b>Randdikte tabel</b> op 3 of meer staan. Met <b>Hoekafronding cellen</b> krijgt elke cel apart ronde hoeken,
+    zodat de cellen er als knopjes uitzien.</p>
+  </details>
+
+  <p class="crumb">Werk je onder Linux? Open het voorbeeld dan zelf met <b>Openen tabel designer</b>: map
+  <code>lessen</code>, bestand <code>les04-prijslijst.htd</code>.</p>
+
+  <div class="pager"><a href="les03.html">&larr; Les 3: Cellen samenvoegen</a><a href="les05.html">Les 5: Afbeeldingen &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

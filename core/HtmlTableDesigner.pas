@@ -8080,6 +8080,17 @@ end;
 
 Cell.Picture.Clear;
 
+// Een relatief pad (bv. afbeeldingen/appel.png in de voorbeelden van het
+// leerpad) wordt gezocht vanaf de map van het .htd-bestand.
+if Cell.ShowImage and
+(Trim(Cell.ImageFile) <> '') and
+not FileExists(Cell.ImageFile) and
+FileExists(ExtractFilePath(ExpandFileName(AFileName)) +
+SetDirSeparators(Cell.ImageFile)) then
+Cell.ImageFile :=
+ExtractFilePath(ExpandFileName(AFileName)) +
+SetDirSeparators(Cell.ImageFile);
+
 if Cell.ShowImage and
 (Trim(Cell.ImageFile) <> '') and
 FileExists(Cell.ImageFile) then

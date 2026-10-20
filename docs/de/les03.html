@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lektion 3 - Zellen verbinden - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les03.html">NL</a><a href="../en/les03.html">EN</a><a href="../fr/les03.html">FR</a><a href="../de/les03.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <a href="leerpad.html" class="active">Lernpfad</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Lernpfad</a> &rsaquo; Lektion 3</p>
+  <h1>Zellen verbinden</h1>
+  <div class="goal"><strong>Ziel:</strong> mehrere Zellen zu einer großen Zelle verbinden, für einen Titel über der Tabelle
+  oder eine Doppelstunde.</div>
+
+  <p><a class="open" href="../../lessen/de/les03-lessenrooster.htd">&#9654; Dieses Beispiel öffnen</a></p>
+  <figure>
+    <img src="../img/les03-lessenrooster-de.png" alt="Stundenplan mit verbundenen Zellen">
+    <figcaption>Ein Stundenplan: Der Titel läuft über die ganze Breite, Informatik und Sport sind Doppelstunden, und die Mittagspause gilt für alle Tage.</figcaption>
+  </figure>
+
+  <h2>Verbinden und trennen</h2>
+  <ul>
+    <li><b>Verbinden:</b> Ziehen Sie die Maus über die Zellen, die eine Zelle werden sollen, und klicken Sie auf der Registerkarte
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabelle (T)</a> auf <b>MC</b> (Zellen verbinden).</li>
+    <li>Das geht <b>nebeneinander</b> (über mehrere Spalten), <b>untereinander</b> (über mehrere Zeilen) oder beides.</li>
+    <li><b>Trennen:</b> Klicken Sie auf eine verbundene Zelle und auf <b>UMC</b> (Zellen trennen).</li>
+  </ul>
+  <div class="tip"><strong>Achtung:</strong> Stand in den Zellen, die Sie verbinden, schon Text, dann steht dieser Text
+  untereinander in der neuen Zelle. Löschen Sie, was Sie nicht brauchen.</div>
+
+  <h2>So machen Sie es selbst</h2>
+  <ol class="steps">
+    <li>Erstellen Sie eine Tabelle mit 6 Spalten und 8 Zeilen (mit <b>AC</b> und <b>AR</b>).</li>
+    <li><b>Titel:</b> Ziehen Sie über die 6 Zellen der obersten Zeile, klicken Sie auf <b>MC</b> und geben Sie <i>Stundenplan 3B</i> ein.
+      Machen Sie den Titel fett, größer und zentriert, mit einer dunklen Zellenfarbe und weißer Schrift (siehe <a href="les02.html">Lektion 2</a>).</li>
+    <li><b>Tage und Uhrzeiten:</b> Geben Sie in Zeile 2 <i>Zeit, Montag ... Freitag</i> ein und in die erste Spalte die Anfangszeiten.</li>
+    <li><b>Eine Doppelstunde:</b> Ziehen Sie am Dienstag über die Zellen von 9.20 und 10.25, klicken Sie auf <b>MC</b> und geben Sie <i>Informatik</i> ein.
+      Machen Sie dasselbe für <i>Sport</i> am Mittwoch.</li>
+    <li><b>Mittagspause:</b> Ziehen Sie in der Zeile von 12.00 über Montag bis Freitag, klicken Sie auf <b>MC</b> und geben Sie <i>Mittagspause</i> ein.</li>
+    <li>Tragen Sie die übrigen Fächer ein und geben Sie den Kopf- und Pausenzellen eine Farbe.</li>
+  </ol>
+
+  <h2>Hinter den Kulissen</h2>
+  <p>Im HTML-Code (klappen Sie den Bereich unten aus) sehen Sie, wie das Verbinden funktioniert: Eine Zelle über mehrere Spalten
+  erhält <code>colspan</code>, eine Zelle über mehrere Zeilen erhält <code>rowspan</code>. Der Titel hat zum Beispiel
+  <code>colspan="6"</code>.</p>
+
+  <h2>Aufgabe</h2>
+  <p>Am Freitagnachmittag gibt es zwei Stunden <i>Projektarbeit</i> statt Kunst und Wirtschaft. Passen Sie den Stundenplan an.</p>
+  <details>
+    <summary>Lösung</summary>
+    <p>Ziehen Sie am Freitag über die Zellen von 13.00 und 13.50 und klicken Sie auf <b>MC</b>. Der alte Text beider Zellen steht jetzt
+    untereinander in der neuen Zelle: Doppelklicken Sie, löschen Sie diesen Text und geben Sie <i>Projektarbeit</i> ein. Im HTML-Code hat
+    die Zelle jetzt <code>rowspan="2"</code>.</p>
+  </details>
+
+  <p class="crumb">Arbeiten Sie unter Linux? Öffnen Sie das Beispiel dann selbst mit <b>Tabellendesigner öffnen</b>: Ordner
+  <code>lessen/de</code>, Datei <code>les03-lessenrooster.htd</code>.</p>
+
+  <div class="pager"><a href="les02.html">&larr; Lektion 2: Zellen formatieren</a><a href="les04.html">Lektion 4: Rahmen und abgerundete Ecken &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

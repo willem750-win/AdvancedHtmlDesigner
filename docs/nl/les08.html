@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les 8 - Van ontwerp naar website - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les08.html" class="cur">NL</a><a href="../en/les08.html">EN</a><a href="../fr/les08.html">FR</a><a href="../de/les08.html">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Aan de slag</a>
+  <a href="leerpad.html" class="active">Leerpad</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabblad Tabel (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Tabblad Cel (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Tabblad Tekstblok (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Tabblad Instellingen (S)</a>
+  <div class="group">Overige</div>
+  <a href="muis-toetsen.html">Muis &amp; toetsen</a>
+  <a href="bestanden.html">Bestanden &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Leerpad</a> &rsaquo; Les 8</p>
+  <h1>Van ontwerp naar website</h1>
+  <div class="goal"><strong>Doel:</strong> je ontwerp bewaren als echte webpagina (<code>.html</code>), de HTML-code
+  begrijpen en een bewaarde pagina later opnieuw openen om verder te werken.</div>
+
+  <p><a class="open" href="../../lessen/les08-fruitwinkel.htd">&#9654; Open dit voorbeeld</a></p>
+  <figure>
+    <img src="../img/les08-fruitwinkel.png" alt="Webpagina van een fruitwinkel met titel, tabel met fruit en prijzen, en een voettekst">
+    <figcaption>Alles uit de vorige lessen samen: een titel en voettekst (tekstblokken), afbeeldingen, links, kleuren en randen.</figcaption>
+  </figure>
+
+  <h2>Ontwerp of webpagina?</h2>
+  <table>
+    <tr><th>Bestand</th><th>Wat is het?</th><th>Openen met</th></tr>
+    <tr><td class="name"><code>.htd</code></td><td>Je <b>ontwerp</b>, om verder aan te werken.</td><td>Advanced Html Designer</td></tr>
+    <tr><td class="name"><code>.html</code></td><td>De <b>webpagina</b>, zoals bezoekers ze zien.</td><td>elke webbrowser (en ook de designer)</td></tr>
+  </table>
+
+  <h2>De HTML-code bekijken</h2>
+  <p>Klik onderaan op <i>Klik hier voor extra functies</i>. Het rolluik heeft twee tabbladen:</p>
+  <ul>
+    <li><b>Html-Document</b>: de volledige webpagina, met de tekstblokken en de pagina-instellingen.</li>
+    <li><b>Html-Tabel</b>: alleen de tabel, om in een bestaande webpagina te plakken.</li>
+  </ul>
+  <p>De belangrijkste onderdelen van de code:</p>
+  <table>
+    <tr><th>Code</th><th>Betekenis</th></tr>
+    <tr><td class="name"><code>&lt;table&gt;</code></td><td>begin van de tabel (<code>&lt;/table&gt;</code> is het einde)</td></tr>
+    <tr><td class="name"><code>&lt;tr&gt;</code></td><td>een rij (<i>table row</i>)</td></tr>
+    <tr><td class="name"><code>&lt;td&gt;</code></td><td>een cel (<i>table data</i>); <code>colspan</code> en <code>rowspan</code> voor samengevoegde cellen</td></tr>
+    <tr><td class="name"><code>style="..."</code></td><td>de opmaak: kleuren, randen, uitlijning, lettergrootte</td></tr>
+    <tr><td class="name"><code>&lt;a href="..."&gt;</code></td><td>een hyperlink</td></tr>
+    <tr><td class="name"><code>&lt;img src="..."&gt;</code></td><td>een afbeelding; de afbeelding zelf zit in de code ingebouwd (<code>data:image/png...</code>)</td></tr>
+    <tr><td class="name"><code>&lt;div class="designer-textblock"&gt;</code></td><td>een tekstblok</td></tr>
+  </table>
+  <div class="tip"><strong>Let op:</strong> de code wordt gemaakt op het moment dat je het rolluik openklapt. Heb je daarna
+  iets veranderd in de designer? Klap het rolluik dan dicht en weer open.</div>
+
+  <h2>Zo maak je er een webpagina van</h2>
+  <ol class="steps">
+    <li>Open het voorbeeld (of je eigen ontwerp) en klap het rolluik open.</li>
+    <li>Klik op het tabblad <b>Html-Document</b> op <img src="../img/form-save.png" class="ico" alt=""><b>Bewaar HTML Document</b>.</li>
+    <li>Kies een map en een naam, bijvoorbeeld <code>fruitwinkel.html</code>.</li>
+    <li>Dubbelklik in de Verkenner op het bestand: het opent in je webbrowser. Klik op de links om ze te testen.</li>
+  </ol>
+  <p>Omdat de afbeeldingen in de code ingebouwd zijn, is je webpagina <b>één bestand</b>. Je kunt het mailen, op een
+  USB-stick zetten of op een website plaatsen. Bij veel webhosts moet de startpagina <code>index.html</code> heten.</p>
+
+  <h2>Een webpagina opnieuw openen</h2>
+  <p>Een <code>.html</code>-bestand dat je met <b>Bewaar HTML Document</b> bewaard hebt, bevat onzichtbaar ook je volledige
+  ontwerp. Open het met <img src="../img/form-open.png" class="ico" alt=""><b>Openen tabel designer</b> en je kunt gewoon
+  verder werken, ook zonder het <code>.htd</code>-bestand. Meer daarover in <a href="bestanden.html#html-openen">Bestanden &amp; export</a>.</p>
+
+  <h2>Opdracht</h2>
+  <p>Bewaar het voorbeeld als <code>fruitwinkel.html</code> en open het in je browser. De bananen worden goedkoper: ze kosten
+  nu <i>&euro; 1,75 per kg</i>. Pas de prijs aan in de designer, bewaar de webpagina opnieuw en vernieuw je browser
+  (<kbd>F5</kbd>). Zoek daarna in de HTML-code het adres van de link achter <i>Bananen</i>.</p>
+  <details>
+    <summary>Oplossing</summary>
+    <p>Klap het rolluik dicht, dubbelklik in de designer op de prijs van de bananen en typ de nieuwe prijs. Klap het rolluik
+    weer open, klik op <b>Bewaar HTML Document</b> en kies hetzelfde bestand: het oude wordt vervangen. Druk in de browser op <kbd>F5</kbd> en je ziet de
+    nieuwe prijs. In de code staat de link als <code>&lt;a href="https://nl.wikipedia.org/wiki/Banaan"&gt;Bananen&lt;/a&gt;</code>.</p>
+  </details>
+
+  <div class="tip"><strong>Proficiat!</strong> Je hebt het hele leerpad doorlopen. Maak nu je eigen webpagina: over je
+  hobby, je klas, je sportclub of je vakantie. Gebruik alles wat je geleerd hebt.</div>
+
+  <p class="crumb">Werk je onder Linux? Open het voorbeeld dan zelf met <b>Openen tabel designer</b>: map
+  <code>lessen</code>, bestand <code>les08-fruitwinkel.htd</code>.</p>
+
+  <div class="pager"><a href="les07.html">&larr; Les 7: Tekstblokken</a><a href="leerpad.html">Leerpad &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

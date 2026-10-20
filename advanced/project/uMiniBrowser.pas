@@ -543,12 +543,12 @@ procedure TMiniBrowserFrm.GuardBeforeBrowse(Sender: TObject; const browser: ICef
 var
   U, FN: string;
 begin
-  // Link naar een paneelbestand (.lpl), bv. een voorbeeld uit het leerpad:
-  // niet tonen, maar het paneel in Logic openen.
+  // Link naar een paneel (.lpl) of ontwerp (.htd), bv. een voorbeeld uit het leerpad:
+  // niet tonen, maar het in het hoofdprogramma openen (OnHelpOpenPanel).
   if request <> nil then
   begin
     U := string(request.Url);
-    if (Pos('file:', LowerCase(U)) = 1) and SameText(ExtractFileExt(U), '.lpl') and
+    if (Pos('file:', LowerCase(U)) = 1) and (SameText(ExtractFileExt(U), '.lpl') or SameText(ExtractFileExt(U), '.htd')) and
        URIToFilename(U, FN) then
     begin
       FPanelToOpen := FN;

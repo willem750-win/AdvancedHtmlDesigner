@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les 3 - Cellen samenvoegen - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les03.html" class="cur">NL</a><a href="../en/les03.html">EN</a><a href="../fr/les03.html">FR</a><a href="../de/les03.html">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Aan de slag</a>
+  <a href="leerpad.html" class="active">Leerpad</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabblad Tabel (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Tabblad Cel (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Tabblad Tekstblok (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Tabblad Instellingen (S)</a>
+  <div class="group">Overige</div>
+  <a href="muis-toetsen.html">Muis &amp; toetsen</a>
+  <a href="bestanden.html">Bestanden &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Leerpad</a> &rsaquo; Les 3</p>
+  <h1>Cellen samenvoegen</h1>
+  <div class="goal"><strong>Doel:</strong> meerdere cellen samenvoegen tot één grote cel, voor een titel boven de tabel
+  of een les die twee uur duurt.</div>
+
+  <p><a class="open" href="../../lessen/les03-lessenrooster.htd">&#9654; Open dit voorbeeld</a></p>
+  <figure>
+    <img src="../img/les03-lessenrooster.png" alt="Lessenrooster met samengevoegde cellen">
+    <figcaption>Een lessenrooster: de titel loopt over de hele breedte, Informatica en Sport duren twee uur, en de middagpauze geldt voor alle dagen.</figcaption>
+  </figure>
+
+  <h2>Samenvoegen en splitsen</h2>
+  <ul>
+    <li><b>Samenvoegen:</b> sleep met de muis over de cellen die één cel moeten worden en klik op het tabblad
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tabel (T)</a> op <b>MC</b> (Cellen samenvoegen).</li>
+    <li>Dat kan <b>naast elkaar</b> (over meerdere kolommen), <b>onder elkaar</b> (over meerdere rijen) of allebei.</li>
+    <li><b>Splitsen:</b> klik op een samengevoegde cel en klik op <b>UMC</b> (Cellen splitsen).</li>
+  </ul>
+  <div class="tip"><strong>Let op:</strong> stond er al tekst in de cellen die je samenvoegt, dan komt die tekst onder
+  elkaar in de nieuwe cel. Verwijder wat je niet nodig hebt.</div>
+
+  <h2>Zo maak je het zelf</h2>
+  <ol class="steps">
+    <li>Maak een tabel van 6 kolommen en 8 rijen (met <b>AC</b> en <b>AR</b>).</li>
+    <li><b>Titel:</b> sleep over de 6 cellen van de bovenste rij, klik op <b>MC</b> en typ <i>Lessenrooster 3B</i>.
+      Maak de titel vet, groter en gecentreerd, met een donkere celkleur en witte letters (zie <a href="les02.html">les 2</a>).</li>
+    <li><b>Dagen en uren:</b> typ in rij 2 <i>Uur, Maandag ... Vrijdag</i> en in de eerste kolom de beginuren.</li>
+    <li><b>Een les van twee uur:</b> sleep op dinsdag over de cellen van 9.20 en 10.25, klik op <b>MC</b> en typ <i>Informatica</i>.
+      Doe hetzelfde voor <i>Sport</i> op woensdag.</li>
+    <li><b>Middagpauze:</b> sleep in de rij van 12.00 over maandag tot en met vrijdag, klik op <b>MC</b> en typ <i>Middagpauze</i>.</li>
+    <li>Vul de andere lessen in en geef de kop- en pauzecellen een kleur.</li>
+  </ol>
+
+  <h2>Achter de schermen</h2>
+  <p>In de HTML-code (klap het rolluik onderaan uit) zie je hoe samenvoegen werkt: een cel over meerdere kolommen krijgt
+  <code>colspan</code>, een cel over meerdere rijen krijgt <code>rowspan</code>. De titel heeft bijvoorbeeld
+  <code>colspan="6"</code>.</p>
+
+  <h2>Opdracht</h2>
+  <p>Op vrijdagnamiddag is er twee uur <i>Projectwerk</i> in plaats van Plastische opvoeding en Economie. Pas het rooster aan.</p>
+  <details>
+    <summary>Oplossing</summary>
+    <p>Sleep op vrijdag over de cellen van 13.00 en 13.50 en klik op <b>MC</b>. De oude tekst van beide cellen staat nu onder
+    elkaar in de nieuwe cel: dubbelklik, wis die tekst en typ <i>Projectwerk</i>. In de HTML-code heeft de cel nu
+    <code>rowspan="2"</code>.</p>
+  </details>
+
+  <p class="crumb">Werk je onder Linux? Open het voorbeeld dan zelf met <b>Openen tabel designer</b>: map
+  <code>lessen</code>, bestand <code>les03-lessenrooster.htd</code>.</p>
+
+  <div class="pager"><a href="les02.html">&larr; Les 2: Cellen opmaken</a><a href="les04.html">Les 4: Randen en afgeronde hoeken &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lektion 8 - Vom Entwurf zur Website - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les08.html">NL</a><a href="../en/les08.html">EN</a><a href="../fr/les08.html">FR</a><a href="../de/les08.html" class="cur">DE</a></div>
+  <a href="index.html">Start</a>
+  <a href="werkwijze.html">Erste Schritte</a>
+  <a href="leerpad.html" class="active">Lernpfad</a>
+  <div class="group">Werkzeugkasten</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Registerkarte Tabelle (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Registerkarte Zelle (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Registerkarte Textblock (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Registerkarte Einstellungen (S)</a>
+  <div class="group">Weiteres</div>
+  <a href="muis-toetsen.html">Maus &amp; Tastatur</a>
+  <a href="bestanden.html">Dateien &amp; Export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Lernpfad</a> &rsaquo; Lektion 8</p>
+  <h1>Vom Entwurf zur Website</h1>
+  <div class="goal"><strong>Ziel:</strong> Ihren Entwurf als echte Webseite (<code>.html</code>) speichern, den HTML-Code
+  verstehen und eine gespeicherte Seite später wieder öffnen, um weiterzuarbeiten.</div>
+
+  <p><a class="open" href="../../lessen/de/les08-fruitwinkel.htd">&#9654; Dieses Beispiel öffnen</a></p>
+  <figure>
+    <img src="../img/les08-fruitwinkel-de.png" alt="Webseite eines Obstladens mit Titel, einer Tabelle mit Obst und Preisen und einer Fußzeile">
+    <figcaption>Alles aus den vorigen Lektionen zusammen: ein Titel und eine Fußzeile (Textblöcke), Bilder, Links, Farben und Rahmen.</figcaption>
+  </figure>
+
+  <h2>Entwurf oder Webseite?</h2>
+  <table>
+    <tr><th>Datei</th><th>Was ist das?</th><th>Öffnen mit</th></tr>
+    <tr><td class="name"><code>.htd</code></td><td>Ihr <b>Entwurf</b>, an dem Sie weiterarbeiten.</td><td>Advanced Html Designer</td></tr>
+    <tr><td class="name"><code>.html</code></td><td>Die <b>Webseite</b>, wie Besucher sie sehen.</td><td>jedem Webbrowser (und auch dem Designer)</td></tr>
+  </table>
+
+  <h2>Den HTML-Code ansehen</h2>
+  <p>Klicken Sie unten auf <i>Hier klicken für Extrafunktionen</i>. Der ausgeklappte Bereich hat zwei Registerkarten:</p>
+  <ul>
+    <li><b>Html-Dokument</b>: die vollständige Webseite, mit den Textblöcken und den Seiteneinstellungen.</li>
+    <li><b>Html-Tabelle</b>: nur die Tabelle, zum Einfügen in eine bestehende Webseite.</li>
+  </ul>
+  <p>Die wichtigsten Teile des Codes:</p>
+  <table>
+    <tr><th>Code</th><th>Bedeutung</th></tr>
+    <tr><td class="name"><code>&lt;table&gt;</code></td><td>Anfang der Tabelle (<code>&lt;/table&gt;</code> ist das Ende)</td></tr>
+    <tr><td class="name"><code>&lt;tr&gt;</code></td><td>eine Zeile (<i>table row</i>)</td></tr>
+    <tr><td class="name"><code>&lt;td&gt;</code></td><td>eine Zelle (<i>table data</i>); <code>colspan</code> und <code>rowspan</code> für verbundene Zellen</td></tr>
+    <tr><td class="name"><code>style="..."</code></td><td>das Format: Farben, Rahmen, Ausrichtung, Schriftgröße</td></tr>
+    <tr><td class="name"><code>&lt;a href="..."&gt;</code></td><td>ein Hyperlink</td></tr>
+    <tr><td class="name"><code>&lt;img src="..."&gt;</code></td><td>ein Bild; das Bild selbst ist in den Code eingebettet (<code>data:image/png...</code>)</td></tr>
+    <tr><td class="name"><code>&lt;div class="designer-textblock"&gt;</code></td><td>ein Textblock</td></tr>
+  </table>
+  <div class="tip"><strong>Achtung:</strong> Der Code wird in dem Moment erstellt, in dem Sie den Bereich ausklappen. Haben Sie danach
+  etwas im Designer geändert? Dann klappen Sie den Bereich zu und wieder aus.</div>
+
+  <h2>So wird daraus eine Webseite</h2>
+  <ol class="steps">
+    <li>Öffnen Sie das Beispiel (oder Ihren eigenen Entwurf) und klappen Sie den Bereich aus.</li>
+    <li>Klicken Sie auf der Registerkarte <b>Html-Dokument</b> auf <img src="../img/form-save.png" class="ico" alt=""><b>HTML-Dokument speichern</b>.</li>
+    <li>Wählen Sie einen Ordner und einen Namen, zum Beispiel <code>obstladen.html</code>.</li>
+    <li>Doppelklicken Sie im Explorer auf die Datei: Sie öffnet sich in Ihrem Webbrowser. Klicken Sie auf die Links, um sie zu testen.</li>
+  </ol>
+  <p>Weil die Bilder in den Code eingebettet sind, ist Ihre Webseite <b>eine einzige Datei</b>. Sie können sie per E-Mail verschicken,
+  auf einen USB-Stick kopieren oder auf eine Website stellen. Bei vielen Webhostern muss die Startseite <code>index.html</code> heißen.</p>
+
+  <h2>Eine Webseite wieder öffnen</h2>
+  <p>Eine <code>.html</code>-Datei, die Sie mit <b>HTML-Dokument speichern</b> gespeichert haben, enthält unsichtbar auch Ihren
+  vollständigen Entwurf. Öffnen Sie sie mit <img src="../img/form-open.png" class="ico" alt=""><b>Tabellendesigner öffnen</b> und Sie
+  können einfach weiterarbeiten, auch ohne die <code>.htd</code>-Datei. Mehr dazu unter <a href="bestanden.html#html-openen">Dateien &amp; Export</a>.</p>
+
+  <h2>Aufgabe</h2>
+  <p>Speichern Sie das Beispiel als <code>obstladen.html</code> und öffnen Sie es in Ihrem Browser. Bananen werden billiger: Sie kosten
+  jetzt <i>1,75 &euro; pro kg</i>. Ändern Sie den Preis im Designer, speichern Sie die Webseite erneut und aktualisieren Sie Ihren
+  Browser (<kbd>F5</kbd>). Suchen Sie danach im HTML-Code die Adresse des Links hinter <i>Bananen</i>.</p>
+  <details>
+    <summary>Lösung</summary>
+    <p>Klappen Sie den Bereich zu, doppelklicken Sie im Designer auf den Preis der Bananen und geben Sie den neuen Preis ein. Klappen Sie
+    den Bereich wieder aus, klicken Sie auf <b>HTML-Dokument speichern</b> und wählen Sie dieselbe Datei: Die alte wird ersetzt. Drücken Sie
+    im Browser <kbd>F5</kbd> und Sie sehen den neuen Preis. Im Code steht der Link als
+    <code>&lt;a href="https://de.wikipedia.org/wiki/Bananen"&gt;Bananen&lt;/a&gt;</code>.</p>
+  </details>
+
+  <div class="tip"><strong>Herzlichen Glückwunsch!</strong> Sie haben den ganzen Lernpfad abgeschlossen. Erstellen Sie jetzt Ihre eigene
+  Webseite: über Ihr Hobby, Ihre Klasse, Ihren Sportverein oder Ihren Urlaub. Nutzen Sie alles, was Sie gelernt haben.</div>
+
+  <p class="crumb">Arbeiten Sie unter Linux? Öffnen Sie das Beispiel dann selbst mit <b>Tabellendesigner öffnen</b>: Ordner
+  <code>lessen/de</code>, Datei <code>les08-fruitwinkel.htd</code>.</p>
+
+  <div class="pager"><a href="les07.html">&larr; Lektion 7: Textblöcke</a><a href="leerpad.html">Lernpfad &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

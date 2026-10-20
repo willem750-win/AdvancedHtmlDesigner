@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4 - Borders and rounded corners - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les04.html">NL</a><a href="../en/les04.html" class="cur">EN</a><a href="../fr/les04.html">FR</a><a href="../de/les04.html">DE</a></div>
+  <a href="index.html">Home</a>
+  <a href="werkwijze.html">Getting started</a>
+  <a href="leerpad.html" class="active">Learning path</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Table tab (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell tab (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Text block tab (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Settings tab (S)</a>
+  <div class="group">More</div>
+  <a href="muis-toetsen.html">Mouse &amp; keys</a>
+  <a href="bestanden.html">Files &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Learning path</a> &rsaquo; Lesson 4</p>
+  <h1>Borders and rounded corners</h1>
+  <div class="goal"><strong>Goal:</strong> choose the border of the table and of the cells: colour, width, style and
+  rounded corners. This gives your table a style of its own.</div>
+
+  <p><a class="open" href="../../lessen/en/les04-prijslijst.htd">&#9654; Open this example</a></p>
+  <figure>
+    <img src="../img/les04-prijslijst-en.png" alt="Price list of an ice cream parlour with a brown, rounded border">
+    <figcaption>The price list of an ice cream parlour: a thick brown border with rounded corners, and dotted lines between the prices.</figcaption>
+  </figure>
+
+  <h2>Two kinds of borders</h2>
+  <ul>
+    <li><b>The border around the whole table</b> is set on the
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Table (T)</a> tab: <b>Table border colour</b>,
+      <b>Table border width</b>, <b>Table border style</b> and <b>Table border radius</b> (the larger the number, the rounder the corners).</li>
+    <li><b>The lines between the cells</b>: choose their thickness with <b>Grid line width</b> (Table tab). Choose the style per cell
+      with <b>Cell border style</b> on the <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell (C)</a> tab:
+      none, solid, dashed, dotted or double.</li>
+  </ul>
+  <div class="tip"><strong>Good to know:</strong> the border around the table and the rounded corners are best seen in the
+  test browser. Click <i>Click here for extra functions</i> at the bottom and then <b>Open test browser</b>.</div>
+
+  <h2>Make it yourself</h2>
+  <ol class="steps">
+    <li>Make a table of 4 columns and 6 rows. Merge the cells of the top row (see <a href="les03.html">lesson 3</a>)
+      and type the name of the ice cream parlour.</li>
+    <li>Fill in the kinds (cone, cup, waffle) and the prices, and format the header as in <a href="les02.html">lesson 2</a>.</li>
+    <li>On the <b>Table</b> tab choose dark brown for <b>Table border colour</b> and set <b>Table border width</b> to 3.</li>
+    <li>Set <b>Table border radius</b> to 14: the corners of the table become round.</li>
+    <li>Select the cells with the kinds and prices (drag over them) and on the <b>Cell</b> tab choose <i>dotted</i>
+      for <b>Cell border style</b>.</li>
+    <li>Look at the result in the test browser.</li>
+  </ol>
+
+  <h2>A border that fits</h2>
+  <p>A border helps to read the table, but too many lines make it look busy. Use a <b>thick border</b> around the table and
+  <b>thin or light lines</b> inside. Choose a border colour that matches the colour of the header.</p>
+
+  <h2>Exercise</h2>
+  <p>Give the table a <b>double</b> border instead of a solid one. Then set <b>Cell corner radius</b>
+  to 6 and see in the test browser what changes.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>On the <b>Table</b> tab choose <i>double</i> for <b>Table border style</b>. A double border needs some width:
+    leave <b>Table border width</b> at 3 or more. With <b>Cell corner radius</b> every cell gets its own round corners,
+    so the cells look like little buttons.</p>
+  </details>
+
+  <p class="crumb">Working on Linux? Then open the example yourself with <b>Open table designer</b>: folder
+  <code>lessen/en</code>, file <code>les04-prijslijst.htd</code>.</p>
+
+  <div class="pager"><a href="les03.html">&larr; Lesson 3: Merging cells</a><a href="les05.html">Lesson 5: Images &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

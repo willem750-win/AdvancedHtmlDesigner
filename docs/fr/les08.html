@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leçon 8 - De la conception au site web - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les08.html">NL</a><a href="../en/les08.html">EN</a><a href="../fr/les08.html" class="cur">FR</a><a href="../de/les08.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <a href="leerpad.html" class="active">Parcours d'apprentissage</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Parcours d'apprentissage</a> &rsaquo; Leçon 8</p>
+  <h1>De la conception au site web</h1>
+  <div class="goal"><strong>Objectif :</strong> enregistrer votre conception comme une vraie page web (<code>.html</code>), comprendre
+  le code HTML et rouvrir plus tard une page enregistrée pour continuer à travailler.</div>
+
+  <p><a class="open" href="../../lessen/fr/les08-fruitwinkel.htd">&#9654; Ouvrir cet exemple</a></p>
+  <figure>
+    <img src="../img/les08-fruitwinkel-fr.png" alt="Page web d'une fruiterie avec un titre, un tableau de fruits et de prix, et un pied de page">
+    <figcaption>Tout ce que vous avez vu dans les leçons précédentes : un titre et un pied de page (blocs de texte), des images, des liens, des couleurs et des bordures.</figcaption>
+  </figure>
+
+  <h2>Conception ou page web ?</h2>
+  <table>
+    <tr><th>Fichier</th><th>Qu'est-ce que c'est ?</th><th>S'ouvre avec</th></tr>
+    <tr><td class="name"><code>.htd</code></td><td>Votre <b>conception</b>, sur laquelle vous continuez à travailler.</td><td>Advanced Html Designer</td></tr>
+    <tr><td class="name"><code>.html</code></td><td>La <b>page web</b>, telle que les visiteurs la voient.</td><td>n'importe quel navigateur (et aussi le concepteur)</td></tr>
+  </table>
+
+  <h2>Voir le code HTML</h2>
+  <p>Cliquez en bas sur <i>Cliquez ici pour des fonctions supplémentaires</i>. Le volet comporte deux onglets :</p>
+  <ul>
+    <li><b>Document Html</b> : la page web complète, avec les blocs de texte et les réglages de la page.</li>
+    <li><b>Tableau Html</b> : uniquement le tableau, à coller dans une page web existante.</li>
+  </ul>
+  <p>Les éléments les plus importants du code :</p>
+  <table>
+    <tr><th>Code</th><th>Signification</th></tr>
+    <tr><td class="name"><code>&lt;table&gt;</code></td><td>début du tableau (<code>&lt;/table&gt;</code> en est la fin)</td></tr>
+    <tr><td class="name"><code>&lt;tr&gt;</code></td><td>une ligne (<i>table row</i>)</td></tr>
+    <tr><td class="name"><code>&lt;td&gt;</code></td><td>une cellule (<i>table data</i>) ; <code>colspan</code> et <code>rowspan</code> pour les cellules fusionnées</td></tr>
+    <tr><td class="name"><code>style="..."</code></td><td>la mise en forme : couleurs, bordures, alignement, taille de police</td></tr>
+    <tr><td class="name"><code>&lt;a href="..."&gt;</code></td><td>un hyperlien</td></tr>
+    <tr><td class="name"><code>&lt;img src="..."&gt;</code></td><td>une image ; l'image elle-même est intégrée dans le code (<code>data:image/png...</code>)</td></tr>
+    <tr><td class="name"><code>&lt;div class="designer-textblock"&gt;</code></td><td>un bloc de texte</td></tr>
+  </table>
+  <div class="tip"><strong>Attention :</strong> le code est créé au moment où vous dépliez le volet. Vous avez modifié quelque chose
+  dans le concepteur ensuite ? Repliez le volet et dépliez-le à nouveau.</div>
+
+  <h2>En faire une page web</h2>
+  <ol class="steps">
+    <li>Ouvrez l'exemple (ou votre propre conception) et dépliez le volet.</li>
+    <li>Dans l'onglet <b>Document Html</b>, cliquez sur <img src="../img/form-save.png" class="ico" alt=""><b>Enregistrer le document HTML</b>.</li>
+    <li>Choisissez un dossier et un nom, par exemple <code>fruiterie.html</code>.</li>
+    <li>Double-cliquez sur le fichier dans l'Explorateur : il s'ouvre dans votre navigateur. Cliquez sur les liens pour les tester.</li>
+  </ol>
+  <p>Comme les images sont intégrées dans le code, votre page web est <b>un seul fichier</b>. Vous pouvez l'envoyer par e-mail, le
+  mettre sur une clé USB ou le placer sur un site web. Chez beaucoup d'hébergeurs, la page d'accueil doit s'appeler <code>index.html</code>.</p>
+
+  <h2>Rouvrir une page web</h2>
+  <p>Un fichier <code>.html</code> enregistré avec <b>Enregistrer le document HTML</b> contient aussi, de façon invisible, toute votre
+  conception. Ouvrez-le avec <img src="../img/form-open.png" class="ico" alt=""><b>Ouvrir le concepteur de tableau</b> et vous pouvez
+  simplement continuer, même sans le fichier <code>.htd</code>. Pour en savoir plus : <a href="bestanden.html#html-openen">Fichiers &amp; export</a>.</p>
+
+  <h2>Exercice</h2>
+  <p>Enregistrez l'exemple sous <code>fruiterie.html</code> et ouvrez-le dans votre navigateur. Les bananes baissent : elles coûtent
+  maintenant <i>1,75 &euro; le kg</i>. Modifiez le prix dans le concepteur, enregistrez à nouveau la page web et actualisez votre
+  navigateur (<kbd>F5</kbd>). Cherchez ensuite dans le code HTML l'adresse du lien derrière <i>Bananes</i>.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Repliez le volet, double-cliquez dans le concepteur sur le prix des bananes et tapez le nouveau prix. Dépliez à nouveau le volet,
+    cliquez sur <b>Enregistrer le document HTML</b> et choisissez le même fichier : l'ancien est remplacé. Appuyez sur <kbd>F5</kbd> dans
+    le navigateur et vous voyez le nouveau prix. Dans le code, le lien s'écrit
+    <code>&lt;a href="https://fr.wikipedia.org/wiki/Banane"&gt;Bananes&lt;/a&gt;</code>.</p>
+  </details>
+
+  <div class="tip"><strong>Bravo !</strong> Vous avez terminé tout le parcours. Créez maintenant votre propre page web : sur votre
+  loisir, votre classe, votre club de sport ou vos vacances. Utilisez tout ce que vous avez appris.</div>
+
+  <p class="crumb">Vous travaillez sous Linux ? Ouvrez alors l'exemple vous-même avec <b>Ouvrir le concepteur de tableau</b> : dossier
+  <code>lessen/fr</code>, fichier <code>les08-fruitwinkel.htd</code>.</p>
+
+  <div class="pager"><a href="les07.html">&larr; Leçon 7 : Blocs de texte</a><a href="leerpad.html">Parcours d'apprentissage &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leçon 5 - Images - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les05.html">NL</a><a href="../en/les05.html">EN</a><a href="../fr/les05.html" class="cur">FR</a><a href="../de/les05.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <a href="leerpad.html" class="active">Parcours d'apprentissage</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Parcours d'apprentissage</a> &rsaquo; Leçon 5</p>
+  <h1>Images</h1>
+  <div class="goal"><strong>Objectif :</strong> placer une image dans une cellule, l'aligner et choisir sa taille.
+  Vous créez une fiche produit : l'image à gauche, les informations à droite.</div>
+
+  <p><a class="open" href="../../lessen/fr/les05-productfiche.htd">&#9654; Ouvrir cet exemple</a></p>
+  <figure>
+    <img src="../img/les05-productfiche-fr.png" alt="Fiche produit d'une pomme avec l'image à gauche et les informations à droite">
+    <figcaption>Une fiche produit : l'image se trouve dans une grande cellule qui s'étend sur quatre lignes.</figcaption>
+  </figure>
+
+  <h2>Les boutons pour les images</h2>
+  <p>Vous les trouvez dans l'onglet <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cellule (C)</a>.
+  Cliquez d'abord sur la cellule où l'image doit aller.</p>
+  <ul>
+    <li><img src="../img/img-add.png" class="ico" alt=""><b>Ajouter une image</b> : choisissez un fichier (png, jpg, gif ou bmp).</li>
+    <li><img src="../img/img-left.png" class="ico" alt=""> <img src="../img/img-center.png" class="ico" alt="">
+      <img src="../img/img-right.png" class="ico" alt=""> image <b>à gauche</b>, <b>au centre</b> ou <b>à droite</b> dans la cellule.</li>
+    <li><img src="../img/img-size.png" class="ico" alt=""><b>Taille de l'image</b> : <i>Image original</i> (taille réelle),
+      <i>Image fit</i> (ajustée à la cellule, sans déformation) ou <i>Image stretch</i> (étirée sur toute la cellule).</li>
+    <li><img src="../img/img-del.png" class="ico" alt=""><b>Supprimer l'image</b> : retire l'image de la cellule.</li>
+  </ul>
+
+  <h2>À vous de jouer</h2>
+  <ol class="steps">
+    <li>Créez un tableau de 3 colonnes et 5 lignes. Fusionnez la ligne du haut pour le titre.</li>
+    <li>Dans la première colonne, fusionnez les cellules des lignes 2 à 5 : c'est là que va l'image.</li>
+    <li>Rendez la première colonne assez large (faites glisser dans les en-têtes de colonnes) et les lignes assez hautes.</li>
+    <li>Cliquez sur la grande cellule puis sur <img src="../img/img-add.png" class="ico" alt=""><b>Ajouter une image</b>.
+      Choisissez le fichier <code>appel.png</code> dans le dossier <code>lessen\afbeeldingen</code>.</li>
+    <li>Cliquez sur <img src="../img/img-center.png" class="ico" alt=""> pour centrer l'image.</li>
+    <li>Tapez les informations dans les autres cellules : variété, origine, prix et saison.</li>
+  </ol>
+
+  <div class="tip"><strong>Où va l'image ?</strong> Le concepteur en garde une copie dans le dossier <code>html\images</code>
+  à côté du programme, pour que votre conception continue à fonctionner si vous déplacez l'original. Dans le code HTML,
+  l'image elle-même est intégrée : votre page web est donc un seul fichier, sans images séparées.</div>
+
+  <h2>Quelle image choisir ?</h2>
+  <ul>
+    <li>Utilisez une <b>petite</b> image : une photo de votre téléphone est bien trop grande pour une cellule et alourdit la page.</li>
+    <li>Un <b>png</b> à fond transparent s'adapte joliment à toutes les couleurs de cellule.</li>
+    <li>N'utilisez que des images que vous avez créées vous-même ou que vous avez le droit d'utiliser.</li>
+  </ul>
+
+  <h2>Exercice</h2>
+  <p>Transformez-la en fiche produit d'une <b>poire</b> : remplacez l'image par <code>peer.png</code> du dossier
+  <code>lessen\afbeeldingen</code> et adaptez le texte. Essayez ensuite <i>Image stretch</i> : qu'est-ce qui ne va pas ?</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Cliquez sur la cellule de la pomme puis sur <b>Ajouter une image</b> : la nouvelle image remplace l'ancienne.
+    Choisissez <code>peer.png</code> et adaptez la variété (par ex. <i>Conférence</i>), le prix et le titre. Avec <i>Image stretch</i>,
+    l'image est étirée sur toute la cellule : la poire s'élargit et paraît déformée. Choisissez donc <i>Image fit</i>
+    quand l'image ne tient pas dans la cellule.</p>
+  </details>
+
+  <p class="crumb">Vous travaillez sous Linux ? Ouvrez alors l'exemple vous-même avec <b>Ouvrir le concepteur de tableau</b> : dossier
+  <code>lessen/fr</code>, fichier <code>les05-productfiche.htd</code>.</p>
+
+  <div class="pager"><a href="les04.html">&larr; Leçon 4 : Bordures et coins arrondis</a><a href="les06.html">Leçon 6 : Hyperliens &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

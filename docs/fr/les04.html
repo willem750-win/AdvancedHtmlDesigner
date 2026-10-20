@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leçon 4 - Bordures et coins arrondis - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les04.html">NL</a><a href="../en/les04.html">EN</a><a href="../fr/les04.html" class="cur">FR</a><a href="../de/les04.html">DE</a></div>
+  <a href="index.html">Accueil</a>
+  <a href="werkwijze.html">Premiers pas</a>
+  <a href="leerpad.html" class="active">Parcours d'apprentissage</a>
+  <div class="group">Boîte à outils</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Onglet Tableau (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Onglet Cellule (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Onglet Bloc de texte (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Onglet Paramètres (S)</a>
+  <div class="group">Autres</div>
+  <a href="muis-toetsen.html">Souris &amp; clavier</a>
+  <a href="bestanden.html">Fichiers &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Parcours d'apprentissage</a> &rsaquo; Leçon 4</p>
+  <h1>Bordures et coins arrondis</h1>
+  <div class="goal"><strong>Objectif :</strong> choisir la bordure du tableau et des cellules : couleur, épaisseur, style et
+  coins arrondis. Votre tableau obtient ainsi son propre style.</div>
+
+  <p><a class="open" href="../../lessen/fr/les04-prijslijst.htd">&#9654; Ouvrir cet exemple</a></p>
+  <figure>
+    <img src="../img/les04-prijslijst-fr.png" alt="Liste de prix d'un glacier avec une bordure brune arrondie">
+    <figcaption>La liste de prix d'un glacier : une épaisse bordure brune aux coins arrondis, et des pointillés entre les prix.</figcaption>
+  </figure>
+
+  <h2>Deux sortes de bordures</h2>
+  <ul>
+    <li><b>La bordure autour de tout le tableau</b> se règle dans l'onglet
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Tableau (T)</a> : <b>Couleur de bordure</b>,
+      <b>Épaisseur de bordure</b>, <b>Style de bordure</b> et <b>Rayon de bordure</b> (plus le nombre est grand, plus les coins sont ronds).</li>
+    <li><b>Les lignes entre les cellules</b> : choisissez leur épaisseur avec <b>Épaisseur des lignes</b> (onglet Tableau). Choisissez le style
+      par cellule avec <b>Style de bordure</b> dans l'onglet <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cellule (C)</a> :
+      aucune, continue, tirets, pointillés ou double.</li>
+  </ul>
+  <div class="tip"><strong>Bon à savoir :</strong> la bordure autour du tableau et les coins arrondis se voient le mieux dans le
+  navigateur de test. Cliquez en bas sur <i>Cliquez ici pour des fonctions supplémentaires</i>, puis sur <b>Ouvrir le navigateur de test</b>.</div>
+
+  <h2>À vous de jouer</h2>
+  <ol class="steps">
+    <li>Créez un tableau de 4 colonnes et 6 lignes. Fusionnez les cellules de la ligne du haut (voir <a href="les03.html">leçon 3</a>)
+      et tapez le nom du glacier.</li>
+    <li>Complétez les formules (cornet, pot, gaufre) et les prix, et mettez l'en-tête en forme comme à la <a href="les02.html">leçon 2</a>.</li>
+    <li>Dans l'onglet <b>Tableau</b>, choisissez le brun foncé comme <b>Couleur de bordure</b> et réglez l'<b>Épaisseur de bordure</b> sur 3.</li>
+    <li>Réglez le <b>Rayon de bordure</b> sur 14 : les coins du tableau deviennent ronds.</li>
+    <li>Sélectionnez les cellules des formules et des prix (faites glisser la souris dessus) et, dans l'onglet <b>Cellule</b>, choisissez
+      <i>pointillés</i> comme <b>Style de bordure</b>.</li>
+    <li>Regardez le résultat dans le navigateur de test.</li>
+  </ol>
+
+  <h2>Une bordure adaptée</h2>
+  <p>Une bordure aide à lire le tableau, mais trop de lignes le rendent chargé. Utilisez une <b>bordure épaisse</b> autour du tableau
+  et des <b>lignes fines ou claires</b> à l'intérieur. Choisissez une couleur de bordure assortie à la couleur de l'en-tête.</p>
+
+  <h2>Exercice</h2>
+  <p>Donnez au tableau une bordure <b>double</b> au lieu d'une bordure continue. Réglez ensuite le <b>Rayon des cellules</b>
+  sur 6 et regardez ce qui change dans le navigateur de test.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Dans l'onglet <b>Tableau</b>, choisissez <i>double</i> comme <b>Style de bordure</b>. Une bordure double a besoin d'épaisseur :
+    laissez l'<b>Épaisseur de bordure</b> sur 3 ou plus. Avec le <b>Rayon des cellules</b>, chaque cellule reçoit ses propres coins
+    arrondis : les cellules ressemblent à de petits boutons.</p>
+  </details>
+
+  <p class="crumb">Vous travaillez sous Linux ? Ouvrez alors l'exemple vous-même avec <b>Ouvrir le concepteur de tableau</b> : dossier
+  <code>lessen/fr</code>, fichier <code>les04-prijslijst.htd</code>.</p>
+
+  <div class="pager"><a href="les03.html">&larr; Leçon 3 : Fusionner des cellules</a><a href="les05.html">Leçon 5 : Images &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

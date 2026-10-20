@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5 - Images - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les05.html">NL</a><a href="../en/les05.html" class="cur">EN</a><a href="../fr/les05.html">FR</a><a href="../de/les05.html">DE</a></div>
+  <a href="index.html">Home</a>
+  <a href="werkwijze.html">Getting started</a>
+  <a href="leerpad.html" class="active">Learning path</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Table tab (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell tab (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Text block tab (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Settings tab (S)</a>
+  <div class="group">More</div>
+  <a href="muis-toetsen.html">Mouse &amp; keys</a>
+  <a href="bestanden.html">Files &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Learning path</a> &rsaquo; Lesson 5</p>
+  <h1>Images</h1>
+  <div class="goal"><strong>Goal:</strong> put an image in a cell, align it and choose its size.
+  You make a product sheet: picture on the left, information on the right.</div>
+
+  <p><a class="open" href="../../lessen/en/les05-productfiche.htd">&#9654; Open this example</a></p>
+  <figure>
+    <img src="../img/les05-productfiche-en.png" alt="Product sheet of an apple with the image on the left and the details on the right">
+    <figcaption>A product sheet: the image is in one large cell that spans four rows.</figcaption>
+  </figure>
+
+  <h2>The image buttons</h2>
+  <p>You find them on the <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell (C)</a> tab.
+  First click the cell where the image should go.</p>
+  <ul>
+    <li><img src="../img/img-add.png" class="ico" alt=""><b>Add image</b>: choose a file (png, jpg, gif or bmp).</li>
+    <li><img src="../img/img-left.png" class="ico" alt=""> <img src="../img/img-center.png" class="ico" alt="">
+      <img src="../img/img-right.png" class="ico" alt=""> image on the <b>left</b>, in the <b>centre</b> or on the <b>right</b> of the cell.</li>
+    <li><img src="../img/img-size.png" class="ico" alt=""><b>Image size</b>: <i>Image original</i> (actual size),
+      <i>Image fit</i> (fits in the cell without distortion) or <i>Image stretch</i> (stretched to fill the cell).</li>
+    <li><img src="../img/img-del.png" class="ico" alt=""><b>Delete image</b>: removes the image from the cell.</li>
+  </ul>
+
+  <h2>Make it yourself</h2>
+  <ol class="steps">
+    <li>Make a table of 3 columns and 5 rows. Merge the top row for the title.</li>
+    <li>In the first column merge the cells of rows 2 to 5: that is where the image goes.</li>
+    <li>Make the first column wide enough (drag in the column headers) and the rows high enough.</li>
+    <li>Click the large cell and click <img src="../img/img-add.png" class="ico" alt=""><b>Add image</b>.
+      Choose the file <code>appel.png</code> in the folder <code>lessen\afbeeldingen</code>.</li>
+    <li>Click <img src="../img/img-center.png" class="ico" alt=""> to centre the image.</li>
+    <li>Type the details in the other cells: variety, origin, price and season.</li>
+  </ol>
+
+  <div class="tip"><strong>Where does the image go?</strong> The designer keeps a copy in the <code>html\images</code> folder
+  next to the program, so your design keeps working if you move the original. In the HTML code the image itself is
+  built in: your web page is a single file, without separate images.</div>
+
+  <h2>Which image should you choose?</h2>
+  <ul>
+    <li>Use a <b>small</b> image: a photo from your phone is far too big for a cell and makes the page heavy.</li>
+    <li>A <b>png</b> with a transparent background fits nicely on any cell colour.</li>
+    <li>Only use images you made yourself or are allowed to use.</li>
+  </ul>
+
+  <h2>Exercise</h2>
+  <p>Turn it into a product sheet for a <b>pear</b>: replace the image with <code>peer.png</code> from the folder
+  <code>lessen\afbeeldingen</code> and change the text. Then try <i>Image stretch</i>: what goes wrong?</p>
+  <details>
+    <summary>Solution</summary>
+    <p>Click the cell with the apple and click <b>Add image</b>: the new image replaces the old one.
+    Choose <code>peer.png</code> and change the variety (e.g. <i>Conference</i>), price and title. With <i>Image stretch</i> the
+    image is stretched over the whole cell: the pear becomes wider and looks distorted. So choose <i>Image fit</i>
+    when the image does not fit in the cell.</p>
+  </details>
+
+  <p class="crumb">Working on Linux? Then open the example yourself with <b>Open table designer</b>: folder
+  <code>lessen/en</code>, file <code>les05-productfiche.htd</code>.</p>
+
+  <div class="pager"><a href="les04.html">&larr; Lesson 4: Borders and rounded corners</a><a href="les06.html">Lesson 6: Hyperlinks &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>

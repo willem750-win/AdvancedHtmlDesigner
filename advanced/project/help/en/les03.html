@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3 - Merging cells - Advanced Html Designer</title>
+<link rel="stylesheet" href="../help.css">
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Advanced Html Designer</div>
+  <div class="langs"><a href="../nl/les03.html">NL</a><a href="../en/les03.html" class="cur">EN</a><a href="../fr/les03.html">FR</a><a href="../de/les03.html">DE</a></div>
+  <a href="index.html">Home</a>
+  <a href="werkwijze.html">Getting started</a>
+  <a href="leerpad.html" class="active">Learning path</a>
+  <div class="group">Toolbox</div>
+  <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Table tab (T)</a>
+  <a href="cel.html"><img src="../img/tool-cell.png" class="ico" alt="">Cell tab (C)</a>
+  <a href="tekstblok.html"><img src="../img/tool-textblock.png" class="ico" alt="">Text block tab (B)</a>
+  <a href="instellingen.html"><img src="../img/tool-settings.png" class="ico" alt="">Settings tab (S)</a>
+  <div class="group">More</div>
+  <a href="muis-toetsen.html">Mouse &amp; keys</a>
+  <a href="bestanden.html">Files &amp; export</a>
+</nav>
+<main>
+  <p class="crumb"><a href="leerpad.html">Learning path</a> &rsaquo; Lesson 3</p>
+  <h1>Merging cells</h1>
+  <div class="goal"><strong>Goal:</strong> merge several cells into one large cell, for a title above the table
+  or a lesson that lasts two periods.</div>
+
+  <p><a class="open" href="../../lessen/en/les03-lessenrooster.htd">&#9654; Open this example</a></p>
+  <figure>
+    <img src="../img/les03-lessenrooster-en.png" alt="School timetable with merged cells">
+    <figcaption>A school timetable: the title spans the full width, ICT and PE last two periods, and the lunch break applies to every day.</figcaption>
+  </figure>
+
+  <h2>Merging and unmerging</h2>
+  <ul>
+    <li><b>Merge:</b> drag the mouse over the cells that should become one cell and on the
+      <a href="tabel.html"><img src="../img/tool-table.png" class="ico" alt="">Table (T)</a> tab click <b>MC</b> (Merge cells).</li>
+    <li>This works <b>side by side</b> (across several columns), <b>one below the other</b> (across several rows) or both.</li>
+    <li><b>Unmerge:</b> click a merged cell and click <b>UMC</b> (Unmerge cells).</li>
+  </ul>
+  <div class="tip"><strong>Note:</strong> if the cells you merge already contained text, that text ends up one line below
+  the other in the new cell. Delete what you do not need.</div>
+
+  <h2>Make it yourself</h2>
+  <ol class="steps">
+    <li>Make a table of 6 columns and 8 rows (with <b>AC</b> and <b>AR</b>).</li>
+    <li><b>Title:</b> drag over the 6 cells of the top row, click <b>MC</b> and type <i>Timetable 3B</i>.
+      Make the title bold, larger and centred, with a dark cell colour and white text (see <a href="les02.html">lesson 2</a>).</li>
+    <li><b>Days and times:</b> in row 2 type <i>Time, Monday ... Friday</i> and in the first column the start times.</li>
+    <li><b>A double lesson:</b> on Tuesday drag over the cells of 9:20 and 10:25, click <b>MC</b> and type <i>ICT</i>.
+      Do the same for <i>PE</i> on Wednesday.</li>
+    <li><b>Lunch break:</b> in the 12:00 row drag over Monday to Friday, click <b>MC</b> and type <i>Lunch break</i>.</li>
+    <li>Fill in the other lessons and give the header and break cells a colour.</li>
+  </ol>
+
+  <h2>Behind the scenes</h2>
+  <p>In the HTML code (open the roll-out panel at the bottom) you can see how merging works: a cell across several columns
+  gets <code>colspan</code>, a cell across several rows gets <code>rowspan</code>. The title, for example, has
+  <code>colspan="6"</code>.</p>
+
+  <h2>Exercise</h2>
+  <p>On Friday afternoon there are two periods of <i>Project work</i> instead of Art and Economics. Change the timetable.</p>
+  <details>
+    <summary>Solution</summary>
+    <p>On Friday drag over the cells of 13:00 and 13:50 and click <b>MC</b>. The old text of both cells is now one line below
+    the other in the new cell: double-click, delete that text and type <i>Project work</i>. In the HTML code the cell now has
+    <code>rowspan="2"</code>.</p>
+  </details>
+
+  <p class="crumb">Working on Linux? Then open the example yourself with <b>Open table designer</b>: folder
+  <code>lessen/en</code>, file <code>les03-lessenrooster.htd</code>.</p>
+
+  <div class="pager"><a href="les02.html">&larr; Lesson 2: Formatting cells</a><a href="les04.html">Lesson 4: Borders and rounded corners &rarr;</a></div>
+</main>
+</div>
+</body>
+</html>
