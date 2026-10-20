@@ -11,6 +11,10 @@
 # Installeren:  sudo apt install ./advanced-html-designer_<versie>_<arch>.deb
 # Verwijderen:  sudo apt remove advanced-html-designer
 #
+# Daarnaast: project/tools/deb/AdvancedHtmlDesigner-<versie>-linux-<arch>.tar.gz
+# voor andere Linux-versies (Fedora, openSUSE, Arch ...): uitpakken in een eigen
+# map en "Advanced Html Designer" starten.
+#
 # Waarom een startscript?
 # Het programma schrijft naast zijn eigen uitvoerbaar bestand (htd/temp.htd,
 # previewN.html, DesignerDefaults.ini, talen.lng). In /opt mag een gewone
@@ -148,9 +152,22 @@ find "$STAGE" -type f -exec chmod 644 {} +
 chmod 755 "$STAGE/usr/bin/$PKG" "$STAGE/opt/$PKG/$EXE_NAME" \
           "$STAGE/DEBIAN/postinst" "$STAGE/DEBIAN/postrm"
 
+# ------------------------------------------------------------------
+# tar.gz voor andere Linux-versies: dezelfde programmabestanden. Uitgepakt
+# in een eigen map mag het programma daar zelf schrijven, een startscript
+# is dan niet nodig.
+# ------------------------------------------------------------------
+TARNAME="AdvancedHtmlDesigner-${VERSION}-linux-$(uname -m)"
+rm -rf "$OUT/$TARNAME"
+cp -r "$STAGE/opt/$PKG" "$OUT/$TARNAME"
+rm -f "$OUT/$TARNAME/VERSION"
+tar -czf "$OUT/$TARNAME.tar.gz" -C "$OUT" "$TARNAME"
+rm -rf "$OUT/$TARNAME"
+
 dpkg-deb --root-owner-group --build "$STAGE" "$OUT/${PKG}_${VERSION}_${ARCH}.deb"
 rm -rf "$STAGE"
 
 echo
 echo "Klaar: $OUT/${PKG}_${VERSION}_${ARCH}.deb"
 echo "Installeren met: sudo apt install \"$OUT/${PKG}_${VERSION}_${ARCH}.deb\""
+echo "Klaar: $OUT/$TARNAME.tar.gz (andere Linux-versies: uitpakken en starten)"

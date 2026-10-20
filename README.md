@@ -52,6 +52,13 @@ with `advanced-html-designer`. Your designs, settings and translations are kept 
 sudo apt remove advanced-html-designer
 ```
 
+### Other Linux distributions (Fedora, openSUSE, Arch …)
+
+Download `AdvancedHtmlDesigner-<version>-linux-x86_64.tar.gz`, extract it into a
+folder of your own (for example in your home folder) and start
+`Advanced Html Designer` in that folder. The program needs GTK 2
+(`libgtk2.0` / `gtk2`).
+
 ### Linux with Wine
 
 The Windows version also runs under [Wine](https://www.winehq.org/):
@@ -127,6 +134,10 @@ een eerste tabel naar een eigen webpagina.
   staat daarna in het menu onder **Ontwikkeling**; je ontwerpen en instellingen
   komen in `~/.local/share/advanced-html-designer`. Verwijderen gaat met
   `sudo apt remove advanced-html-designer`.
+- **Andere Linux-versies (Fedora, openSUSE, Arch …):** download
+  `AdvancedHtmlDesigner-<versie>-linux-x86_64.tar.gz`, pak het uit in een eigen map
+  (bv. in je persoonlijke map) en start daar `Advanced Html Designer`. Het
+  programma heeft GTK 2 nodig.
 - **Linux met Wine:** de Windows-versie werkt ook onder Wine:
   `wine "Advanced Html Designer.exe"`.
 - **Zelf compileren:** installeer in Lazarus eerst `core/tabledesignerhtml.lpk`,
