@@ -14,8 +14,9 @@ program for Windows and Linux, and as reusable Lazarus components.
 - Cell formatting: bold, italic, underline, alignment, colours, font size, borders, rounded corners
 - Images in cells (left / centre / right, size), text and image hyperlinks
 - Free-floating **text blocks** anywhere on the page, positioned with the mouse or to the millimetre
-- Export as a complete HTML document or as table-only HTML, preview in your browser
+- Export as a complete HTML document or as table-only HTML, preview in the built-in browser
 - **Save as PDF** in the paper size of the page, with colours, images, text blocks and clickable links
+  (made by the built-in browser, also on Linux: no Chrome needed)
 - Save and load designs (`.htd`)
 - Re-open a saved HTML document and keep editing it: the design (including images) is embedded invisibly in the `.html`
 - User interface in **Dutch, English, French and German**, with a built-in translation editor
@@ -26,7 +27,7 @@ program for Windows and Linux, and as reusable Lazarus components.
 
 All downloads are on the [Releases](../../releases) page.
 
-### Windows
+### Windows (10 and 11)
 
 Recommended: download and run `AdvancedHtmlDesigner-<version>-setup.exe`.
 It installs the program for your user account (no administrator rights needed)
@@ -34,7 +35,8 @@ in `%LOCALAPPDATA%\Programs\Advanced Html Designer` and adds it to the Start men
 Your designs, settings and translations are kept on updates and when you uninstall.
 
 Without installing: download the zip, unzip it anywhere and run
-`Advanced Html Designer.exe`. Keep `talen.lng` and the `help` folder next to the program.
+`Advanced Html Designer.exe`. Keep `talen.lng` and the `help` and `ceflib` folders
+next to the program.
 
 ### Linux (Debian, Ubuntu, Linux Mint …)
 
@@ -91,13 +93,17 @@ Steps:
    Lazarus rebuilds the IDE; the components appear on the **JanWilly** palette tab.
 3. For the demo program, also install the **ExpandPanels** package
    (it provides the roll-out panel `TMyRollOut`).
-4. Open `advanced/project/project1.lpi` and build it.
+4. For the built-in browser (preview, help and PDF), also install the
+   **CEF4Delphi** package (CEF 156) and put the matching CEF runtime in a folder
+   `ceflib` next to the program.
+5. Open `advanced/project/project1.lpi` and build it.
 
-The same steps work in Lazarus on Linux (GTK2 widgetset). To turn the Linux
-build into a `.deb` package, run on Linux:
+The same steps work in Lazarus on Linux (GTK2 widgetset). Without `ceflib` the
+program opens the preview and the help in your default browser. To turn the
+Linux build into a `.deb` package, run on Linux:
 
 ```
-sh advanced/project/tools/make-deb.sh 1.2.0
+sh advanced/project/tools/make-deb.sh 1.5.0
 ```
 
 The package is written to `advanced/project/tools/deb/`.
@@ -122,12 +128,15 @@ Je ontwerp kun je ook als **PDF** bewaren. Een **leerpad** van 8 lessen in de he
 (Nederlands, Engels, Frans en Duits) leidt leerlingen en cursisten stap voor stap van
 een eerste tabel naar een eigen webpagina.
 
-- **Windows:** start `AdvancedHtmlDesigner-<versie>-setup.exe` van
+Het voorbeeld, de help en de PDF gebruiken een ingebouwde browser, ook onder
+Linux; Chrome is niet meer nodig.
+
+- **Windows (10 en 11):** start `AdvancedHtmlDesigner-<versie>-setup.exe` van
   [Releases](../../releases). Het programma wordt voor jou geïnstalleerd (geen
   beheerdersrechten nodig) en staat in het Startmenu; je ontwerpen, instellingen
   en vertalingen blijven bij een update en bij verwijderen behouden.
   Zonder installatie: pak de zip uit en start `Advanced Html Designer.exe`. Laat
-  `talen.lng` en de map `help` naast het programma staan.
+  `talen.lng` en de mappen `help` en `ceflib` naast het programma staan.
 - **Linux (Debian, Ubuntu, Linux Mint …):** download het `.deb`-pakket bij
   [Releases](../../releases) en installeer het met
   `sudo apt install ./advanced-html-designer_<versie>_amd64.deb`. Het programma
@@ -142,9 +151,10 @@ een eerste tabel naar een eigen webpagina.
   `wine "Advanced Html Designer.exe"`.
 - **Zelf compileren:** installeer in Lazarus eerst `core/tabledesignerhtml.lpk`,
   daarna `advanced/htmltabledesigner_advanced.lpk`. Voor het voorbeeldprogramma
-  heb je ook het pakket **ExpandPanels** nodig. Open dan
+  heb je ook het pakket **ExpandPanels** nodig, en voor de ingebouwde browser
+  **CEF4Delphi** (CEF 156) met de map `ceflib` naast het programma. Open dan
   `advanced/project/project1.lpi`. Dat werkt ook in Lazarus onder Linux (GTK2);
-  met `sh advanced/project/tools/make-deb.sh 1.2.0` maak je daar een `.deb`-pakket.
+  met `sh advanced/project/tools/make-deb.sh 1.5.0` maak je daar een `.deb`-pakket.
 - De help (in het programma via de Help-knop) is beschikbaar in het Nederlands,
   Engels, Frans en Duits, en ook
   [online](https://willem750-win.github.io/AdvancedHtmlDesigner/nl/index.html).

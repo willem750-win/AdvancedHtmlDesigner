@@ -4,7 +4,7 @@ object MiniBrowserFrm: TMiniBrowserFrm
   Top = 119
   Width = 747
   BorderIcons = [biSystemMenu]
-  Caption = 'Browser LogicNew'
+  Caption = 'Advanced Html Designer'
   ClientHeight = 471
   ClientWidth = 747
   Color = clBtnFace

@@ -37,13 +37,16 @@
 
 unit uMiniBrowser;
 
+// Alleen voor Windows (onder Linux: uMiniBrowserLinux). De IFDEF's in de uses
+// houden de controle van de Lazarus-IDE onder Linux stil ("Units not found").
+
 {$I cef.inc}
 
 interface
 
 uses
-  Windows, Messages, LMessages, SysUtils, Variants, Classes, Graphics, Menus,
-  Controls, Forms, Dialogs, StdCtrls, ExtCtrls, Types, ComCtrls, ClipBrd, ActiveX, ShlObj,
+  {$IFDEF MSWINDOWS}Windows,{$ENDIF} Messages, LMessages, SysUtils, Variants, Classes, Graphics, Menus,
+  Controls, Forms, Dialogs, StdCtrls, ExtCtrls, Types, ComCtrls, ClipBrd, {$IFDEF MSWINDOWS}ActiveX, ShlObj,{$ENDIF}
   uCEFChromium, uCEFWindowParent, uCEFInterfaces, uCEFApplication, uCEFTypes, uCEFConstants,
   uCEFWinControl, uCEFChromiumEvents, URIParser;
 type
@@ -275,7 +278,7 @@ type
       const frame: ICefFrame; const request: ICefRequest;
       user_gesture, isRedirect: Boolean; out Result: Boolean);
     procedure GuardBeforePopup(Sender: TObject; const browser: ICefBrowser;
-      const frame: ICefFrame; const targetUrl, targetFrameName: ustring;
+      const frame: ICefFrame; popup_id: Integer; const targetUrl, targetFrameName: ustring;
       targetDisposition: TCefWindowOpenDisposition; userGesture: Boolean;
       const popupFeatures: TCefPopupFeatures; var windowInfo: TCefWindowInfo;
       var client: ICefClient; var settings: TCefBrowserSettings;
@@ -383,7 +386,7 @@ implementation
 
 uses
   uPreferences, uCefStringMultimap, uCEFMiscFunctions, uSimpleTextViewer,
-  uCefClient, uCEFDictionaryValue;
+  uCefClient, uCEFDictionaryValue, FileUtil;
 
 // Destruction steps
 // =================
@@ -409,20 +412,78 @@ begin
 end;
 
 
+const
+  EXTRA_CACHE = 'cache-extra';   // + pid: cache van een tweede venster
+
+var
+  // blijft open zolang het programma draait; Windows geeft het vrij als het
+  // proces stopt, ook na een crash
+  CacheSlot: THandle = feInvalidHandle;
+
+// Open een slotbestand exclusief (maakt het aan als het er nog niet is).
+function NeemSlot(const SlotFile: string): THandle;
+begin
+  if not FileExists(SlotFile) then
+    FileClose(FileCreate(SlotFile));
+  Result := FileOpen(SlotFile, fmOpenReadWrite or fmShareExclusive);
+end;
+
+// Kies de cachemap. Chromium laat maar één programma tegelijk een cachemap
+// gebruiken: een tweede Advanced Html Designer met dezelfde map kreeg geen
+// voorbeeld of help. Het eerste programma krijgt de vaste map 'cache' (slot:
+// cache.lock), een volgend een eigen map cache-extra<pid> (slot: slot.lock
+// daarin). Een extra map waarvan het slot vrij is, hoort bij een gestopt
+// programma en gaat weg.
+function KiesCache(const AppDir: string): string;
+var
+  SR: TSearchRec;
+  H: THandle;
+begin
+  if FindFirst(AppDir + EXTRA_CACHE + '*', faDirectory, SR) = 0 then
+  begin
+    repeat
+      if (SR.Attr and faDirectory) = 0 then Continue;
+      H := FileOpen(AppDir + SR.Name + PathDelim + 'slot.lock', fmOpenReadWrite or fmShareExclusive);
+      if (H <> feInvalidHandle) or not FileExists(AppDir + SR.Name + PathDelim + 'slot.lock') then
+      begin
+        if H <> feInvalidHandle then FileClose(H);
+        DeleteDirectory(AppDir + SR.Name, False);
+      end;
+    until FindNext(SR) <> 0;
+    FindClose(SR);
+  end;
+
+  CacheSlot := NeemSlot(AppDir + 'cache.lock');
+  if CacheSlot <> feInvalidHandle then
+    Exit(AppDir + 'cache');
+
+  Result := AppDir + EXTRA_CACHE + IntToStr(GetProcessID);
+  ForceDirectories(Result);
+  CacheSlot := NeemSlot(Result + PathDelim + 'slot.lock');
+end;
+
 procedure CreateGlobalCEFApp;
 var
   AppDir, CefDir: string;
+  I: Integer;
+  SubProces: Boolean;
 begin
   // De CEF-runtime staat in de submap ceflib naast het programma.
   // Paden absoluut maken: bij een andere werkmap vindt CEF anders niets.
   AppDir := IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0)));
   CefDir := AppDir + 'ceflib';
 
+  SubProces := False;
+  for I := 1 to ParamCount do
+    if Pos('--type=', ParamStr(I)) = 1 then SubProces := True;
+
   GlobalCEFApp                     := TCefApplication.Create;
   GlobalCEFApp.FrameworkDirPath    := CefDir;
   GlobalCEFApp.ResourcesDirPath    := CefDir;
   GlobalCEFApp.LocalesDirPath      := CefDir + PathDelim + 'locales';
-  GlobalCEFApp.cache               := AppDir + 'cache';
+  // subprocessen krijgen de cachemap van het hoofdproces mee van Chromium
+  if not SubProces then
+    GlobalCEFApp.cache             := KiesCache(AppDir);
   GlobalCEFApp.LogFile             := AppDir + 'debug.log';
   GlobalCEFApp.LogSeverity         := LOGSEVERITY_INFO;
   GlobalCEFApp.EnablePrintPreview  := True;          
@@ -490,14 +551,9 @@ begin
 end;
 
 procedure TMiniBrowserFrm.MenuItem4Click(Sender: TObject);
-var
-  TempLanguageList : ustring;
 begin
-  TempLanguageList := Chromium1.AcceptLanguageList;
-  if (length(TempLanguageList) = 0) then TempLanguageList := Chromium1.Options.AcceptLanguageList;
-  if (length(TempLanguageList) = 0) then TempLanguageList := GlobalCEFApp.AcceptLanguageList;
-
-  Chromium1.AcceptLanguageList := InputBox('Language', 'Accept language list', TempLanguageList);
+  // sinds CEF 156 alleen nog voor de hele toepassing, bij het starten
+  ShowMessage('Accept language list : ' + GlobalCEFApp.AcceptLanguageList);
 end;
 
 procedure TMiniBrowserFrm.MenuItem5Click(Sender: TObject);
@@ -506,9 +562,9 @@ var
 begin
   TempInfo := 'libcef.dll : '         + CRLF + GlobalCEFApp.LibCefVersion    + CRLF + CRLF +
               'chrome_elf.dll : '     + CRLF + GlobalCEFApp.ChromeVersion    + CRLF + CRLF +
-              'Universal API hash : ' + CRLF + GlobalCEFApp.ApiHashUniversal + CRLF + CRLF +
               'Platform API hash : '  + CRLF + GlobalCEFApp.ApiHashPlatform  + CRLF + CRLF +
-              'Commit API hash : '    + CRLF + GlobalCEFApp.ApiHashCommit;
+              'Commit API hash : '    + CRLF + GlobalCEFApp.ApiHashCommit    + CRLF + CRLF +
+              'Full CEF version : '   + CRLF + GlobalCEFApp.VersionFull;
 
   showmessage(TempInfo);
 end;
@@ -581,7 +637,7 @@ begin
 end;
 
 procedure TMiniBrowserFrm.GuardBeforePopup(Sender: TObject; const browser: ICefBrowser;
-  const frame: ICefFrame; const targetUrl, targetFrameName: ustring;
+  const frame: ICefFrame; popup_id: Integer; const targetUrl, targetFrameName: ustring;
   targetDisposition: TCefWindowOpenDisposition; userGesture: Boolean;
   const popupFeatures: TCefPopupFeatures; var windowInfo: TCefWindowInfo;
   var client: ICefClient; var settings: TCefBrowserSettings;
@@ -1288,9 +1344,9 @@ begin
   if not(Chromium1.IsSameBrowser(browser)) then exit;
 
   if (title <> '') then
-    caption := 'Browser LogicNew - ' + title
+    caption := 'Advanced Html Designer - ' + title
    else
-    caption := 'Browser LogicNew';
+    caption := 'Advanced Html Designer';
 end;
 
 procedure TMiniBrowserFrm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -1887,26 +1943,14 @@ end;
 
 procedure TMiniBrowserFrm.CopyFramesIDsMsg(var aMessage : TMessage);
 var
-  i          : NativeUInt;
-  TempCount  : NativeUInt;
-  TempArray  : TCefFrameIdentifierArray;
-  TempString : string;
+  TempSL : TStringList;
 begin
-  TempCount := Chromium1.FrameCount;
+  TempSL := TStringList.Create;
 
-  if Chromium1.GetFrameIdentifiers(TempCount, TempArray) then
-    begin
-      TempString := '';
-      i          := 0;
+  if Chromium1.GetFrameIdentifiers(TStrings(TempSL)) then
+    clipboard.AsText := TempSL.Text;
 
-      while (i < TempCount) do
-        begin
-          TempString := TempString + inttostr(TempArray[i]) + CRLF;
-          inc(i);
-        end;
-
-      clipboard.AsText := TempString;
-    end;
+  TempSL.Free;
 end;
 
 procedure TMiniBrowserFrm.CopyFramesNamesMsg(var aMessage : TMessage);

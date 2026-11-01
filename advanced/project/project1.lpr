@@ -9,10 +9,16 @@ uses
   {$IFDEF HASAMIGA}
   athreads,
   {$ENDIF}
+  // Onder Linux (GTK2) start uCefGtk2Widgetset eerst CEF (ingebouwde browser,
+  // zie uMiniBrowserLinux) en maakt pas daarna de widgetset aan.
+  {$IF DEFINED(LINUX) AND DEFINED(LCLGTK2)}
+  uCefGtk2Widgetset,
+  {$ELSE}
   Interfaces, // this includes the LCL widgetset
+  {$ENDIF}
   Forms, Unit1, pexpandpanels
-  // De ingebouwde CEF-browser (MiniBrowser) voor het voorbeeld en de help wordt
-  // enkel onder Windows gebruikt; onder Linux opent alles in de systeembrowser.
+  // De ingebouwde CEF-browser (MiniBrowser) voor het voorbeeld, de help en
+  // de PDF; onder Windows hier, onder Linux in uCefGtk2Widgetset/uMiniBrowserLinux.
   {$IFDEF WINDOWS}
   , uPreferences, uSimpleTextViewer, uMiniBrowser, uCEFApplication
   {$ENDIF}

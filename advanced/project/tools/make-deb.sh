@@ -4,8 +4,8 @@
 #
 # Uitvoeren ONDER LINUX, nadat het project in Lazarus (GTK2) gecompileerd is:
 #
-#     sh project/tools/make-deb.sh            (versie 1.4.1)
-#     sh project/tools/make-deb.sh 1.4.1      (eigen versienummer)
+#     sh project/tools/make-deb.sh            (versie 1.5.0)
+#     sh project/tools/make-deb.sh 1.5.0      (eigen versienummer)
 #
 # Resultaat: project/tools/deb/advanced-html-designer_<versie>_<arch>.deb
 # Installeren:  sudo apt install ./advanced-html-designer_<versie>_<arch>.deb
@@ -22,10 +22,16 @@
 # per gebruiker naar ~/.local/share/advanced-html-designer en start het
 # vandaar. Eigen ontwerpen, instellingen en vertalingen blijven bij een
 # update behouden; programma en help worden vervangen.
+#
+# CEF-runtime: project/ceflib gaat mee (voorbeeld, help en PDF in de
+# ingebouwde browser). libcef.so wordt gestript (1,4 GB -> ca. 280 MB). In de
+# .deb wordt ceflib niet per gebruiker gekopieerd maar gelinkt naar /opt.
+# Zonder ceflib opent alles in de standaardbrowser en is voor een PDF
+# Chrome of Chromium nodig.
 # ---------------------------------------------------------------------------
 set -e
 
-VERSION="${1:-1.4.1}"
+VERSION="${1:-1.5.0}"
 PKG=advanced-html-designer
 EXE_NAME="Advanced Html Designer"   # = Doelbestandsnaam in project1.lpi
 
@@ -65,6 +71,14 @@ for LIC in "$TOOLS/publish/LICENSE" "$PROJECT/../../LICENSE"; do
   fi
 done
 echo "$VERSION" > "$STAGE/opt/$PKG/VERSION"
+# CEF-runtime voor de ingebouwde browser
+if [ -f "$PROJECT/ceflib/libcef.so" ]; then
+  cp -r "$PROJECT/ceflib" "$STAGE/opt/$PKG/ceflib"
+  strip "$STAGE/opt/$PKG/ceflib/libcef.so" "$STAGE/opt/$PKG/ceflib/libvk_swiftshader.so" \
+        "$STAGE/opt/$PKG/ceflib/libvulkan.so.1" 2>/dev/null || true
+else
+  echo "LET OP: $PROJECT/ceflib ontbreekt; alles opent dan in de standaardbrowser."
+fi
 
 # ------------------------------------------------------------------
 # Startscript
@@ -86,6 +100,9 @@ if [ "\$(cat "\$DST/VERSION" 2>/dev/null)" != "\$(cat "\$SRC/VERSION")" ]; then
   [ -f "\$DST/talen.lng" ] || cp "\$SRC/talen.lng" "\$DST/"
   cp -f "\$SRC/VERSION" "\$DST/VERSION"
 fi
+# CEF-runtime: te groot om per gebruiker te kopiëren, daarom een link
+rm -rf "\$DST/ceflib"
+[ ! -d "\$SRC/ceflib" ] || ln -s "\$SRC/ceflib" "\$DST/ceflib"
 
 cd "\$DST"
 exec "\$DST/$EXE_NAME" "\$@"
@@ -124,7 +141,7 @@ Section: web
 Priority: optional
 Architecture: $ARCH
 Depends: libc6, libgtk2.0-0, xdg-utils
-Suggests: chromium | google-chrome-stable
+Recommends: libnss3, libnspr4, libatk1.0-0 | libatk1.0-0t64, libatk-bridge2.0-0 | libatk-bridge2.0-0t64, libcups2 | libcups2t64, libasound2 | libasound2t64, libgbm1, libxkbcommon0, libxcomposite1, libxdamage1, libxrandr2, libpango-1.0-0, libcairo2
 Installed-Size: $SIZE
 Maintainer: Willy Jansen <willyjansen@telenet.be>
 Description: Visuele ontwerper voor HTML-tabellen en -pagina's
@@ -153,6 +170,7 @@ find "$STAGE" -type d -exec chmod 755 {} +
 find "$STAGE" -type f -exec chmod 644 {} +
 chmod 755 "$STAGE/usr/bin/$PKG" "$STAGE/opt/$PKG/$EXE_NAME" \
           "$STAGE/DEBIAN/postinst" "$STAGE/DEBIAN/postrm"
+[ ! -f "$STAGE/opt/$PKG/ceflib/chrome-sandbox" ] || chmod 755 "$STAGE/opt/$PKG/ceflib/chrome-sandbox"
 
 # ------------------------------------------------------------------
 # tar.gz voor andere Linux-versies: dezelfde programmabestanden. Uitgepakt

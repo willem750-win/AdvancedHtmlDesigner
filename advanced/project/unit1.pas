@@ -87,13 +87,15 @@ type
     // rechtstreeks als OnLanguageChanged gekoppeld kan worden.
     procedure ApplyFormLanguage(Sender: TObject);
 
-    // Opent een lokaal bestand: onder Windows in de ingebouwde MiniBrowser
-    // (ALocalOnly: geen internet, zoals bij de help), anders in de systeembrowser.
+    // Opent een lokaal bestand in de ingebouwde MiniBrowser (ALocalOnly: geen
+    // internet, zoals bij de help); zonder MiniBrowser in de systeembrowser.
     procedure OpenInBrowser(const AFileName: string; ALocalOnly: Boolean);
     // opent een voorbeeldontwerp (.htd) uit het leerpad in de designer
     procedure OpenDesignFromHelp(const AFileName: string);
     // melding als de PDF klaar is
     procedure PdfSaved(const AFileName: string; AOk: Boolean);
+    // bij het sluiten van het hoofdvenster (Linux: de browser sluiten)
+    procedure FormCloseBrowser(Sender: TObject; var CloseAction: TCloseAction);
 
   public
     // Schrijft het HTML-document voor een PDF (previewPdf.html): met het
@@ -108,12 +110,15 @@ implementation
 
 {$R *.lfm}
 
+// Onder Linux (GTK2) is er een ingebouwde browser als de map ceflib er is
+{$IF DEFINED(LINUX) AND DEFINED(LCLGTK2)}{$DEFINE LINUXCEF}{$ENDIF}
+
 {$IFDEF WINDOWS}
 uses
   uMiniBrowser, WinDirs;
 {$ELSE}
 uses
-  Process, FileUtil;
+  Process, FileUtil{$IFDEF LINUXCEF}, uMiniBrowserLinux{$ENDIF};
 {$ENDIF}
 
 // De map Documenten van de gebruiker (onder Linux de persoonlijke map)
@@ -132,7 +137,20 @@ const
 
 { TForm1 }
 
-{$IFDEF WINDOWS}
+// Is de ingebouwde browser (MiniBrowser) er? Onder Windows altijd, onder
+// Linux alleen als CEF gestart is (map ceflib naast het programma).
+function BrowserAvailable: Boolean;
+begin
+  {$IF DEFINED(WINDOWS)}
+  Result := True;
+  {$ELSEIF DEFINED(LINUXCEF)}
+  Result := HelpBrowserAvailable;
+  {$ELSE}
+  Result := False;
+  {$ENDIF}
+end;
+
+{$IF DEFINED(WINDOWS) OR DEFINED(LINUXCEF)}
 procedure EnsureMiniBrowser(AOwner: TForm);
 begin
   if not Assigned(MiniBrowserFrm) then
@@ -147,17 +165,32 @@ end;
 
 function FileURL(const AFileName: string): string;
 begin
+  {$IFDEF WINDOWS}
   Result := 'file:///' + StringReplace(AFileName, '\', '/', [rfReplaceAll]);
+  {$ELSE}
+  Result := 'file://' + AFileName;   // AFileName begint al met /
+  {$ENDIF}
 end;
 
 procedure TForm1.OpenInBrowser(const AFileName: string; ALocalOnly: Boolean);
 begin
-  {$IFDEF WINDOWS}
-  EnsureMiniBrowser(Self);
-  MiniBrowserLocalOnly := ALocalOnly;
-  MiniBrowserFrm.LoadURLString(FileURL(AFileName));
-  {$ELSE}
+  {$IF DEFINED(WINDOWS) OR DEFINED(LINUXCEF)}
+  if BrowserAvailable then
+  begin
+    EnsureMiniBrowser(Self);
+    MiniBrowserLocalOnly := ALocalOnly;
+    MiniBrowserFrm.LoadURLString(FileURL(AFileName));
+    Exit;
+  end;
+  {$ENDIF}
   OpenDocument(AFileName);
+end;
+
+procedure TForm1.FormCloseBrowser(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  {$IFDEF LINUXCEF}
+  // de browser netjes sluiten, anders blijft CEF bij het afsluiten hangen
+  CloseMiniBrowser;
   {$ENDIF}
 end;
 
@@ -229,11 +262,12 @@ begin
    {$IFDEF LINUX}
    MyRollOut1.Visible := not MyRollOut1.Collapsed;
    {$ENDIF}
-   {$IFDEF WINDOWS}
+   {$IF DEFINED(WINDOWS) OR DEFINED(LINUXCEF)}
    // "Open dit voorbeeld" in het leerpad opent het ontwerp in de designer
    OnHelpOpenPanel := @OpenDesignFromHelp;
    OnPdfSaved := @PdfSaved;
    {$ENDIF}
+   AddHandlerClose(@FormCloseBrowser);
 
    FLastScrollX := -1;
    FLastScrollY := -1;
@@ -446,13 +480,18 @@ begin
     HtmlFile := WritePdfHtml(WidthMM, HeightMM);
     MyRollOut1.Collapsed := True;
 
-    {$IFDEF WINDOWS}
+    {$IF DEFINED(WINDOWS) OR DEFINED(LINUXCEF)}
     // De ingebouwde browser toont de pagina en bewaart ze daarna als PDF;
     // het resultaat komt in PdfSaved.
-    EnsureMiniBrowser(Self);
-    MiniBrowserLocalOnly := False;
-    MiniBrowserFrm.SaveAsPdf(FileURL(HtmlFile), Dlg.FileName, WidthMM, HeightMM);
-    {$ELSE}
+    if BrowserAvailable then
+    begin
+      EnsureMiniBrowser(Self);
+      MiniBrowserLocalOnly := False;
+      MiniBrowserFrm.SaveAsPdf(FileURL(HtmlFile), Dlg.FileName, WidthMM, HeightMM);
+      Exit;
+    end;
+    {$ENDIF}
+    {$IFNDEF WINDOWS}
     // Geen ingebouwde browser: Chrome of Chromium maakt de PDF (zonder venster).
     Chrome := FindDefaultExecutablePath('chromium');
     if Chrome = '' then Chrome := FindDefaultExecutablePath('chromium-browser');
